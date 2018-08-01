@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstructionViewController" customModule="ZiPingSwift" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="儿童社会发展情况问卷" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTf-OD-0o4">
+                    <rect key="frame" x="56" y="50" width="263.5" height="31.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="尊敬的家长，您好！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3E-T2-aDg">
+                    <rect key="frame" x="30" y="121.5" width="315" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9d-fm-nco">
+                    <rect key="frame" x="30" y="155.5" width="315" height="161.5"/>
+                    <string key="text">下面是关于孩子行为的一些问题，每题后面都有从“1不符合”到“5完全符合”五种选择。其中，“5完全符合”的意思是：任意选择5个同龄孩子，您的孩子在这5个孩子中的表现都是最好的；“1不符合”的意思是：任意选择5个同龄孩子，您的孩子在这5个孩子中的表现都是最差的。请您根据每题所说的和自己孩子是否符合的情况，选择最符合您的孩子的一个，在上面打勾。</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sEn-Zj-b6B">
+                    <rect key="frame" x="30" y="339" width="315" height="125.5"/>
+                    <string key="text">请注意以下几点：
+(1)请一定根据您的孩子一贯的实际情况来进
+行选择。
+(2)选择无对错之分，无需做过多思考，尽可
+能快的完成。
+(3)请不要同时选择两个或两个以上的选择项。
+(4)请不要遗漏，务必回答每一个问题。</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymf-fy-IIu">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <color key="backgroundColor" red="1" green="0.3803921569" blue="0.5450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="nJw-xC-CZ8"/>
+                    </constraints>
+                    <state key="normal" title="开始填写问卷">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="startQuestionnaireAction:" destination="-1" eventType="touchUpInside" id="S6l-t2-AhR"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="e3E-T2-aDg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="2be-sD-bxe"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="h9d-fm-nco" secondAttribute="trailing" constant="30" id="2i1-bW-mzO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e3E-T2-aDg" secondAttribute="trailing" constant="30" id="BmV-Wp-rTd"/>
+                <constraint firstItem="ymf-fy-IIu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="HUz-yU-dL9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ymf-fy-IIu" secondAttribute="bottom" id="QFN-k4-MRm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ymf-fy-IIu" secondAttribute="trailing" id="RKK-9N-lCV"/>
+                <constraint firstItem="sEn-Zj-b6B" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="TLc-Hh-XyY"/>
+                <constraint firstItem="h9d-fm-nco" firstAttribute="top" secondItem="e3E-T2-aDg" secondAttribute="bottom" constant="16" id="Uyf-oT-neu"/>
+                <constraint firstItem="e3E-T2-aDg" firstAttribute="top" secondItem="yTf-OD-0o4" secondAttribute="bottom" constant="40" id="Y9T-12-gb1"/>
+                <constraint firstItem="sEn-Zj-b6B" firstAttribute="top" secondItem="h9d-fm-nco" secondAttribute="bottom" constant="22" id="gm8-xT-XHQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sEn-Zj-b6B" secondAttribute="trailing" constant="30" id="hQh-QS-vMq"/>
+                <constraint firstItem="yTf-OD-0o4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="vgo-zB-WKu"/>
+                <constraint firstItem="h9d-fm-nco" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="wIw-4f-zGF"/>
+                <constraint firstItem="yTf-OD-0o4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="yR2-d2-3Nl"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>
