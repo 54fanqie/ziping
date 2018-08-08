@@ -219,7 +219,7 @@ extension CYJMineViewController {
     func specialvaluation(){
         
         if role == .master {
-            let valuatiov = CheckValuationViewController()
+            let valuatiov = CheckValuationController()
             navigationController?.pushViewController(valuatiov, animated: true)
         }
         

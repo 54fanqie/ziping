@@ -172,7 +172,7 @@ class CYJConditionButton: UIButton {
         
         // 如果文字变大，那么 整体变大
         if (titleSize?.width)! > CGFloat(50.0) {
-            self.frame = CGRect(x: 0, y: 0, width: (titleSize?.width)! + 28.5, height: 15)
+            self.frame = CGRect(x: 0, y: 0, width: (titleSize?.width)! + 28.5, height: 32)
         }
         
         self.setImage(#imageLiteral(resourceName: "icon_gray_arrow_down"), for: .normal)

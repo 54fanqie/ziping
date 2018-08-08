@@ -453,6 +453,10 @@
 		8DFF44BD1FA2E39700670D4A /* CYJAttentionAnalyseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFF44BC1FA2E39700670D4A /* CYJAttentionAnalyseController.swift */; };
 		B118E4FE1FDD21CB002D91C6 /* CYJFilterStyleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B118E4FD1FDD21CB002D91C6 /* CYJFilterStyleButton.swift */; };
 		B11FC8931FE20D7C001E0F71 /* STHUPO.TTF in Resources */ = {isa = PBXBuildFile; fileRef = B11FC8921FE20D7C001E0F71 /* STHUPO.TTF */; };
+		B1214AD8211AC08D00BFA28A /* CompleteNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1214AD6211AC08D00BFA28A /* CompleteNumberView.swift */; };
+		B1214AD9211AC08D00BFA28A /* CompleteNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1214AD7211AC08D00BFA28A /* CompleteNumberView.xib */; };
+		B1214ADC211AD54500BFA28A /* ScoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */; };
+		B1214ADD211AD54500BFA28A /* ScoreListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1214ADB211AD54500BFA28A /* ScoreListTableViewCell.xib */; };
 		B12DB11E2100DB3200D95FAA /* ValuationNoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */; };
 		B12DB11F2100DB3200D95FAA /* ValuationNoStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */; };
 		B12DB1222100DC2A00D95FAA /* ValuationEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */; };
@@ -466,7 +470,6 @@
 		B12DB1322101DCAB00D95FAA /* QuestionnaireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB1302101DCAB00D95FAA /* QuestionnaireViewController.swift */; };
 		B137AFDD2108854A0095FAEE /* MultipleChoiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137AFDB2108854A0095FAEE /* MultipleChoiceController.swift */; };
 		B137AFE021088EEA0095FAEE /* MultipleChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137AFDF21088EEA0095FAEE /* MultipleChoiceCell.swift */; };
-		B137AFE22109C4840095FAEE /* CheckValuationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137AFE12109C4840095FAEE /* CheckValuationViewController.swift */; };
 		B137AFE4210B20830095FAEE /* ClassOptionSelectedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137AFE3210B20830095FAEE /* ClassOptionSelectedController.swift */; };
 		B13ACFCB21030FFE00700C06 /* ValuationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13ACFCA21030FFE00700C06 /* ValuationController.swift */; };
 		B13ACFD22103309D00700C06 /* GraduationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13ACFD02103309D00700C06 /* GraduationViewController.swift */; };
@@ -481,6 +484,7 @@
 		B1C9AA981FDC60A20038C372 /* CYJNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1C9AA961FDC60A20038C372 /* CYJNotificationCell.xib */; };
 		B1F95B4C2106D2EA00BA5EA2 /* InstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F95B4A2106D2EA00BA5EA2 /* InstructionViewController.swift */; };
 		B1F95B4D2106D2EA00BA5EA2 /* InstructionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1F95B4B2106D2EA00BA5EA2 /* InstructionViewController.xib */; };
+		B1FF9E77211834DC004A7FAB /* CheckValuationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1FF9E76211834DB004A7FAB /* CheckValuationController.swift */; };
 		C9114D8505BA00ADDA6171D5 /* Pods_ZiPingSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A75D5409FF6A3E79749CD98C /* Pods_ZiPingSwiftTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -1017,6 +1021,10 @@
 		A84BDF432A0E14638E82E9E9 /* Pods_ZiPingSwiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZiPingSwiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B118E4FD1FDD21CB002D91C6 /* CYJFilterStyleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYJFilterStyleButton.swift; sourceTree = "<group>"; };
 		B11FC8921FE20D7C001E0F71 /* STHUPO.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = STHUPO.TTF; sourceTree = "<group>"; };
+		B1214AD6211AC08D00BFA28A /* CompleteNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteNumberView.swift; sourceTree = "<group>"; };
+		B1214AD7211AC08D00BFA28A /* CompleteNumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteNumberView.xib; sourceTree = "<group>"; };
+		B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListTableViewCell.swift; sourceTree = "<group>"; };
+		B1214ADB211AD54500BFA28A /* ScoreListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScoreListTableViewCell.xib; sourceTree = "<group>"; };
 		B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationNoStartViewController.swift; sourceTree = "<group>"; };
 		B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationNoStartViewController.xib; sourceTree = "<group>"; };
 		B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationEndViewController.swift; sourceTree = "<group>"; };
@@ -1030,7 +1038,6 @@
 		B12DB1302101DCAB00D95FAA /* QuestionnaireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireViewController.swift; sourceTree = "<group>"; };
 		B137AFDB2108854A0095FAEE /* MultipleChoiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleChoiceController.swift; sourceTree = "<group>"; };
 		B137AFDF21088EEA0095FAEE /* MultipleChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleChoiceCell.swift; sourceTree = "<group>"; };
-		B137AFE12109C4840095FAEE /* CheckValuationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckValuationViewController.swift; sourceTree = "<group>"; };
 		B137AFE3210B20830095FAEE /* ClassOptionSelectedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassOptionSelectedController.swift; sourceTree = "<group>"; };
 		B13ACFCA21030FFE00700C06 /* ValuationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationController.swift; sourceTree = "<group>"; };
 		B13ACFD02103309D00700C06 /* GraduationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraduationViewController.swift; sourceTree = "<group>"; };
@@ -1045,6 +1052,7 @@
 		B1C9AA961FDC60A20038C372 /* CYJNotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYJNotificationCell.xib; sourceTree = "<group>"; };
 		B1F95B4A2106D2EA00BA5EA2 /* InstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionViewController.swift; sourceTree = "<group>"; };
 		B1F95B4B2106D2EA00BA5EA2 /* InstructionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstructionViewController.xib; sourceTree = "<group>"; };
+		B1FF9E76211834DB004A7FAB /* CheckValuationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckValuationController.swift; sourceTree = "<group>"; };
 		B96354F2ED8BE633D57FC3B3 /* Pods-ZiPingSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZiPingSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZiPingSwift/Pods-ZiPingSwift.release.xcconfig"; sourceTree = "<group>"; };
 		E46BE1088CA8A0F5322CD06E /* Pods-ZiPingSwiftUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZiPingSwiftUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZiPingSwiftUITests/Pods-ZiPingSwiftUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E88683E0C255CA4F8DE7EABA /* Pods-ZiPingSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZiPingSwiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZiPingSwiftTests/Pods-ZiPingSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -2050,6 +2058,8 @@
 		8D6374A41F569BD500F666C9 /* Master */ = {
 			isa = PBXGroup;
 			children = (
+				B1214AD6211AC08D00BFA28A /* CompleteNumberView.swift */,
+				B1214AD7211AC08D00BFA28A /* CompleteNumberView.xib */,
 				8D6375171F56A2F600F666C9 /* CYJRecordStarsView.swift */,
 				8D54A6561F74DE29007C0F8E /* CYJCountedView.swift */,
 				8D54A6581F74DE36007C0F8E /* CYJCountedView.xib */,
@@ -2058,6 +2068,8 @@
 				8D516A0C1F78940900BCA623 /* CYJAnalyseFilterView.swift */,
 				8D577F661FB1B3A3009BA634 /* CYJPieChartCell.swift */,
 				8D577F681FB1B5B9009BA634 /* CYJCustomBarChartCell.swift */,
+				B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */,
+				B1214ADB211AD54500BFA28A /* ScoreListTableViewCell.xib */,
 			);
 			path = Master;
 			sourceTree = "<group>";
@@ -2333,7 +2345,7 @@
 		B18CBECC20FF719A00827E39 /* Valuation */ = {
 			isa = PBXGroup;
 			children = (
-				B137AFE12109C4840095FAEE /* CheckValuationViewController.swift */,
+				B1FF9E76211834DB004A7FAB /* CheckValuationController.swift */,
 				B137AFE3210B20830095FAEE /* ClassOptionSelectedController.swift */,
 			);
 			name = Valuation;
@@ -2568,6 +2580,7 @@
 				8D4C8DBD1F7F71AB00EDAE28 /* text_add@2x.png in Resources */,
 				8D4C8DCD1F7F71AB00EDAE28 /* videotext_rotate@.png in Resources */,
 				8D4C8D941F7F719A00EDAE28 /* noeyegray.png in Resources */,
+				B1214ADD211AD54500BFA28A /* ScoreListTableViewCell.xib in Resources */,
 				8D4C8DC01F7F71AB00EDAE28 /* video_record_share_loading_0@2x.png in Resources */,
 				8D6FFE451F550AC40065307F /* Assets.xcassets in Resources */,
 				8D4C8DB51F7F71AB00EDAE28 /* qingliang@2x.png in Resources */,
@@ -2663,6 +2676,7 @@
 				8D4C8DAA1F7F71AB00EDAE28 /* landiao@2x.png in Resources */,
 				8D4C8DBE1F7F71AB00EDAE28 /* text_type@2x.png in Resources */,
 				8D1654991FA732A100AC4954 /* transparent.png in Resources */,
+				B1214AD9211AC08D00BFA28A /* CompleteNumberView.xib in Resources */,
 				8D4C8D9C1F7F71AB00EDAE28 /* 2xspeedpressed@2x.png in Resources */,
 				B1A7C5DF1FD3F6E0006DEEEC /* Pink.plist in Resources */,
 				8D4C8DA81F7F71AB00EDAE28 /* fwhite@2x.png in Resources */,
@@ -2819,7 +2833,6 @@
 				8D1356371F7E63CB00733F0F /* KYDataPickerController.swift in Sources */,
 				8D67756A1F90BD2F00D08151 /* CYJProfessionalAnalyseController.swift in Sources */,
 				8D424EF01F7A78ED000FEA7B /* CustomSegmentView.swift in Sources */,
-				B137AFE22109C4840095FAEE /* CheckValuationViewController.swift in Sources */,
 				8D54A61F1F74A38C007C0F8E /* CYJFeedBackController.swift in Sources */,
 				8D65C6981F760C0E00D81314 /* StarEvaluateView.swift in Sources */,
 				8D2CA40C1F5E41C1002C8395 /* CYJTabbarItemContrntView.swift in Sources */,
@@ -2839,6 +2852,7 @@
 				8DA819C81F7CECA7002E03D5 /* CYJEvaluateTree.swift in Sources */,
 				8D6374C01F569BD500F666C9 /* UIView+CornerRadius.swift in Sources */,
 				8D4C8D861F7F717A00EDAE28 /* VideoCutView.m in Sources */,
+				B1FF9E77211834DC004A7FAB /* CheckValuationController.swift in Sources */,
 				B12DB12E2101DB8300D95FAA /* QuestionnComplentViewController.swift in Sources */,
 				8D6374D41F569BD500F666C9 /* UIViewControllerExtension.swift in Sources */,
 				8D2839D11F7A21BD00B1133C /* KYImageViewer.swift in Sources */,
@@ -2910,6 +2924,7 @@
 				8D59D7191FC2C67500E3619B /* CYJRecordCountView.swift in Sources */,
 				8D6374F21F569DB200F666C9 /* CYJCheckoutViewController.swift in Sources */,
 				8DA8E51C1F7E36050068EA25 /* CYJRECDetailCommentScoreView.swift in Sources */,
+				B1214AD8211AC08D00BFA28A /* CompleteNumberView.swift in Sources */,
 				8DBF9A3E1F8B77860031727D /* CYJTellUsController.swift in Sources */,
 				8D54A61C1F74A380007C0F8E /* CYJResetPasswordController.swift in Sources */,
 				8D07D1AC1FB5441D009BE014 /* CYJASRView.swift in Sources */,
@@ -2946,6 +2961,7 @@
 				8D7DD2C01F7A3CED009105C1 /* CYJRECBuildAddChildController.swift in Sources */,
 				8DFE3B241FA7535000B32B16 /* CYJRECDetailBarView.swift in Sources */,
 				8D6375061F569F0D00F666C9 /* CYJRecord.swift in Sources */,
+				B1214ADC211AD54500BFA28A /* ScoreListTableViewCell.swift in Sources */,
 				8D6FFE3E1F550AC40065307F /* AppDelegate.swift in Sources */,
 				8D2839B31F7A1BED00B1133C /* CYJRECBuildCVC.swift in Sources */,
 				8D99B2DB1F7CF7F6006CF190 /* CYJMessage.swift in Sources */,
