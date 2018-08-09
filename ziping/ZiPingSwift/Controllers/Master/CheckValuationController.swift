@@ -81,7 +81,7 @@ class CheckValuationController: KYBaseTableViewController {
         super.viewDidLoad()
 
         self.title = "专项测评"
-        tabelHeaderView = UIView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: 560))
+        tabelHeaderView = UIView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: 544))
         tabelHeaderView.theme_backgroundColor = Theme.Color.line
         tableView.tableHeaderView = tabelHeaderView
         tableView.separatorStyle = .none
@@ -324,11 +324,6 @@ class CheckValuationController: KYBaseTableViewController {
 
         let completeNumberView = CompleteNumberView.init(frame: CGRect(x: 0, y: comparedView.frame.maxY, width: view.frame.width, height: 257));
         tabelHeaderView.addSubview(completeNumberView)
-   
-        tableView.register(UINib.init(nibName: "ScoreListTableViewCell", bundle: nil), forCellReuseIdentifier: "scoreListCell")
-//        let nib = UINib(nibName: "ScoreListTableViewCell", bundle: nil) //nibName指的是我们创建的Cell文件名
-//        tableView.register(nib, forCellReuseIdentifier: "scoreListCell")
-         tableView.register(ScoreListTableViewCell.self, forCellReuseIdentifier: "scoreListCell")
         
 //        tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
         // 获取一下班级信息
@@ -363,15 +358,15 @@ extension CheckValuationController {
         return 42
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "scoreListCell") as? ScoreListTableViewCell
-//        if cell == nil {
-            cell = Bundle.main.loadNibNamed("ScoreListTableViewCell", owner: self, options: nil)?.last as? ScoreListTableViewCell
-//        }
-        cell?.textLabel?.text = "nihao "
+        var   cell :ScoreListTableViewCell! = tableView.dequeueReusableCell(withIdentifier: "cellID"  ) as? ScoreListTableViewCell
+        if cell == nil {
+            cell = ScoreListTableViewCell(style: .default, reuseIdentifier: "cellID")
+        }
+        cell.selectionStyle = .none
 //        cell?.averageLab.text = "nihao "
         
-        cell?.selectionStyle = .none
-        return cell!
+        
+        return cell
         
     }
     

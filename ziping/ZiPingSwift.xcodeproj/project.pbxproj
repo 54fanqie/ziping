@@ -456,7 +456,6 @@
 		B1214AD8211AC08D00BFA28A /* CompleteNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1214AD6211AC08D00BFA28A /* CompleteNumberView.swift */; };
 		B1214AD9211AC08D00BFA28A /* CompleteNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1214AD7211AC08D00BFA28A /* CompleteNumberView.xib */; };
 		B1214ADC211AD54500BFA28A /* ScoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */; };
-		B1214ADD211AD54500BFA28A /* ScoreListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1214ADB211AD54500BFA28A /* ScoreListTableViewCell.xib */; };
 		B12DB11E2100DB3200D95FAA /* ValuationNoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */; };
 		B12DB11F2100DB3200D95FAA /* ValuationNoStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */; };
 		B12DB1222100DC2A00D95FAA /* ValuationEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */; };
@@ -1024,7 +1023,6 @@
 		B1214AD6211AC08D00BFA28A /* CompleteNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteNumberView.swift; sourceTree = "<group>"; };
 		B1214AD7211AC08D00BFA28A /* CompleteNumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteNumberView.xib; sourceTree = "<group>"; };
 		B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListTableViewCell.swift; sourceTree = "<group>"; };
-		B1214ADB211AD54500BFA28A /* ScoreListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScoreListTableViewCell.xib; sourceTree = "<group>"; };
 		B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationNoStartViewController.swift; sourceTree = "<group>"; };
 		B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationNoStartViewController.xib; sourceTree = "<group>"; };
 		B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationEndViewController.swift; sourceTree = "<group>"; };
@@ -2069,7 +2067,6 @@
 				8D577F661FB1B3A3009BA634 /* CYJPieChartCell.swift */,
 				8D577F681FB1B5B9009BA634 /* CYJCustomBarChartCell.swift */,
 				B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */,
-				B1214ADB211AD54500BFA28A /* ScoreListTableViewCell.xib */,
 			);
 			path = Master;
 			sourceTree = "<group>";
@@ -2580,7 +2577,6 @@
 				8D4C8DBD1F7F71AB00EDAE28 /* text_add@2x.png in Resources */,
 				8D4C8DCD1F7F71AB00EDAE28 /* videotext_rotate@.png in Resources */,
 				8D4C8D941F7F719A00EDAE28 /* noeyegray.png in Resources */,
-				B1214ADD211AD54500BFA28A /* ScoreListTableViewCell.xib in Resources */,
 				8D4C8DC01F7F71AB00EDAE28 /* video_record_share_loading_0@2x.png in Resources */,
 				8D6FFE451F550AC40065307F /* Assets.xcassets in Resources */,
 				8D4C8DB51F7F71AB00EDAE28 /* qingliang@2x.png in Resources */,
