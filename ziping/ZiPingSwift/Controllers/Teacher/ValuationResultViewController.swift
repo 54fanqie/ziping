@@ -14,6 +14,9 @@ class ValuationResultViewController: KYBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let vi = ValuationResultView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: Theme.Measure.screenHeight - 64 ))
+        view.addSubview(vi)
+        
     }
 
     override func didReceiveMemoryWarning() {

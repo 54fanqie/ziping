@@ -19,24 +19,28 @@ class ValuationController: KYBaseViewController {
         switch statue {
         case 1:
             let completeVC = ValuationCompleteController();
+            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
             //添加获取到的视图控制器的视图
             view.addSubview(completeVC.view)
             addChildViewController(completeVC)
             
         case 2:
             let  noStartVC = ValuationNoStartViewController();
+            noStartVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
             view.addSubview(noStartVC.view)
             addChildViewController(noStartVC)
             
             
         case 3:
             let  endVC = ValuationEndViewController();
+            endVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
             view.addSubview(endVC.view)
             addChildViewController(endVC)
             
             
         default:
             let completeVC = ValuationCompleteController();
+            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
             view.addSubview(completeVC.view)
             addChildViewController(completeVC)
         }
