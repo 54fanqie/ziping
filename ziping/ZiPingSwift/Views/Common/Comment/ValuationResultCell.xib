@@ -79,6 +79,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="formbackView" destination="oLb-5N-8rL" id="jD5-NM-wg1"/>
+                <outlet property="timeLab" destination="eDb-gN-Lkn" id="m02-xZ-Qsz"/>
+                <outlet property="titleLab" destination="4Bw-Zv-Xmn" id="qPK-Ic-nul"/>
             </connections>
             <point key="canvasLocation" x="-12.5" y="97"/>
         </tableViewCell>
