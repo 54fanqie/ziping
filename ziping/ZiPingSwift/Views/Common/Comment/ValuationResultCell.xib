@@ -51,16 +51,11 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-5N-8rL">
-                        <rect key="frame" x="130" y="0.0" width="369" height="62.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.98431372549019602" green="0.98431372549019602" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="eDb-gN-Lkn" firstAttribute="top" secondItem="4Bw-Zv-Xmn" secondAttribute="bottom" constant="4" id="E0k-0s-dxq"/>
                     <constraint firstItem="Tvh-bg-g4L" firstAttribute="leading" secondItem="eDb-gN-Lkn" secondAttribute="trailing" id="Eff-vA-ChX"/>
-                    <constraint firstItem="oLb-5N-8rL" firstAttribute="leading" secondItem="Tvh-bg-g4L" secondAttribute="trailing" id="Jr7-qN-0yb"/>
                     <constraint firstItem="Tvh-bg-g4L" firstAttribute="leading" secondItem="4Bw-Zv-Xmn" secondAttribute="trailing" id="NB3-T8-NP7"/>
                     <constraint firstItem="4Bw-Zv-Xmn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="P8v-qO-eIp"/>
                     <constraint firstItem="vav-eD-cdD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QeH-x2-Pv0"/>
@@ -70,15 +65,11 @@
                     <constraint firstItem="Tvh-bg-g4L" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZDm-kg-gYy"/>
                     <constraint firstItem="4Bw-Zv-Xmn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="bII-79-M9f"/>
                     <constraint firstItem="eDb-gN-Lkn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mFm-NX-YRl"/>
-                    <constraint firstItem="oLb-5N-8rL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ruL-LB-V7e"/>
                     <constraint firstItem="Tvh-bg-g4L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="129" id="tfG-86-khY"/>
-                    <constraint firstAttribute="bottom" secondItem="oLb-5N-8rL" secondAttribute="bottom" constant="1" id="wNv-o9-udM"/>
-                    <constraint firstAttribute="trailing" secondItem="oLb-5N-8rL" secondAttribute="trailing" id="xGU-RB-JBf"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="formbackView" destination="oLb-5N-8rL" id="jD5-NM-wg1"/>
                 <outlet property="timeLab" destination="eDb-gN-Lkn" id="m02-xZ-Qsz"/>
                 <outlet property="titleLab" destination="4Bw-Zv-Xmn" id="qPK-Ic-nul"/>
             </connections>

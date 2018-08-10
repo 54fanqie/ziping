@@ -51,44 +51,43 @@ class FormView: UIView {
 
 
 class ValuationResultCell: UITableViewCell {
-   
+    
     @IBOutlet weak var titleLab: UILabel!
     @IBOutlet weak var timeLab: UILabel!
-    @IBOutlet weak var formbackView: UIView!
-     var dict : NSDictionary = [:] {
+    var formbackView: UIView!
+    var dict : NSDictionary = [:] {
         
         didSet {
-           print(dict)
+            print(dict)
             let data = dict.object(forKey: "list") as! NSArray
-        
+            
             if data.count == 0{
                 return
             }
             
             titleLab.text = dict.object(forKey: "title") as? String
             timeLab.text = (dict.object(forKey: "time") as! String)
-
+            
             for index in 0..<data.count {
                 print(index)
                 let fw = (Theme.Measure.screenWidth - 129)  / CGFloat(data.count)
                 let vi = FormView.init(frame: CGRect(x: fw * CGFloat(index), y: 0, width: fw , height: 53 ));
                 let  code = data[index] as! String
                 vi.codeLab.text = code
-                
                 formbackView.addSubview(vi)
             }
         }
     }
     
     
-//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    //    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    //        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    //
+    //    }
+    //
+    //    required init?(coder aDecoder: NSCoder) {
+    //        fatalError("init(coder:) has not been implemented")
+    //    }
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -102,7 +101,15 @@ class ValuationResultCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        formbackView = UIView()
+        formbackView.backgroundColor = UIColor.clear
+        self.addSubview(formbackView)
+        formbackView?.snp.makeConstraints({ (make)in
+            make.top.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(0)
+            make.left.equalTo(self).offset(129)
+        })
         
     }
     

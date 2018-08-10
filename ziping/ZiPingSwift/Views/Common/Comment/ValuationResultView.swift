@@ -30,6 +30,7 @@ class ValuationResultView: UIView {
         
         headerTitleView = HeaderTitleView(frame: CGRect(x: 0, y: 16, width: frame.width, height: 46));
         tabelHeaderView.addSubview(headerTitleView)
+        headerTitleView.typeData = ["  \n总分","认知\n领域","语言\n领域","社会\n领域","学习\n品质",]
         tableView.reloadData()
     }
     
