@@ -12,8 +12,9 @@ import Foundation
 struct APIManager {
     
     //MARK: Server地址
-    static let serverPath = "http://api.epaofu.com"
+//    static let serverPath = "http://api.epaofu.com"
 //    static let serverPath = "http://testapi.emice.net"
+       static let serverPath = "http://testapi.epaofu.com"
     
     struct User {
         /// 登录
@@ -152,5 +153,10 @@ struct APIManager {
         static let attentionpj: String = serverPath + "/tj/attentiontj"
         static let grownpj: String = serverPath + "/tj/grownpj"
         static let analPro: String = serverPath + "/tj/analPro"
+    }
+    struct Valuation {
+        static let check: String = serverPath + "/evaluation/check"
+        static let getShiti: String = serverPath + "/evaluation/getShiti"
+        
     }
 }

@@ -7,29 +7,74 @@
 //
 
 import UIKit
+import HandyJSON
+
+class ShiJuanModel: CYJBaseModel {
+    var historyid : Int = 0
+    var isfinish : Int = 0
+    var shijuanid : Int = 0
+    var title : String?
+    var content : String?
+    var shitiData : [ShiTiDetailModel] = []
+}
+
+class ShiTiDetailModel: CYJBaseModel {
+    var bigTitle : String?
+    var catid1 : Int = 1
+    var catid2 : Int = 2
+    var catid3 : Int = 3
+    var choices : [ChoicesDetailModel] = []
+    var questioImg : String?
+    var tiid : Int = 0
+    var title : String?
+    var type : Int = 0
+    var yueduImg : String?
+}
+
+class ChoicesDetailModel : CYJBaseModel{
+    var answer : Int = 0
+    var chose : String?
+    var scId : Int = 0
+    var score : Int = 0
+    var thumb : String?
+}
+
 
 class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableViewDelegate, MultipleChoiceDelegate {
     
     
+    var shijuanid : Int = 0
+    var shiJuanModel : ShiJuanModel?
+    
+    var dataSource : [ShiTiDetailModel] = []
     
     var table: UITableView!
     var bottmView: UIView!
     var dataArray : NSMutableArray!
-//    var suspendBtn : UIButton!
-//    var updataBtn : UIButton!
+    
     /// 操作bar
     var actionView: CYJActionsView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "问卷测评"
-        
-        let dic = MultipleChoiceController.getData()
-        
-        dataArray = NSMutableArray();
-        for _ in 0..<10 {
-            dataArray.add(dic)
-        }
-        print(dataArray)
+        //请求数据查看是否完成
+        RequestManager.POST(urlString: APIManager.Valuation.getShiti, params: ["shijuanid": self.shijuanid], complete: { [weak self] (data, error) in
+            
+            guard error == nil else {
+                Third.toast.message((error?.localizedDescription)!)
+                return
+            }
+            
+            
+            if let datas = data as? NSDictionary {
+                print(datas)
+                //遍历，并赋值
+                let target = JSONDeserializer<ShiJuanModel>.deserializeFrom(dict: datas )
+                self?.shiJuanModel = target
+                self?.dataSource = (self?.shiJuanModel?.shitiData)!
+                self?.table.reloadData()
+            }
+        })
         
         
         table = UITableView()
@@ -42,9 +87,9 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
         table.theme_backgroundColor = Theme.Color.viewLightColor
         self.view.addSubview(table)
         //设置estimatedRowHeight属性默认值
-        //        table.estimatedRowHeight = 44;
-        //rowHeight属性设置为UITableViewAutomaticDimension
-        //        table.rowHeight = UITableViewAutomaticDimension;
+                table.estimatedRowHeight = 44;
+//        rowHeight属性设置为UITableViewAutomaticDimension
+                table.rowHeight = UITableViewAutomaticDimension;
         
         
         table.snp.makeConstraints { (make) in
@@ -80,35 +125,9 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
         
         
         
+        
     }
     
-//    func setFrameConstraints(){
-//        bottmView.snp.makeConstraints { (make) in
-//            make.left.equalTo(view).offset(0)
-//            make.right.equalTo(view).offset(0)
-//            make.bottom.equalTo(view.snp.bottom).offset(0)
-//            make.height.equalTo(44)
-//        }
-//        suspendBtn.snp.makeConstraints { (make) in
-//            make.left.equalTo(bottmView).offset(0)
-//            make.top.equalTo(bottmView).offset(0.5)
-//            make.bottom.equalTo(bottmView.snp.bottom).offset(0)
-//            make.width.equalTo(view.frame.size.width * 0.4)
-//        }
-//        updataBtn.snp.makeConstraints { (make) in
-//            make.left.equalTo(suspendBtn.snp.right).offset(0)
-//            make.right.equalTo(bottmView).offset(0)
-//            make.top.equalTo(bottmView).offset(0)
-//            make.bottom.equalTo(bottmView).offset(0)
-//        }
-////
-//        table.snp.makeConstraints { (make) in
-//            make.left.equalTo(view).offset(0)
-//            make.right.equalTo(view).offset(0)
-//            make.top.equalTo(view).offset(0)
-//            make.bottom.equalTo(bottmView.snp.top).offset(0)
-//        }
-//    }
     
     
     @objc func updataAciton(button:UIButton) {
@@ -143,14 +162,14 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return dataArray.count
+        return self.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let indentifier = "ChoiceCell" + String(format: "%d%d", indexPath.row,indexPath.section)
         var cell:MultipleChoiceCell! = tableView.dequeueReusableCell(withIdentifier: indentifier)as?MultipleChoiceCell
         if cell == nil {
-            cell = MultipleChoiceCell(style: .default, reuseIdentifier: indentifier, cellData:dataArray[indexPath.row] as! NSDictionary)
+            cell = MultipleChoiceCell(style: .default, reuseIdentifier: indentifier, cellData:(self.shiJuanModel?.shitiData[indexPath.row])!)
         }
         cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -204,52 +223,52 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
      }
      */
     
-    static func  getData() -> NSDictionary {
-        let mutable1 : NSMutableDictionary = NSMutableDictionary()
-        mutable1.setObject("不符合", forKey:"question"  as NSCopying)
-        mutable1.setObject(1, forKey:"answer"  as NSCopying)
-        
-        
-        let mutable2 : NSMutableDictionary = NSMutableDictionary()
-        mutable2.setObject("不太符合", forKey:"question"  as NSCopying)
-        mutable2.setObject(0, forKey:"answer"  as NSCopying)
-        
-        
-        let mutable3 : NSMutableDictionary = NSMutableDictionary()
-        mutable3.setObject("中等", forKey:"question"  as NSCopying)
-        mutable3.setObject(0, forKey:"answer"  as NSCopying)
-        
-        let mutable4 : NSMutableDictionary = NSMutableDictionary()
-        mutable4.setObject("符合", forKey:"question"  as NSCopying)
-        mutable4.setObject(0, forKey:"answer"  as NSCopying)
-        
-        let mutable5 : NSMutableDictionary = NSMutableDictionary()
-        mutable5.setObject("完全符合", forKey:"question"  as NSCopying)
-        mutable5.setObject(0, forKey:"answer"  as NSCopying)
-        
-        let arry:[NSDictionary] =  [mutable1, mutable2, mutable3,mutable4,mutable5]
-        
-        
-        
-        
-        
-        
-        let dicAll : NSMutableDictionary = NSMutableDictionary()
-        dicAll.setObject("在幼儿园或学校里遵守各项常规和纪律", forKey:"title"  as NSCopying)
-        dicAll.setObject(arry, forKey:"data"  as NSCopying)
-        
-        
-        
-        
-        
-        //        muArray.add(mutable1)
-        //        muArray.add(mutable2)
-        //        muArray.add(mutable1)
-        //        muArray.add(mutable2)
-        //        muArray.add(mutable1)
-        //
-        //
-        //        let muArrayAll = NSMutableArray()
-        return dicAll
-    }
+//        static func  getData() -> NSDictionary {
+//            let mutable1 : NSMutableDictionary = NSMutableDictionary()
+//            mutable1.setObject("不符合", forKey:"question"  as NSCopying)
+//            mutable1.setObject(1, forKey:"answer"  as NSCopying)
+//
+//
+//            let mutable2 : NSMutableDictionary = NSMutableDictionary()
+//            mutable2.setObject("不太符合", forKey:"question"  as NSCopying)
+//            mutable2.setObject(0, forKey:"answer"  as NSCopying)
+//
+//
+//            let mutable3 : NSMutableDictionary = NSMutableDictionary()
+//            mutable3.setObject("中等", forKey:"question"  as NSCopying)
+//            mutable3.setObject(0, forKey:"answer"  as NSCopying)
+//
+//            let mutable4 : NSMutableDictionary = NSMutableDictionary()
+//            mutable4.setObject("符合", forKey:"question"  as NSCopying)
+//            mutable4.setObject(0, forKey:"answer"  as NSCopying)
+//
+//            let mutable5 : NSMutableDictionary = NSMutableDictionary()
+//            mutable5.setObject("完全符合", forKey:"question"  as NSCopying)
+//            mutable5.setObject(0, forKey:"answer"  as NSCopying)
+//
+//            let arry:[NSDictionary] =  [mutable1, mutable2, mutable3,mutable4,mutable5]
+//
+//
+//
+//
+//
+//
+//            let dicAll : NSMutableDictionary = NSMutableDictionary()
+//            dicAll.setObject("在幼儿园或学校里遵守各项常规和纪律", forKey:"title"  as NSCopying)
+//            dicAll.setObject(arry, forKey:"data"  as NSCopying)
+//
+//
+//
+//
+//
+//            //        muArray.add(mutable1)
+//            //        muArray.add(mutable2)
+//            //        muArray.add(mutable1)
+//            //        muArray.add(mutable2)
+//            //        muArray.add(mutable1)
+//            //
+//            //
+//            //        let muArrayAll = NSMutableArray()
+//            return dicAll
+//        }
 }

@@ -217,7 +217,7 @@ extension CYJMineViewController {
 }
 extension CYJMineViewController {
     func specialvaluation(){
-        
+        //测评        
         if role == .master {
             let valuatiov = CheckValuationController()
             navigationController?.pushViewController(valuatiov, animated: true)
@@ -312,8 +312,6 @@ extension CYJMineViewController : UINavigationControllerDelegate, UIImagePickerC
                 DLog(uploadedPath)
                 RequestManager.POST(urlString: APIManager.Mine.avater, params: ["token": LocaleSetting.token, "photo": "\(uploadedPath.components(separatedBy: "/").last ?? "default")"]) { [unowned self] (data, error) in
                     //如果存在error
-                    Third.toast.hide {
-                    }
                     guard error == nil else {
                         Third.toast.message((error?.localizedDescription)!)
                         return

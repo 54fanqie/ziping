@@ -9,7 +9,8 @@
 import UIKit
 
 class InstructionViewController: KYBaseViewController {
-
+    var shijuanid : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "问卷测评"
@@ -19,6 +20,7 @@ class InstructionViewController: KYBaseViewController {
   
     @IBAction func startQuestionnaireAction(_ sender: Any) {
         let muVC = MultipleChoiceController();
+        muVC.shijuanid = self.shijuanid
         self.navigationController?.pushViewController(muVC, animated: true);
     }
     override func didReceiveMemoryWarning() {

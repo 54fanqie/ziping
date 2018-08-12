@@ -15,7 +15,7 @@ import SnapKit
 
 class MultipleChoiceCell: UITableViewCell {
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String? , cellData: NSDictionary) {
+    init(style: UITableViewCellStyle, reuseIdentifier: String? , cellData: ShiTiDetailModel) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.lauoutUI(cellData: cellData)
     }
@@ -54,12 +54,12 @@ class MultipleChoiceCell: UITableViewCell {
     }
     
     
-    func lauoutUI(cellData :NSDictionary)  {
+    func lauoutUI(cellData :ShiTiDetailModel)  {
         //问题
-        let questionTitle = cellData["title"] as! String
+        let questionTitle = cellData.title
        
         //答案
-        let questionArray = cellData["data"] as! NSArray
+        let questionArray = cellData.choices
         
         
    
@@ -86,6 +86,7 @@ class MultipleChoiceCell: UITableViewCell {
         titleLab = UILabel();
         titleLab?.text = questionTitle
         titleLab?.theme_textColor = Theme.Color.textColorDark
+        titleLab?.numberOfLines = 0 
         titleLab?.font = UIFont.systemFont(ofSize: 15)
         topView?.addSubview(titleLab!)
         
@@ -111,8 +112,14 @@ class MultipleChoiceCell: UITableViewCell {
         
         for i in 0..<questionArray.count{
             
-            let dict = questionArray[i] as! NSDictionary;
-            let isSelect = dict["answer"] as! Bool
+            let dictDetail = questionArray[i]
+            var isSelect : Bool = false
+            if dictDetail.scId == i {
+                isSelect = true
+            }else{
+                isSelect = false
+            }
+            
             
             
             let subView = UIView()
@@ -154,7 +161,7 @@ class MultipleChoiceCell: UITableViewCell {
             
         
             let contentTitle = UILabel();
-            contentTitle.text = dict["question"] as? String
+            contentTitle.text = dictDetail.chose
             contentTitle.font = UIFont.systemFont(ofSize: 15)
             contentTitle.theme_textColor = Theme.Color.textColorDark
             subView.addSubview(contentTitle)

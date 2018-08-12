@@ -8,12 +8,28 @@
 
 import UIKit
 import SwiftTheme
+import HandyJSON
+
+class ValuationStatuModel: CYJBaseModel {
+    var groupId         : Int = 0 //当前身份，1=园长，2=教师，3=家长
+    var status          : Int? // 前状态，0=未开始，1=进行中，2=己结束，3=己毕业
+    var title           : String?     //标题
+    var isfinish        : Int?  //  是否提交试卷（1=是，0=否（可能从没做过，也可以是没做完））
+    var shijuanid       : Int = 0  //当前标题（state=1时，这里为试卷的标题，否则为对应的状态说明标题）
+    var remarks         : String?  //备注提示
+    var testStatistics  : NSArray = [] //统计情况 groupId=2时使用，（overComplete=己完成，overStart=己开始，overNoStart=未开始）
+    var testTime        : NSArray? //测评时间清单(state=4时，显示这对应数据)
+}
+
 
 class QuestionnaireViewController: KYBaseViewController {
     
     var scrollPageView: ScrollPageView!
     var uid: Int = 0
     var statue :Int = Int()
+    var valuatuinStatue : ValuationStatuModel?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,26 +56,46 @@ class QuestionnaireViewController: KYBaseViewController {
         style.normalTitleColor = normalColor
         style.selectedTitleColor = color
         
-        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: Theme.Measure.screenHeight - 64), segmentStyle: style, titles: ["问卷测评", "教师测评结果"], childVcs: setChildVcs(), parentViewController: self)
+        //请求数据查看是否完成
+        RequestManager.POST(urlString: APIManager.Valuation.check, params: nil, complete: { [weak self] (data, error) in
+            
+            guard error == nil else {
+                Third.toast.message((error?.localizedDescription)!)
+                return
+            }
+            
+            
+            if let datas = data as? NSDictionary {
+                //遍历，并赋值
+                let target = JSONDeserializer<ValuationStatuModel>.deserializeFrom(dict: datas )
+                self?.valuatuinStatue = target
+                //                self?.scrollPageView.reloadChildVcsWithNewTitles(["问卷测评", "教师测评结果"], andNewChildVcs: (self?.setChildVcs())!)
+                self?.scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: (self?.view.frame.width)!, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight), segmentStyle: style, titles: ["问卷测评", "教师测评结果"], childVcs: (self?.setChildVcs())!, parentViewController: self!)
+                
+                self?.view.addSubview((self?.scrollPageView)!)
+            }
+        })
         
-        view.addSubview(scrollPageView)
+        
     }
     /// swiperView 必须实现的
     func setChildVcs() -> [UIViewController] {
         
         var childVCs: [UIViewController] = []
-        switch statue {
+        switch self.valuatuinStatue?.status {
         case 0:
             //  问卷测评 未开始
             let vc4 = ValuationNoStartViewController()
             vc4.view.backgroundColor = UIColor.white
             vc4.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc4.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc4)
         case 1:
             //  问卷测评  进行中
             let vc1 = QuestionnaireIngViewController()
             vc1.view.backgroundColor = UIColor.white
             vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc1.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc1)
         case 3:
             //  问卷测评  已完成
@@ -79,10 +115,10 @@ class QuestionnaireViewController: KYBaseViewController {
             vc5.view.backgroundColor = UIColor.white
             vc5.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
             childVCs.append(vc5)
-
+            
         default:
-            //  问卷测评  未开始
-            let vc = ValuationNoStartViewController()
+            //  空白
+            let vc = UIViewController()
             vc.view.backgroundColor = UIColor.white
             vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
             childVCs.append(vc)

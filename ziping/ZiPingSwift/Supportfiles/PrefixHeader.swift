@@ -71,6 +71,43 @@ struct Theme {
         static func tHeight(_ height: CGFloat) -> CGFloat {
             return screenHeight * height / 667
         }
+        
+        
+        // 屏幕宽度
+        
+       static let JMTWindowWidth = UIScreen.main.bounds.size.width
+        
+        // 屏幕高度
+        
+       static let JMTWindowHeight = UIScreen.main.bounds.size.height
+        
+        // iPhone4
+        
+        static let isIphone4 = JMTWindowHeight  < 568 ? true : false
+        
+        // iPhone 5
+        
+       static let isIphone5 = JMTWindowHeight  == 568 ? true : false
+        
+        // iPhone 6
+        
+       static let isIphone6 = JMTWindowHeight  == 667 ? true : false
+        
+        // iphone 6P
+        
+      static  let isIphone6P = JMTWindowHeight == 736 ? true : false
+        
+        // iphone X
+        
+        static let isIphoneX = JMTWindowHeight == 812 ? true : false
+        
+        // navigationBarHeight
+        
+       static let navigationBarHeight : CGFloat = isIphoneX ? 88 : 64
+        
+        // tabBarHeight
+        
+       static  let tabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
     }
     
     struct Color {

@@ -13,7 +13,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionnaireIngViewController" customModule="ZiPingSwift" customModuleProvider="target">
             <connections>
+                <outlet property="markLab" destination="uEi-3G-hJB" id="Axi-cV-Fvq"/>
                 <outlet property="starValuationBtn" destination="vNm-Hr-jGH" id="wfZ-uh-frG"/>
+                <outlet property="titlelab" destination="Mgj-2o-T7U" id="hRe-aJ-Q6w"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

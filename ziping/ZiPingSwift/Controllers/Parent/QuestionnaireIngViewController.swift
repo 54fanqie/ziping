@@ -10,7 +10,16 @@ import UIKit
 
 class QuestionnaireIngViewController: KYBaseViewController {
 
+    @IBOutlet weak var markLab: UILabel!
+    @IBOutlet weak var titlelab: UILabel!
     @IBOutlet weak var starValuationBtn: UIButton!
+    var valuationStatueInfo : ValuationStatuModel?{
+        didSet{
+            titlelab.text = self.valuationStatueInfo?.title
+            markLab.text = self.valuationStatueInfo?.remarks
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         starValuationBtn.layer.cornerRadius = 20
@@ -20,6 +29,18 @@ class QuestionnaireIngViewController: KYBaseViewController {
     }
 
     @IBAction func starValuationAction(_ sender: Any) {
+        var vc : UIViewController
+        if self.valuationStatueInfo?.isfinish == 1 {
+            let mu = MultipleChoiceController();
+            mu.shijuanid = (self.valuationStatueInfo?.shijuanid)!
+            vc = mu
+        }else{
+            let instrucVc  = InstructionViewController()
+            instrucVc.shijuanid = (self.valuationStatueInfo?.shijuanid)!
+            vc = instrucVc
+        }
+         self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
