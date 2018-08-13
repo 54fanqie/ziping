@@ -479,6 +479,7 @@
 		B13ACFD22103309D00700C06 /* GraduationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13ACFD02103309D00700C06 /* GraduationViewController.swift */; };
 		B13ACFD32103309D00700C06 /* GraduationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B13ACFD12103309D00700C06 /* GraduationViewController.xib */; };
 		B13ACFD62103359200700C06 /* ValuationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13ACFD42103359200700C06 /* ValuationResultViewController.swift */; };
+		B14100CE212180C600E732AA /* ValuationAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14100CD212180C600E732AA /* ValuationAlertController.swift */; };
 		B17721471FEA9A1C00A3F25C /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17721461FEA9A1C00A3F25C /* AuthorizationManager.swift */; };
 		B18CBECF20FF747F00827E39 /* ValuationCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */; };
 		B18CBED020FF747F00827E39 /* ValuationCompleteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */; };
@@ -1050,6 +1051,7 @@
 		B13ACFD02103309D00700C06 /* GraduationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraduationViewController.swift; sourceTree = "<group>"; };
 		B13ACFD12103309D00700C06 /* GraduationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GraduationViewController.xib; sourceTree = "<group>"; };
 		B13ACFD42103359200700C06 /* ValuationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationResultViewController.swift; sourceTree = "<group>"; };
+		B14100CD212180C600E732AA /* ValuationAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationAlertController.swift; sourceTree = "<group>"; };
 		B17721461FEA9A1C00A3F25C /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationCompleteController.swift; sourceTree = "<group>"; };
 		B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationCompleteController.xib; sourceTree = "<group>"; };
@@ -1836,6 +1838,7 @@
 			children = (
 				8D6374DF1F569CB900F666C9 /* CYJCMDetailViewController.swift */,
 				8D6374E11F569CD200F666C9 /* CYJCMListViewController.swift */,
+				B14100CD212180C600E732AA /* ValuationAlertController.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -2891,6 +2894,7 @@
 				B137AFE4210B20830095FAEE /* ClassOptionSelectedController.swift in Sources */,
 				8D36B40E1F8F0834001736D9 /* CYJRECCacheViewController.swift in Sources */,
 				8D4C8D7C1F7F717000EDAE28 /* VideoEditViewController.m in Sources */,
+				B14100CE212180C600E732AA /* ValuationAlertController.swift in Sources */,
 				8D4C8D721F7F714E00EDAE28 /* NSData+Common.m in Sources */,
 				8D6374E01F569CB900F666C9 /* CYJCMDetailViewController.swift in Sources */,
 				8D4C8D701F7F713E00EDAE28 /* TextCell.m in Sources */,

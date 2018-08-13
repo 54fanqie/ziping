@@ -12,9 +12,9 @@ import Foundation
 struct APIManager {
     
     //MARK: Server地址
-//    static let serverPath = "http://api.epaofu.com"
-//    static let serverPath = "http://testapi.emice.net"
-       static let serverPath = "http://testapi.epaofu.com"
+    //    static let serverPath = "http://api.epaofu.com"
+    //    static let serverPath = "http://testapi.emice.net"
+    static let serverPath = "http://testapi.epaofu.com"
     
     struct User {
         /// 登录
@@ -27,7 +27,7 @@ struct APIManager {
         static let code: String = serverPath + "/user/code"
         /// 修改密码-通过验证码
         static let modifyPwd: String = serverPath + "/user/modifyPwd"
-
+        
     }
     
     struct Record {
@@ -45,7 +45,7 @@ struct APIManager {
         static let add: String = serverPath + "/grown/add"
         /// 修改成长记；成长记
         static let edit: String = serverPath + "/grown/edit"
-
+        
         /// 成长记录详细描述
         static let info: String = serverPath + "/grown/info"
         /// 成长记录评价
@@ -59,13 +59,13 @@ struct APIManager {
         
         /// 成长记录回复或评论
         static let comment: String = serverPath + "/grown/comment"
-
+        
         /// 点赞
         static let praise: String = serverPath + "/grown/praise"
         
         /// listDomain
         static let listDomain: String = serverPath + "/grown/listDomain"
-
+        
     }
     
     struct Archive {
@@ -76,7 +76,7 @@ struct APIManager {
         
         /// 档案袋的表 们
         static let chartData: String = serverPath + "/archives/bar"
-
+        
     }
     
     struct Message {
@@ -139,8 +139,8 @@ struct APIManager {
         static let teacherInfo: String = serverPath + "/my/teacherinfo"
         /// 更改个人信息
         static let update: String = serverPath + "/my/update"
-
-
+        
+        
     }
     
     struct Media {
@@ -157,6 +157,13 @@ struct APIManager {
     struct Valuation {
         static let check: String = serverPath + "/evaluation/check"
         static let getShiti: String = serverPath + "/evaluation/getShiti"
+        static let addAnswer: String = serverPath + "/evaluation/addAnswer"
+        static let teacherResult: String = serverPath + "/evaluation/teacherResult"
+        static let applyReport: String = serverPath + "/evaluation/applyReport"
+        static let teacherApplyReport: String = serverPath + "/evaluation/teacherApplyReport"
+        static let getClass: String = serverPath + "/evaluation/getClass"
+        static let getTestTime: String = serverPath + "/evaluation/getTestTime"
+        static let analysis: String = serverPath + "/evaluation/analysis"
         
     }
 }

@@ -10,14 +10,14 @@ import UIKit
 import SnapKit
 
 @objc protocol MultipleChoiceDelegate : NSObjectProtocol{
-    func selectResult(parma:String)
+    func selectResult(cellIndex : Int ,choesIndex : Int,score:String)
 }
 
 class MultipleChoiceCell: UITableViewCell {
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String? , cellData: ShiTiDetailModel) {
+    init(style: UITableViewCellStyle, reuseIdentifier: String? , cellData: ShiTiDetailModel, index: Int) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.lauoutUI(cellData: cellData)
+        self.lauoutUI(cellData: cellData ,index: index)
     }
     
     //声明类的代理属性变量名
@@ -28,8 +28,7 @@ class MultipleChoiceCell: UITableViewCell {
     var topView: UIView?
     var bottomView: UIView?
     var imageViewMuArray : NSMutableArray?
-    
-    
+    var shiTiDetailModel = ShiTiDetailModel()
     
     //题目标题高度
     let topViewHeight = 45
@@ -44,25 +43,26 @@ class MultipleChoiceCell: UITableViewCell {
     let imageSize = 20
     
     //选择按钮left间距
-     let imageLeftSpace = 20
-   
+    let imageLeftSpace = 20
+    
     //选项内容与按钮的间距
-    let contentTobuttonSpace = 10
+    let contentTobuttonSpace = 60
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
-    func lauoutUI(cellData :ShiTiDetailModel)  {
+    func lauoutUI(cellData :ShiTiDetailModel,index: Int)  {
+        shiTiDetailModel = cellData
         //问题
-        let questionTitle = cellData.title
-       
+        let questionTitle =  String(format:"%d、%@",index + 1,cellData.title!)
+        
         //答案
         let questionArray = cellData.choices
         
         
-   
+        //大背景
         backView = UIView();
         backView?.layer.cornerRadius = 10
         backView?.layer.masksToBounds = true
@@ -70,19 +70,14 @@ class MultipleChoiceCell: UITableViewCell {
         backView?.layer.borderWidth = 0.1
         backView?.layer.theme_borderColor = "Global.textColorLight"
         self.contentView.addSubview(backView!)
-        
+        //选项按钮图片
         imageViewMuArray = NSMutableArray();
-        
+        //标题底层背景
         topView = UIView();
         topView?.theme_backgroundColor = Theme.Color.viewLightColor
         backView?.addSubview(topView!)
-        topView?.snp.makeConstraints({ (make)in
-            make.left.equalTo(backView!).offset(0)
-            make.right.equalTo(backView!).offset(0)
-            make.top.equalTo(backView!).offset(0)
-            make.height.equalTo(topViewHeight)
-        })
         
+        //标题lab
         titleLab = UILabel();
         titleLab?.text = questionTitle
         titleLab?.theme_textColor = Theme.Color.textColorDark
@@ -90,47 +85,29 @@ class MultipleChoiceCell: UITableViewCell {
         titleLab?.font = UIFont.systemFont(ofSize: 15)
         topView?.addSubview(titleLab!)
         
-        titleLab?.snp.makeConstraints({ (make)in
-            make.left.equalTo(topView!).offset(titleLeftSpace)
-            make.right.equalTo(topView!).offset(0)
-            make.centerY.equalTo(topView!)
-        })
         
         
+        //选项背景按钮
         bottomView = UIView();
         bottomView?.backgroundColor = UIColor.white
         backView?.addSubview(bottomView!)
         
-        
-        
-        bottomView?.snp.makeConstraints({ (make)in
-            make.left.equalTo(backView!).offset(0)
-            make.right.equalTo(backView!).offset(0)
-            make.top.equalTo(topView!.snp.bottom).offset(10)
-            make.height.equalTo(subViewHeight * questionArray.count)
-        })
-        
+        var lastView : UIView?
         for i in 0..<questionArray.count{
             
             let dictDetail = questionArray[i]
             var isSelect : Bool = false
-            if dictDetail.scId == i {
-                isSelect = true
-            }else{
+            if dictDetail.answer == 0 {
                 isSelect = false
+            }else{
+                isSelect = true
             }
             
             
-            
+            //子选项View
             let subView = UIView()
             bottomView?.addSubview(subView)
             
-            subView.snp.makeConstraints({ (make)in
-                make.left.equalTo(bottomView!).offset(0)
-                make.right.equalTo(bottomView!).offset(0)
-                make.top.equalTo(bottomView!).offset(subViewHeight * i)
-                make.height.equalTo(subViewHeight)
-            })
             let imageView = UIImageView();
             if(isSelect){
                 imageView.image = #imageLiteral(resourceName: "cnb-seted")
@@ -159,19 +136,61 @@ class MultipleChoiceCell: UITableViewCell {
                 make.height.equalTo(30)
             })
             
-        
+            
             let contentTitle = UILabel();
             contentTitle.text = dictDetail.chose
             contentTitle.font = UIFont.systemFont(ofSize: 15)
+            contentTitle.numberOfLines = 0
             contentTitle.theme_textColor = Theme.Color.textColorDark
             subView.addSubview(contentTitle)
             
+            
             contentTitle.snp.makeConstraints({ (make)in
-                make.left.equalTo(selButton.snp.right).offset(contentTobuttonSpace)
-                make.centerY.equalTo(selButton)
-                make.right.equalTo(subView).offset(10)
+                make.left.equalTo(subView).offset(contentTobuttonSpace)
+                make.centerY.equalTo(subView)
+                make.right.equalTo(subView).offset(-10)
             })
+            
+            if i==0 {
+                subView.snp.makeConstraints({ (make)in
+                    make.left.equalTo(bottomView!).offset(0)
+                    make.right.equalTo(bottomView!).offset(0)
+                    make.top.equalTo(bottomView!).offset(0)
+                    make.bottom.equalTo(contentTitle.snp.bottom).offset(10)
+                })
+            }else{
+                subView.snp.makeConstraints({ (make)in
+                    make.left.equalTo(bottomView!).offset(0)
+                    make.right.equalTo(bottomView!).offset(0)
+                    make.top.equalTo((lastView?.snp.bottom)!).offset(0)
+                    make.bottom.equalTo(contentTitle.snp.bottom).offset(10)
+                })
+            }
+            
+            lastView = subView;
         }
+        
+        
+        titleLab?.snp.makeConstraints({ (make)in
+            make.left.equalTo(topView!).offset(titleLeftSpace)
+            make.right.equalTo(topView!).offset(-5)
+            make.centerY.equalTo(topView!)
+        })
+        topView?.snp.makeConstraints({ (make)in
+            make.left.equalTo(backView!).offset(0)
+            make.right.equalTo(backView!).offset(0)
+            make.top.equalTo(backView!).offset(0)
+            make.bottom.equalTo((titleLab?.snp.bottom)!).offset(17)
+        })
+        
+        
+        
+        bottomView?.snp.makeConstraints({ (make)in
+            make.left.equalTo(backView!).offset(0)
+            make.right.equalTo(backView!).offset(0)
+            make.top.equalTo(topView!.snp.bottom).offset(10)
+            make.height.equalTo(subViewHeight * questionArray.count)
+        })
         
         backView?.snp.makeConstraints({ (make) in
             make.left.equalToSuperview().offset(10)
@@ -191,10 +210,22 @@ class MultipleChoiceCell: UITableViewCell {
                 imageView.image = #imageLiteral(resourceName: "cnb")
             }
         }
+    
+        let choicesDetailModel =  shiTiDetailModel.choices[button.tag]
         if delegate != nil{
-            delegate?.selectResult(parma: String(format: "%d", button.tag))
+            delegate?.selectResult(cellIndex : self.tag ,choesIndex: button.tag + 1 ,score: String(format: "%d", choicesDetailModel.score))
         }
         
+    }
+    
+    //返回button所在的UITableViewCell
+    func superUITableViewCell(of: UIButton) -> UITableViewCell? {
+        for view in sequence(first: of.superview, next: { $0?.superview }) {
+            if let cell = view as? UITableViewCell {
+                return cell
+            }
+        }
+        return nil
     }
     
     override func awakeFromNib() {
