@@ -40,7 +40,7 @@ class CYJBabiesPageController: KYBaseViewController {
         style.normalTitleColor = normalColor
         style.selectedTitleColor = color
         
-        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: Theme.Measure.screenHeight - 64), segmentStyle: style, titles: ["成长记录", "档案袋"], childVcs: setChildVcs(), parentViewController: self)
+        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: Theme.Measure.screenHeight - 64), segmentStyle: style, titles: ["成长记录", "专项测评结果" ,"档案袋"], childVcs: setChildVcs(), parentViewController: self)
         
         view.addSubview(scrollPageView)
     }
@@ -56,6 +56,15 @@ class CYJBabiesPageController: KYBaseViewController {
         vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
         
         childVCs.append(vc1)
+        
+        
+        //教师测评结果
+        let vc = ValuationResultViewController();
+        vc.view.backgroundColor = UIColor.white
+        vc.userID = String(format: "%d", self.uid)
+
+        vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+        childVCs.append(vc)
         
         let vc2 = CYJArchiveListViewController()
         vc2.uid = self.uid

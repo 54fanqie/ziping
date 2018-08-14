@@ -1,82 +1,25 @@
 //
-//  CYJRECListController_master.swift
+//  OtherClassRecordController.swift
 //  ZiPingSwift
 //
-//  Created by kyang on 2017/9/22.
-//  Copyright © 2017年 Chinayoujiao. All rights reserved.
+//  Created by fanqie on 2018/8/14.
+//  Copyright © 2018年 Chinayoujiao. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import HandyJSON
-
-class RECListSearchParam: CYJParameterEncoding, NSCopying{
-
-    var token = LocaleSetting.token
-    var cId: [Int]?  //班级id，数组 ,分割？
-    var grade: [Int]?  //年级id，数组
-    /// 是否批阅 （1未批阅，2已批阅）
-    var isMark: Int?  //是否批阅 （1未批阅，2已批阅）
-    /// 是否为优秀记录:1是，2否
-    var isGood: Int?
-    var babyName: [String]?  //幼儿名字，数组
-    var teacherid: [Int]? //教师id，数组
-    var year: Int? //年
-    var semester: Int?   //学期
-    var did: Int?  //领域id 单选
-    var startTime: String?    //记录开始日期 2017-9-2 格式
-    var endTime: String?   //记录结束日期
-    var page: Int = 1    //页码 不传默认第一页
-    var limit: String = "10"   //条数 不传默认10条
-    
-    /// 清除当前数据
-    func clear() {
-        self.cId = nil
-        self.grade = nil
-        self.isMark = nil
-        self.isGood = nil
-        self.babyName = nil
-        self.teacherid = nil
-        self.year = nil
-        self.semester = nil
-        self.did = nil
-        self.startTime = nil
-        self.endTime = nil
-    }
-    ///实现copyWithZone方法
-    func copy(with zone: NSZone? = nil) -> Any {
-        let theCopyObj = RECListSearchParam.init()
-        
-        theCopyObj.cId = self.cId
-        theCopyObj.grade = self.grade
-        theCopyObj.isMark = self.isMark
-        theCopyObj.isGood = self.isGood
-        theCopyObj.babyName = self.babyName
-        theCopyObj.teacherid = self.teacherid
-        theCopyObj.year = self.year
-        theCopyObj.semester = self.semester
-        theCopyObj.did = self.did
-        theCopyObj.startTime = self.startTime
-        theCopyObj.endTime = self.endTime
-        theCopyObj.page = self.page
-        theCopyObj.limit = self.limit
-
-        return theCopyObj
-    }
-}
-
-
-class CYJRECListControllerMaster: CYJRECListViewController {
+class OtherClassRecordController: CYJRECListViewController {
     
     var searchBar: UISearchBar!
-
+    
     lazy var listParam: RECListSearchParam = {
         return RECListSearchParam()
     }()
     var searchClassArray: [CYJClass]?
     
     
-//    var countView: CYJRecordCountView!
-
+    //    var countView: CYJRecordCountView!
+    
     override func viewDidLoad() {
         let   fakeSearchBarView = UIView(frame: CGRect(x:0 , y: 64, width:view.frame.width,height:46))
         fakeSearchBarView.theme_backgroundColor = Theme.Color.viewLightColor
@@ -97,16 +40,16 @@ class CYJRECListControllerMaster: CYJRECListViewController {
         
         self.tableView.frame = CGRect(x: 0, y: 64 + 50, width: view.frame.width, height: view.frame.height - 64 - 50)
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
-//        请求第一轮数据
+        //        请求第一轮数据
         self.fetchDataSource()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        if self.page == 1 {
-//        }
+        //        if self.page == 1 {
+        //        }
     }
     
     override func fetchDataSource() {
@@ -114,13 +57,13 @@ class CYJRECListControllerMaster: CYJRECListViewController {
         self.listParam.page = self.page
         if self.page == 1 {
             
-//            if let _ = tableView.cellForRow(at: IndexPath(row: 0, section: 0 )) {
-//
-//                DispatchQueue.main.async {[unowned self] in
-//                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: false)
-//
-//                }
-//            }
+            //            if let _ = tableView.cellForRow(at: IndexPath(row: 0, section: 0 )) {
+            //
+            //                DispatchQueue.main.async {[unowned self] in
+            //                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: false)
+            //
+            //                }
+            //            }
             
             Third.toast.show { }
         }
@@ -130,16 +73,16 @@ class CYJRECListControllerMaster: CYJRECListViewController {
                 Third.toast.hide {}
             }
             self?.endRefreshing()
-
+            
             //如果存在error
             guard error == nil else {
                 self?.statusUpdated(success: false)
-
+                
                 Third.toast.message((error?.localizedDescription)!)
                 return
             }
             self?.statusUpdated(success: true)
-
+            
             if let records = data as? NSArray {
                 if self?.page == 1 {
                     self?.dataSource.removeAll()
@@ -156,33 +99,33 @@ class CYJRECListControllerMaster: CYJRECListViewController {
                     self?.tableView.mj_footer.endRefreshingWithNoMoreData()
                 }
                 self?.dataSource.append(contentsOf: tmpFrame)
-//                self?.countView?.count = 190
-
+                //                self?.countView?.count = 190
+                
                 self?.tableView.reloadData()
             }
         }
     }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 30
-//    }
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let seprateView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30))
-//        seprateView.theme_backgroundColor = Theme.Color.ground
-//
-//        //创建  countedView
-//        countView = CYJRecordCountView(frame: CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: 30))
-//        countView.clearButtonClickHandler = {[unowned self] _ in
-//            self.listParam.clear()
-//            self.page = 1
-//            self.fetchDataSource()
-//        }
-//
-//        seprateView.addSubview(countView)
-//
-//        return seprateView
-//    }
-//
+    //
+    //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    //        return 30
+    //    }
+    //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    //        let seprateView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30))
+    //        seprateView.theme_backgroundColor = Theme.Color.ground
+    //
+    //        //创建  countedView
+    //        countView = CYJRecordCountView(frame: CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: 30))
+    //        countView.clearButtonClickHandler = {[unowned self] _ in
+    //            self.listParam.clear()
+    //            self.page = 1
+    //            self.fetchDataSource()
+    //        }
+    //
+    //        seprateView.addSubview(countView)
+    //
+    //        return seprateView
+    //    }
+    //
     // 园长端增加删除 功能
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
@@ -216,7 +159,7 @@ class CYJRECListControllerMaster: CYJRECListViewController {
     }
 }
 
-extension CYJRECListControllerMaster {
+extension OtherClassRecordController {
     
     func goSearchArea() {
         let filter = CYJSearchViewController()
@@ -226,7 +169,7 @@ extension CYJRECListControllerMaster {
             //选出来了
             self.listParam = $0.0.copy() as! RECListSearchParam
             DLog("self.listParam.encodeToDictionary()")
-
+            
             DLog(self.listParam.encodeToDictionary())
             DLog("===================================")
             self.searchClassArray = $0.1

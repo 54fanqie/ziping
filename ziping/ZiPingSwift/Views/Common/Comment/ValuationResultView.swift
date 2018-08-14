@@ -13,10 +13,21 @@ class ValuationResultView: UIView {
     fileprivate var tableView: UITableView!
     var tabelHeaderView :UIView!
     var headerTitleView : HeaderTitleView!
-    var dataArray : NSArray!
+    var dataArray = [NSDictionary]()
+    var  teacherResultList = [TeacherResult]() {
+        didSet{
+            for teacherResult in teacherResultList {
+                let dict = getData(teacherResult: teacherResult)
+                dataArray.append(dict)
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        dataArray = getData()
         tableView = UITableView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height), style: .plain)
         tableView.delegate = self
         tableView.dataSource = self
@@ -56,7 +67,7 @@ extension ValuationResultView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ValuationResultCell") as? ValuationResultCell
         cell?.selectionStyle = .none
         cell?.textLabel?.theme_textColor = Theme.Color.textColor
-        cell?.dict = dataArray[indexPath.row] as! NSDictionary
+        cell?.dict = dataArray[indexPath.row]
        
         
         return cell!
@@ -69,20 +80,13 @@ extension ValuationResultView: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    func  getData() -> NSArray {
-        let someArray : [String]=["101","23","123","44","55"]
-        
-        
+    func  getData(teacherResult :TeacherResult) -> NSDictionary {
+        let someArray : [String]=[teacherResult.scoreTotal!,teacherResult.part1!,teacherResult.part2!,teacherResult.part3!,teacherResult.part4!]
         let mutable1 : NSMutableDictionary = NSMutableDictionary()
-        mutable1.setObject("2018春季第一次", forKey:"title"  as NSCopying)
-        mutable1.setObject("(12/01~01/15)", forKey:"time"  as NSCopying)
+        mutable1.setObject(teacherResult.title!, forKey:"title"  as NSCopying)
+        mutable1.setObject(teacherResult.rangeTime!, forKey:"time"  as NSCopying)
         mutable1.setObject(someArray, forKey: "list"  as NSCopying)
-        
-       
-        
-        let arry:[NSDictionary] =  [mutable1, mutable1, mutable1,mutable1,mutable1]
-        
-        return arry as NSArray
+        return mutable1
     }
 }
 

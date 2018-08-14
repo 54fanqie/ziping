@@ -223,7 +223,7 @@ extension CYJMineViewController {
             navigationController?.pushViewController(valuatiov, animated: true)
         }
         
-        if role == .teacher {
+        if role == .teacher ||  role == .teacherL{
             let  valuatiov = ValuationController()
             navigationController?.pushViewController(valuatiov, animated: true)
         }
@@ -237,8 +237,11 @@ extension CYJMineViewController {
             navigationController?.pushViewController(valuatiov, animated: true)
         }   
     }
+    //浏览其他班级
     func otherClasses(){
-        
+        let  otherClas = OtherClassRecordController()
+        otherClas.title = "浏览其他班级记录"
+        navigationController?.pushViewController(otherClas, animated: true)
     }
     
     func showMineInfo()  {

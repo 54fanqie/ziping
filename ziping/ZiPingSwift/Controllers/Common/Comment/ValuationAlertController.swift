@@ -10,7 +10,7 @@ import UIKit
 
 class ValuationAlertController: UIViewController {
     var containerView: UIView!
-    
+    var message : String!
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 5
@@ -81,6 +81,7 @@ class ValuationAlertController: UIViewController {
       
         containerView.addSubview(titleLabel)
         containerView.addSubview(secondButton)
+        titleLabel.text = message
     }
     
     func firstClickAction(_ sender: UIButton) {

@@ -17,7 +17,7 @@ class ValuationStatuModel: CYJBaseModel {
     var isfinish        : Int?  //  是否提交试卷（1=是，0=否（可能从没做过，也可以是没做完））
     var shijuanid       : Int = 0  //当前标题（state=1时，这里为试卷的标题，否则为对应的状态说明标题）
     var remarks         : String?  //备注提示
-    var testStatistics  : NSArray = [] //统计情况 groupId=2时使用，（overComplete=己完成，overStart=己开始，overNoStart=未开始）
+    var testStatistics  : NSDictionary? //统计情况 groupId=2时使用，（overComplete=己完成，overStart=己开始，overNoStart=未开始）
     var testTime        : NSArray? //测评时间清单(state=4时，显示这对应数据)
 }
 
@@ -126,6 +126,7 @@ class QuestionnaireViewController: KYBaseViewController {
         //教师测评结果
         let vc = ValuationResultViewController();
         vc.view.backgroundColor = UIColor.white
+        vc.userID = String(format: "%d", (LocaleSetting.userInfo()?.uId)!)
         vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
         childVCs.append(vc)
         return childVCs

@@ -480,6 +480,7 @@
 		B13ACFD32103309D00700C06 /* GraduationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B13ACFD12103309D00700C06 /* GraduationViewController.xib */; };
 		B13ACFD62103359200700C06 /* ValuationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13ACFD42103359200700C06 /* ValuationResultViewController.swift */; };
 		B14100CE212180C600E732AA /* ValuationAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14100CD212180C600E732AA /* ValuationAlertController.swift */; };
+		B14100D02122C2A200E732AA /* OtherClassRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14100CF2122C2A200E732AA /* OtherClassRecordController.swift */; };
 		B17721471FEA9A1C00A3F25C /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17721461FEA9A1C00A3F25C /* AuthorizationManager.swift */; };
 		B18CBECF20FF747F00827E39 /* ValuationCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */; };
 		B18CBED020FF747F00827E39 /* ValuationCompleteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */; };
@@ -1052,6 +1053,7 @@
 		B13ACFD12103309D00700C06 /* GraduationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GraduationViewController.xib; sourceTree = "<group>"; };
 		B13ACFD42103359200700C06 /* ValuationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationResultViewController.swift; sourceTree = "<group>"; };
 		B14100CD212180C600E732AA /* ValuationAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationAlertController.swift; sourceTree = "<group>"; };
+		B14100CF2122C2A200E732AA /* OtherClassRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherClassRecordController.swift; sourceTree = "<group>"; };
 		B17721461FEA9A1C00A3F25C /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationCompleteController.swift; sourceTree = "<group>"; };
 		B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationCompleteController.xib; sourceTree = "<group>"; };
@@ -2139,6 +2141,7 @@
 				8D7DD2BF1F7A3CED009105C1 /* CYJRECBuildAddChildController.swift */,
 				8D3607DB1F7B8C0F00EB24A0 /* CYJRECBuildAlertController.swift */,
 				8D56DBB91F7B919900D46A09 /* CYJRECSharedAlertController.swift */,
+				B14100CF2122C2A200E732AA /* OtherClassRecordController.swift */,
 			);
 			name = Record;
 			sourceTree = "<group>";
@@ -2343,13 +2346,13 @@
 				B12DB1282101DB5B00D95FAA /* QuestionnaireIngViewController.swift */,
 				B12DB1292101DB5B00D95FAA /* QuestionnaireIngViewController.xib */,
 				B12DB12C2101DB8300D95FAA /* QuestionnComplentViewController.swift */,
+				B12DB12D2101DB8300D95FAA /* QuestionnComplentViewController.xib */,
 				B13ACFD02103309D00700C06 /* GraduationViewController.swift */,
 				B13ACFD12103309D00700C06 /* GraduationViewController.xib */,
-				B12DB12D2101DB8300D95FAA /* QuestionnComplentViewController.xib */,
-				B12DB1302101DCAB00D95FAA /* QuestionnaireViewController.swift */,
 				B1F95B4A2106D2EA00BA5EA2 /* InstructionViewController.swift */,
 				B1F95B4B2106D2EA00BA5EA2 /* InstructionViewController.xib */,
 				B137AFDB2108854A0095FAEE /* MultipleChoiceController.swift */,
+				B12DB1302101DCAB00D95FAA /* QuestionnaireViewController.swift */,
 			);
 			name = Valuation;
 			sourceTree = "<group>";
@@ -3028,6 +3031,7 @@
 				8D6374D11F569BD500F666C9 /* ScrollPageView.swift in Sources */,
 				8D4C8D841F7F717A00EDAE28 /* TextAddView.m in Sources */,
 				8D4C8D781F7F714E00EDAE28 /* UIView+Additions.m in Sources */,
+				B14100D02122C2A200E732AA /* OtherClassRecordController.swift in Sources */,
 				8D6374C31F569BD500F666C9 /* KYTextView.swift in Sources */,
 				8D36B4101F8F09E4001736D9 /* CYJRECCacheCell.swift in Sources */,
 				8D6374BE1F569BD500F666C9 /* UIImage+Opration.swift in Sources */,

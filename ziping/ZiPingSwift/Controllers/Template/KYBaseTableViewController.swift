@@ -35,6 +35,8 @@ class KYBaseTableViewController: KYBaseViewController{
     /// 表格style
     var style: UITableViewStyle = UITableViewStyle.plain
     
+    var haveTabBar :Bool = false
+    
     /// controller数据加载情况
     var status: KYDateStatus = .firstLoad
     {
@@ -104,7 +106,7 @@ class KYBaseTableViewController: KYBaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 //        创建表格
-        tableView =  UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), style: style)
+        tableView =  UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - (haveTabBar ? 44 : 0)), style: style)
         view.addSubview(tableView)
 
         // 表格属性

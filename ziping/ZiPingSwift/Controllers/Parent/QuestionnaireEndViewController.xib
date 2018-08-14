@@ -13,8 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionnaireEndViewController" customModule="ZiPingSwift" customModuleProvider="target">
             <connections>
-                <outlet property="applyAction" destination="TXU-UX-vKb" id="R5O-da-Bw7"/>
-                <outlet property="applyButton" destination="TXU-UX-vKb" id="lN9-A4-GtC"/>
+                <outlet property="applyButton" destination="TXU-UX-vKb" id="xC2-IH-I4i"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -52,6 +51,9 @@
                     <state key="normal" title="向园长申请专业分析">
                         <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="applyforMaster:" destination="-1" eventType="touchUpInside" id="06a-eZ-ehG"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

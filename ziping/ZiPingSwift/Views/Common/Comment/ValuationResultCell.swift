@@ -25,7 +25,7 @@ class FormView: UIView {
         codeLab = UILabel();
         codeLab?.text = "120"
         codeLab?.theme_textColor = Theme.Color.textColor
-        codeLab?.font = UIFont.systemFont(ofSize: 14)
+        codeLab?.font = UIFont.systemFont(ofSize: 12)
         codeLab?.textAlignment = .center
         self.addSubview(codeLab!)
         
@@ -61,21 +61,41 @@ class ValuationResultCell: UITableViewCell {
             print(dict)
             let data = dict.object(forKey: "list") as! NSArray
             
-            if data.count == 0{
-                return
-            }
-            
             titleLab.text = dict.object(forKey: "title") as? String
             timeLab.text = (dict.object(forKey: "time") as! String)
+            var count : Int = 0
             
-            for index in 0..<data.count {
-                print(index)
-                let fw = (Theme.Measure.screenWidth - 129)  / CGFloat(data.count)
-                let vi = FormView.init(frame: CGRect(x: fw * CGFloat(index), y: 0, width: fw , height: 53 ));
-                let  code = data[index] as! String
-                vi.codeLab.text = code
-                formbackView.addSubview(vi)
+            for item in data {
+                let t =  item as!String
+                if t == "-" {
+                    count+=1
+                }
             }
+            
+            
+            if  count  == data.count - 1{
+                let  codeLab = UILabel();
+                codeLab.text = "未完成"
+                codeLab.theme_textColor = Theme.Color.textColor
+                codeLab.font = UIFont.systemFont(ofSize: 12)
+                codeLab.textAlignment = .center
+                formbackView.addSubview(codeLab)
+                codeLab.snp.makeConstraints { (make) in
+                    make.centerX.equalTo(formbackView).offset(0)
+                    make.centerY.equalTo(formbackView).offset(0)
+                }
+                
+            }else{
+                for index in 0..<data.count {
+                    print(index)
+                    let fw = (Theme.Measure.screenWidth - 129)  / CGFloat(data.count)
+                    let vi = FormView.init(frame: CGRect(x: fw * CGFloat(index), y: 0, width: fw , height: 53 ));
+                    let  code = data[index] as! String
+                    vi.codeLab.text = code
+                    formbackView.addSubview(vi)
+                }
+            }
+            
         }
     }
     

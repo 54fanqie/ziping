@@ -14,6 +14,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ValuationEndViewController" customModule="ZiPingSwift" customModuleProvider="target">
             <connections>
                 <outlet property="applyButton" destination="jXf-4L-4r1" id="jxN-cK-gSW"/>
+                <outlet property="bigTitleLab" destination="8h9-u6-Avo" id="yUT-gO-xxI"/>
+                <outlet property="scopetitleLab" destination="RCo-Vd-r1k" id="k8Q-Eu-qak"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

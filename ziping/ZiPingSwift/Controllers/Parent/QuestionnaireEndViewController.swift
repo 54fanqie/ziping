@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import HandyJSON
 class QuestionnaireEndViewController: KYBaseViewController {
 
     @IBOutlet weak var applyButton: UIButton!
@@ -18,8 +18,30 @@ class QuestionnaireEndViewController: KYBaseViewController {
         applyButton.theme_backgroundColor = Theme.Color.main
         // Do any additional setup after loading the view.
     }
-    @IBOutlet weak var applyAction: UIButton!
-    
+    //像园长申请分析报告
+    @IBAction func applyforMaster(_ sender: Any) {
+        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : 1]) { [weak self] (data, error) in
+            guard error == nil else {
+                Third.toast.message((error?.localizedDescription)!)
+                return
+            }
+            
+            let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: data as? NSDictionary)
+            if custom?.status == 200 {
+                
+            }else
+            {
+                
+            }
+            let alert = ValuationAlertController()
+            //                alert.message = info["message"]as! String
+            alert.message = "专项测评专业分析申请已发送给园长，将由园长与平台沟通哦~"
+            alert.completeHandler = { [] in
+                alert.dismiss(animated:true, completion: nil)
+            }
+            alert.showAlert()
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

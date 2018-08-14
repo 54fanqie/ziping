@@ -14,6 +14,8 @@ class CYJBabysViewController: KYBaseTableViewController {
     var dataSource: [CYJChild] = []
     
     override func viewDidLoad() {
+        //在调用 super.viewDidLoad() 前给 haveTabBar 赋值
+        haveTabBar = true
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.

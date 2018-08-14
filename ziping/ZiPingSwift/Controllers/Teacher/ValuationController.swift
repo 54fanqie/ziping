@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import HandyJSON
 class ValuationController: KYBaseViewController {
     
     override func viewDidLoad() {
@@ -15,12 +15,35 @@ class ValuationController: KYBaseViewController {
         //四周均不延伸
         self.edgesForExtendedLayout = []
         
-        let statue = 3
+        
+        
+        //请求数据查看是否完成
+        RequestManager.POST(urlString: APIManager.Valuation.check, params: nil, complete: { [weak self] (data, error) in
+            
+            guard error == nil else {
+                Third.toast.message((error?.localizedDescription)!)
+                return
+            }
+            
+            if let datas = data as? NSDictionary {
+                //遍历，并赋值
+                let target = JSONDeserializer<ValuationStatuModel>.deserializeFrom(dict: datas )
+                self?.goToVC(index: (target?.status)!, target: target!)
+            }
+        })
+        
+        
+       
+    }
+    
+    func goToVC( index : Int,target : ValuationStatuModel)  {
+        let statue = index + 1
         switch statue {
         case 1:
             let completeVC = ValuationCompleteController();
             completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
             //添加获取到的视图控制器的视图
+            completeVC.valuationStatuModel = target
             view.addSubview(completeVC.view)
             addChildViewController(completeVC)
             
@@ -28,6 +51,7 @@ class ValuationController: KYBaseViewController {
             let  noStartVC = ValuationNoStartViewController();
             noStartVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
             view.addSubview(noStartVC.view)
+            noStartVC.valuationStatueInfo = target
             addChildViewController(noStartVC)
             
             
@@ -45,6 +69,7 @@ class ValuationController: KYBaseViewController {
             addChildViewController(completeVC)
         }
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

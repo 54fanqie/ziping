@@ -14,6 +14,7 @@ class CYJRECCacheViewController: KYBaseTableViewController, CYJActionPassOnDelea
     var dataSource: [CYJRECCacheCellFrame] = []
     
     override func viewDidLoad() {
+        haveTabBar = true
         super.viewDidLoad()
         
         self.title = "暂存记录"

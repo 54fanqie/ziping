@@ -9,7 +9,7 @@
 import UIKit
 
 class ValuationCompleteController: KYBaseViewController {
-
+    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var bigTitleLab: UILabel!
     @IBOutlet weak var scopetitleLab: UILabel!
@@ -17,33 +17,42 @@ class ValuationCompleteController: KYBaseViewController {
     @IBOutlet weak var compentLab: UILabel!
     @IBOutlet weak var noCompentLab: UILabel!
     @IBOutlet weak var noStartLab: UILabel!
+    
+    var valuationStatuModel : ValuationStatuModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //四周均不延伸
         self.edgesForExtendedLayout = []
         topView.theme_backgroundColor = "Nav.barTintColor"
-        bigTitleLab.text = "2018年春季第一次测评"
-        scopetitleLab.text = "此次的测评时间范围2月15日~3月30日，请在该时间范围内在PC或PAD端访问 “www.epaofu.com”完成班内幼儿的"
-        compentLab.text = "10"
-        noCompentLab.text = "19"
-        noStartLab.text = "1"
+        
+        
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bigTitleLab.text = valuationStatuModel.title
+        scopetitleLab.text = valuationStatuModel.remarks
+        let dict  = valuationStatuModel.testStatistics
+        
+        compentLab.text = dict?["overComplete"] as? String
+        noCompentLab.text = dict?["overNoStart"] as? String
+        noStartLab.text = dict?["overStart"] as? String
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

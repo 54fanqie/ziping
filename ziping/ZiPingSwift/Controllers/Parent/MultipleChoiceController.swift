@@ -52,13 +52,15 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
     var bottmView: UIView!
     
     //要上传的参数
-    var uploadChoiceslParsam : [String : Any] = [String : Any]()
+    var uploadChoiceslParsam = Dictionary<String,Any>()
     
     /// 操作bar
     var actionView: CYJActionsView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "问卷测评"
+        
+        print(["shijuanid": self.shijuanid])
         //请求数据查看是否完成
         RequestManager.POST(urlString: APIManager.Valuation.getShiti, params: ["shijuanid": self.shijuanid], complete: { [weak self] (data, error) in
             
@@ -142,6 +144,7 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
 //
 //                if dict.object(forKey: "choice") as! Int == 0 {
 //                    let alert = ValuationAlertController()
+//                    alert.message = "您需将所有题目完成后提交，请检查是否有遗漏掉的题目~"
 //                    alert.completeHandler = { [] in
 //                        alert.dismiss(animated:true, completion: nil)
 //                    }
@@ -151,14 +154,42 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
 //            }
         }
         
-//        uploadChoiceslParsam.setValue(button.tag, forKey: "isfinish")
-//        print(toJSONString(dict: uploadChoiceslParsam))
+        uploadChoiceslParsam["isfinish"] =  button.tag
+        print(toJSONString(dict: uploadChoiceslParsam))
         
        
         
         
         //        print(getDictionaryFromJSONString(jsonString: params))
-        RequestManager.POST(urlString: APIManager.Valuation.addAnswer, params: uploadChoiceslParsam ) { [weak self] (data, error) in
+        let result_data = uploadChoiceslParsam["result_data"] as! Dictionary<String,Any>
+        let params = [ "datiNums" : "10",
+                       "historyid" : "3",
+                       "spentTime" : "0",
+                       "title" : "笔试班学员专享课后测",
+                       "shijuanid" : "1",
+                       "isfinish" : "0",
+                       "result_data" : nil]
+        print(params)
+//        let parameters: Dictionary = ["key" : "93c921ea8b0348af8e8e7a6a273c41bd"]
+//        let headers: HTTPHeaders = ["Authorization": "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+//                                    "Accept": "application/json"]
+//        Alamofire.request("http://apis.haoservice.com/weather/city", method: .post,  parameters:parameters) .responseJSON {response  in
+//            print("result==\(response.result)")
+//            //有错误就打印错误，没有就解析数据
+//            if let Error = response.result.error
+//            {
+//                print(Error)
+//            }
+//            else if let jsonValue = response.result.value
+//            {
+//                print("code = \(jsonValue)")
+//            }
+//
+//        }
+        
+
+        
+        RequestManager.POST(urlString: APIManager.Valuation.addAnswer, params: params ) { [weak self] (data, error) in
             //如果存在error
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
@@ -174,18 +205,7 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
         }
     }
     
-    func toJSONString(dict: Any)-> String{
-        do {
-            
-            let data = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-            let strJson = String(data: data, encoding: .utf8)
-            return strJson ?? ""
-        }catch
-        {
-            return ""
-        }
-    }
-    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -220,12 +240,12 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
     func selectResult(cellIndex : Int ,choesIndex : Int, score : String) {
  
         print(uploadChoiceslParsam)
-        var result_data = uploadChoiceslParsam["result_data"]
-//        var dataArray = result_data!["data"]
+        var result_data = uploadChoiceslParsam["result_data"] as! Dictionary<String,Any>
+        let dataArray = result_data["data"] as! NSArray
         
-//        let dict = dataDict[cellIndex] as! NSMutableDictionary
-//        dict.setValue(choesIndex, forKey: "choice")
-//        dict.setValue(score, forKey: "score")
+        var dict = dataArray[cellIndex] as! Dictionary<String,Any>
+        dict["choice"] = choesIndex
+        dict["score"] = score
     }
     
     
@@ -246,7 +266,7 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
         //选项数据
         let dataArray = NSMutableArray()
         for shiTiDetailModel in (self.shiJuanModel?.shitiData)! {
-            var subDict = Dictionary<String,Any>()
+            var subDict = Dictionary<String,Int>()
             
             subDict["tiid"] = shiTiDetailModel.tiid
             subDict["catid1"] = shiTiDetailModel.catid1
@@ -262,6 +282,18 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
         muDict["result_data"] = dataDict
         uploadChoiceslParsam = muDict
         
+    }
+    
+    func toJSONString(dict: Any)-> String{
+        do {
+            
+            let data = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+            let strJson = String(data: data, encoding: .utf8)
+            return strJson ?? ""
+        }catch
+        {
+            return ""
+        }
     }
     
     
@@ -309,53 +341,4 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
      // Pass the selected object to the new view controller.
      }
      */
-    
-    //        static func  getData() -> NSDictionary {
-    //            let mutable1 : NSMutableDictionary = NSMutableDictionary()
-    //            mutable1.setObject("不符合", forKey:"question"  as NSCopying)
-    //            mutable1.setObject(1, forKey:"answer"  as NSCopying)
-    //
-    //
-    //            let mutable2 : NSMutableDictionary = NSMutableDictionary()
-    //            mutable2.setObject("不太符合", forKey:"question"  as NSCopying)
-    //            mutable2.setObject(0, forKey:"answer"  as NSCopying)
-    //
-    //
-    //            let mutable3 : NSMutableDictionary = NSMutableDictionary()
-    //            mutable3.setObject("中等", forKey:"question"  as NSCopying)
-    //            mutable3.setObject(0, forKey:"answer"  as NSCopying)
-    //
-    //            let mutable4 : NSMutableDictionary = NSMutableDictionary()
-    //            mutable4.setObject("符合", forKey:"question"  as NSCopying)
-    //            mutable4.setObject(0, forKey:"answer"  as NSCopying)
-    //
-    //            let mutable5 : NSMutableDictionary = NSMutableDictionary()
-    //            mutable5.setObject("完全符合", forKey:"question"  as NSCopying)
-    //            mutable5.setObject(0, forKey:"answer"  as NSCopying)
-    //
-    //            let arry:[NSDictionary] =  [mutable1, mutable2, mutable3,mutable4,mutable5]
-    //
-    //
-    //
-    //
-    //
-    //
-    //            let dicAll : NSMutableDictionary = NSMutableDictionary()
-    //            dicAll.setObject("在幼儿园或学校里遵守各项常规和纪律", forKey:"title"  as NSCopying)
-    //            dicAll.setObject(arry, forKey:"data"  as NSCopying)
-    //
-    //
-    //
-    //
-    //
-    //            //        muArray.add(mutable1)
-    //            //        muArray.add(mutable2)
-    //            //        muArray.add(mutable1)
-    //            //        muArray.add(mutable2)
-    //            //        muArray.add(mutable1)
-    //            //
-    //            //
-    //            //        let muArrayAll = NSMutableArray()
-    //            return dicAll
-    //        }
 }
