@@ -29,9 +29,9 @@ class ValuationEndViewController: KYBaseViewController {
 //        scopetitleLab.text = valuationStatuModel.remarks
        
     }
-    //申请专业分析
+    //教师、园长申请生成报告
     @IBAction func applyAction(_ sender: Any) {
-        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : 1]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.teacherApplyReport, params: nil) { [weak self] (data, error) in
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return

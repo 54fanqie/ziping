@@ -36,7 +36,7 @@ class ValuationResultViewController: KYBaseViewController {
         view.addSubview(formView)
         
         if LocaleSetting.userInfo()?.role == .teacher {
-            
+            //            教师、园长申请生成报告
             uploadButton = UIButton(type: .custom)
             uploadButton.setTitle("向园长申请专业分析", for: .normal)
             uploadButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
@@ -57,8 +57,8 @@ class ValuationResultViewController: KYBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        print("申请userID" + userID!)
-        RequestManager.POST(urlString: APIManager.Valuation.teacherResult, params: ["userid" : userID!]) { [weak self] (data, error) in
+        print("申请测评结果: userID" + userID!)
+        RequestManager.POST(urlString: APIManager.Valuation.teacherResult , params: ["userid" : userID!]) { [weak self] (data, error) in
             
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
@@ -81,7 +81,21 @@ class ValuationResultViewController: KYBaseViewController {
     
     
     func uploadAction() {
-        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : 1]) { [weak self] (data, error) in
+        
+        var params = [String : Any]()
+        var urlString : String!
+        
+        if LocaleSetting.userInfo()?.role == .child {//家长向园长申请生成报告
+            
+            urlString = APIManager.Valuation.applyReport
+            params = ["historyid" : 1]
+            
+        } else { //教师、园长申请生成报告
+           
+            urlString = APIManager.Valuation.teacherApplyReport
+        }
+        
+        RequestManager.POST(urlString: urlString, params: params ) { [weak self] (data, error) in
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return

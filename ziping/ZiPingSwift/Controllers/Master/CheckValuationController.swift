@@ -7,9 +7,32 @@
 //
 
 import UIKit
+import HandyJSON
+
+class GradeOptionModel: CYJBaseModel {
+    var grade : String?
+    var gradeName : String?
+    var classOptionList : [ClassOptionModel] = []
+}
+
+class ClassOptionModel: CYJBaseModel {
+    var classId : String?
+    var className : String?
+}
+
+//查询条件数据
+class CheckValuationParamModel: CYJBaseModel {
+    var year : Int = 0
+    var semester : Int = 0
+    var grade : Int = 0
+    var classId : Int = 0
+    var shijuanid : Int = 0
+    var isComparison : Int = 0
+}
+
 
 class CheckValuationController: KYBaseTableViewController {
-
+    
     var tabelHeaderView: UIView!
     
     /// 三个条件
@@ -24,34 +47,11 @@ class CheckValuationController: KYBaseTableViewController {
     
     // 三个按钮
     var actionsView: CYJActionsView!
-   
+    
     //完成人数对比
     var titleView : CompleteNumberView!
     
     
-    // 学期的数组
-    lazy var semesterArray: [CYJOption] = {
-        return [CYJOption(title: "春季", opId: 2), CYJOption(title: "秋季", opId: 1)]
-    }()
-    
-    // 班级种类的数组
-    lazy var gradeArray:  [CYJOption] = {
-        return [CYJOption(title: "大班", opId: 1),
-                CYJOption(title: "中班", opId: 2),
-                CYJOption(title: "小班", opId: 3),
-                CYJOption(title: "托班", opId: 4)]
-    }()
-    
-    // 测评时间数组
-    lazy var valuationTimeArray:  [CYJOption] = {
-        return [CYJOption(title: "秋季第一次测评", opId: 1),
-                CYJOption(title: "秋季第二次测评", opId: 2),
-                CYJOption(title: "春季第一次测评", opId: 3),
-                CYJOption(title: "春季第二次测评", opId: 4)]
-    }()
-    
-    /// 参数 对象
-    var analyseParam: CYJAnalyseParam = CYJAnalyseParam()
     
     /// 年分的数组
     lazy var yearArray: [CYJOption] = {
@@ -71,6 +71,25 @@ class CheckValuationController: KYBaseTableViewController {
         return years
     }()
     
+    // 学期的数组
+    lazy var semesterArray: [CYJOption] = {
+        return [CYJOption(title: "春季", opId: 2), CYJOption(title: "秋季", opId: 1)]
+    }()
+    
+    // 班级种类的数组
+    var gradeArray = [GradeOptionModel]()
+    
+    // 测评时间数组
+    var valuationTimeArray = [CYJOption]()
+    
+    
+    /// 参数 对象
+    var analyseParam: CYJAnalyseParam = CYJAnalyseParam()
+    
+    /// 参数 对象
+    var checkValuationParamModel: CheckValuationParamModel = CheckValuationParamModel()
+   
+    
     //请求的列表数据
     var listChartDatas : [String] = []
     
@@ -79,13 +98,34 @@ class CheckValuationController: KYBaseTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = "专项测评"
         tabelHeaderView = UIView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: 544))
         tabelHeaderView.theme_backgroundColor = Theme.Color.line
         tableView.tableHeaderView = tabelHeaderView
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
+        
+        
+        
+        RequestManager.POST(urlString: APIManager.Valuation.getClass, params: nil) { [weak self] (data, error) in
+            
+            guard error == nil else {
+                Third.toast.message((error?.localizedDescription)!)
+                return
+            }
+            //遍历，并赋值
+            if let datas = data as? NSArray {
+                //遍历，并赋值
+                datas.forEach({ [] in
+                    let target = JSONDeserializer<GradeOptionModel>.deserializeFrom(dict: $0 as? NSDictionary)
+                    self?.gradeArray.append(target!)
+                    
+                })
+            }
+        }
+        
+        
         
         
         //=======================================记录时间===================================================
@@ -154,18 +194,17 @@ class CheckValuationController: KYBaseTableViewController {
         //=======================================筛选班级====================================================
         //MARK: 设置初始年级为 大班 -- 获取领域
         
-        classConditionView = CYJConditionView(title: "筛选班级:", key: "class")
+        classConditionView = CYJConditionView(title: "请选择班级:", key: "class")
         classCondition = CYJConditionButton(title: "请选择班级", key: "class_grade") {[unowned self] (sender) in
             print("筛选年级")
+          
+            let gradeIndex = self.checkValuationParamModel == nil ? 0 : self.checkValuationParamModel.classId
+            let optionController = ClassOptionSelectedController(currentIndex: gradeIndex, options: self.gradeArray) { [unowned sender](op) in
+//                print("\(op.title)")
+//                sender.setTitle(op.title, for: .normal)
+//
+//                self.analyseParam.grade = op.opId
             
-            let gradeIndex = self.gradeArray.index(where: { $0.opId == self.analyseParam.grade}) ?? 0
-            
-            let optionController = CYJOptionsSelectedController(currentIndex: gradeIndex, options: self.gradeArray) { [unowned sender](op) in
-                print("\(op.title)")
-                sender.setTitle(op.title, for: .normal)
-                
-                self.analyseParam.grade = op.opId
-                
                 
                 
                 //刷新下面参数
@@ -178,9 +217,9 @@ class CheckValuationController: KYBaseTableViewController {
                 
                 
                 
-                self.analyseParam.cId = 0
-                self.analyseParam.dId = nil
-                self.analyseParam.diId = nil
+//                self.analyseParam.cId = 0
+//                self.analyseParam.dId = nil
+//                self.analyseParam.diId = nil
             }
             self.navigationController?.pushViewController(optionController, animated: true)
         }
@@ -197,7 +236,7 @@ class CheckValuationController: KYBaseTableViewController {
         
         //=======================================测评时间====================================================
         scopeConditionView = CYJConditionView(title: "测评时间:", key: "scope")
-        valuationTimeCondition = CYJConditionButton(title: "范围", key: "scope_scope") { [unowned self] (sender) in
+        valuationTimeCondition = CYJConditionButton(title: "请选择", key: "scope_scope") { [unowned self] (sender) in
             //TODO: print("分析范围")
             
             //            if self.domainsForClass.count == 0 {
@@ -261,7 +300,7 @@ class CheckValuationController: KYBaseTableViewController {
             self.valuationTimeCondition.title = "筛选"
             
             
-//            self.clearAllCharts()
+            //            self.clearAllCharts()
             
         }
         resetButton.defaultColorStyle = true
@@ -287,7 +326,7 @@ class CheckValuationController: KYBaseTableViewController {
         actionsView.actions = [resetButton, showButton, applyButton]
         tabelHeaderView.addSubview(actionsView)
         
-    //===========================================统计结果==========================================================
+        //===========================================统计结果==========================================================
         let comparedView = UIView()
         comparedView.theme_backgroundColor = Theme.Color.viewLightColor
         comparedView.frame = CGRect(x: 0, y: actionsView.frame.maxY, width: view.frame.width, height: 40)
@@ -321,15 +360,15 @@ class CheckValuationController: KYBaseTableViewController {
             make.width.equalTo(100)
         }
         //===========================================完成人数对比==========================================================
-
+        
         let completeNumberView = CompleteNumberView.init(frame: CGRect(x: 0, y: comparedView.frame.maxY, width: view.frame.width, height: 257));
         tabelHeaderView.addSubview(completeNumberView)
         
-//        tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
+        //        tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
         // 获取一下班级信息
-//        self.getClassbyYear()
+        //        self.getClassbyYear()
     }
-
+    
     func compareAciton(button : UIButton){
         button.isSelected = !button.isSelected
     }
@@ -363,16 +402,16 @@ extension CheckValuationController {
             cell = ScoreListTableViewCell(style: .default, reuseIdentifier: "cellID")
         }
         cell.selectionStyle = .none
-//        cell?.averageLab.text = "nihao "
+        //        cell?.averageLab.text = "nihao "
         
         
         return cell
         
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //        let cell = tableView.cellForRow(at: indexPath) as? CYJCustomBarChartCell
-        //        cell?.animateOut()
-//    }
+    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //        let cell = tableView.cellForRow(at: indexPath) as? CYJCustomBarChartCell
+    //        cell?.animateOut()
+    //    }
     
 }
