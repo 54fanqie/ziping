@@ -14,6 +14,17 @@ class ScoreListTableViewCell: UITableViewCell {
     var tatolLab: UILabel?
     var averageLab: UILabel?
     var backView: UIView?
+
+    var testGroupData = TestGroupData(){
+        didSet{
+            typeLab?.text = String(format: "%@/%@", testGroupData.rangeAge as! String,testGroupData.sex as! String)
+            tatolLab?.text = testGroupData.averageScore
+            averageLab?.text = testGroupData.averageAge
+        }
+    }
+
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

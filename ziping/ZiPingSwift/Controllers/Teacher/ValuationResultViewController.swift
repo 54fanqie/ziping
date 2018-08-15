@@ -84,12 +84,14 @@ class ValuationResultViewController: KYBaseViewController {
         
         var params = [String : Any]()
         var urlString : String!
+        var titleMeasge : String?
+        
         
         if LocaleSetting.userInfo()?.role == .child {//家长向园长申请生成报告
             
             urlString = APIManager.Valuation.applyReport
             params = ["historyid" : 1]
-            
+            titleMeasge = "专项测评专业分析申请已发送给园长，将由园长与平台沟通哦~"
         } else { //教师、园长申请生成报告
            
             urlString = APIManager.Valuation.teacherApplyReport
@@ -109,9 +111,11 @@ class ValuationResultViewController: KYBaseViewController {
                 
             }
             let alert = ValuationAlertController()
-            //                alert.message = info["message"]as! String
-            alert.message = "专项测评专业分析申请已发送给园长，将由园长与平台沟通哦~"
-            alert.completeHandler = { [] in
+            if titleMeasge == nil {
+                titleMeasge == custom?.message
+            }
+            alert.message = titleMeasge
+            alert.completeHandler =  { [] in
                 alert.dismiss(animated:true, completion: nil)
             }
             alert.showAlert()

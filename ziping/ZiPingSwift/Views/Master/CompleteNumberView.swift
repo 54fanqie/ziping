@@ -21,6 +21,69 @@ class CompleteNumberView: UIView {
     
     @IBOutlet var view: UIView!
     @IBOutlet weak var listTitleView: UIView!
+    
+    var thisTestStatistics = NSDictionary(){
+        didSet{
+            leftTitleLab.text = "完成测评幼儿"
+            rightTitleLab.text = "未完成测评幼儿"
+            ageSexLab.text = "年龄段/性别"
+            tatolLab.text = "班级总分平均分"
+            averageLab.text = "园内同年龄组平均分"
+            
+            
+            leftCountLab.text = thisTestStatistics["overComplete"] as? String
+            let a = Int((thisTestStatistics["overNoStart"] as? String)!)
+            let b = Int((thisTestStatistics["overStart"] as? String)!)
+            rightCountLab.text =  String(format: "%d", a!+b!)
+        }
+    }
+    var lastTestStatistics = NSDictionary()
+    
+    var isComparison : Bool = false {
+        didSet{
+            if isComparison == true {//进行对比
+                leftTitleLab.text = "本/上次完成测评幼儿"
+                rightTitleLab.text = "本/上次未完成测评幼儿"
+                ageSexLab.text = "年龄段/性别"
+              
+                tatolLab.text = "班级总分平均分 \n （本/上次）"
+                averageLab.text = "园内同年龄组平均分 \n （本/上次）"
+                
+              
+                
+                leftCountLab.text = String(format: "%@/%@", (thisTestStatistics["overComplete"] as? String)!,(lastTestStatistics["overComplete"] as? String)!)
+                
+                
+                let a = Int((thisTestStatistics["overNoStart"] as? String)!)
+                let b = Int((thisTestStatistics["overStart"] as? String)!)
+                
+                let c = Int((lastTestStatistics["overNoStart"] as? String)!)
+                let d = Int((lastTestStatistics["overStart"] as? String)!)
+                
+                rightCountLab.text = String(format: "%@/%@", String(format: "%d", a!+b!),String(format: "%d", c!+d!))
+                
+            
+            }else{//不对比
+                leftTitleLab.text = "完成测评幼儿"
+                rightTitleLab.text = "未完成测评幼儿"
+                ageSexLab.text = "年龄段/性别"
+                tatolLab.text = "班级总分平均分"
+                averageLab.text = "园内同年龄组平均分"
+                
+                leftCountLab.text = thisTestStatistics["overComplete"] as? String
+                let a = Int((thisTestStatistics["overNoStart"] as? String)!)
+                let b = Int((thisTestStatistics["overStart"] as? String)!)
+                rightCountLab.text =  String(format: "%d", a!+b!)
+                
+                
+            }
+            
+        }
+    }
+    
+   
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         awakeFromNib()
@@ -33,18 +96,12 @@ class CompleteNumberView: UIView {
     
     //初始化属性配置
     func initial(){
-        leftTitleLab.text = "完成测评幼儿"
-        rightTitleLab.text = "未完成测评幼儿"
-        
-        leftCountLab.text = "10"
-        rightCountLab.text = "12"
-        
-        ageSexLab.text = "年龄段/性别"
-        tatolLab.text = "班级总分平均分 \n （本/上次）"
-        averageLab.text = "园内同年龄组平均分"
         listTitleView.layer.theme_borderColor = "Global.separatorColor"
         listTitleView.layer.borderWidth = 1
     }
+    
+    
+    
     
     // load view from xib
     //加载xib

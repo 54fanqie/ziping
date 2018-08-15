@@ -46,7 +46,7 @@ class ValuationEndViewController: KYBaseViewController {
             }
             let alert = ValuationAlertController()
             //                alert.message = info["message"]as! String
-            alert.message = "专项测评专业分析申请已发送给园长，将由园长与平台沟通哦~"
+            alert.message = "专项测评专业分析申请已发出"
             alert.completeHandler = { [] in
                 alert.dismiss(animated:true, completion: nil)
             }
