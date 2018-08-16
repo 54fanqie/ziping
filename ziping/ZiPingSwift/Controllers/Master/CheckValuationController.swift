@@ -243,7 +243,7 @@ class CheckValuationController: KYBaseTableViewController {
                 
                 self.checkValuationParamModel.grade = op.grade
                 self.checkValuationParamModel.classId = op.classId
-                sender.title = className
+                sender.title = "\(gradeName)" + "-" + "\(className)"
                 self.gradeIndex = gradeIndex
                 self.classIndex = classIndex
                 
@@ -265,7 +265,7 @@ class CheckValuationController: KYBaseTableViewController {
         //=======================================测评时间====================================================
         scopeConditionView = CYJConditionView(title: "测评时间:", key: "time")
         self.timeIndex = 0
-        valuationTimeCondition = CYJConditionButton(title: "请选择时间", key: "test_time") { [unowned self] (sender) in
+        valuationTimeCondition = CYJConditionButton(title: "请选择测评时间", key: "test_time") { [unowned self] (sender) in
             
             let testTimeController = TImeOptionSelectedController(currentIndex: self.timeIndex, options: self.valuationTimeArray) { [unowned sender](op , selectIndex) in
                 

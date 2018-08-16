@@ -162,7 +162,7 @@ class OtherClassRecordController: CYJRECListViewController {
 extension OtherClassRecordController {
     
     func goSearchArea() {
-        let filter = CYJSearchViewController()
+        let filter = OtherClassSearchController()
         filter.listparam = self.listParam.copy() as! RECListSearchParam
         filter.classInGrade = self.searchClassArray
         filter.finishSelected = {[unowned self] in

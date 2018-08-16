@@ -482,6 +482,7 @@
 		B14100CE212180C600E732AA /* ValuationAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14100CD212180C600E732AA /* ValuationAlertController.swift */; };
 		B14100D02122C2A200E732AA /* OtherClassRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14100CF2122C2A200E732AA /* OtherClassRecordController.swift */; };
 		B14100D22124104700E732AA /* TImeOptionSelectedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14100D12124104700E732AA /* TImeOptionSelectedController.swift */; };
+		B14100D42125115200E732AA /* OtherClassSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14100D32125115200E732AA /* OtherClassSearchController.swift */; };
 		B17721471FEA9A1C00A3F25C /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17721461FEA9A1C00A3F25C /* AuthorizationManager.swift */; };
 		B18CBECF20FF747F00827E39 /* ValuationCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */; };
 		B18CBED020FF747F00827E39 /* ValuationCompleteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */; };
@@ -1056,6 +1057,7 @@
 		B14100CD212180C600E732AA /* ValuationAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationAlertController.swift; sourceTree = "<group>"; };
 		B14100CF2122C2A200E732AA /* OtherClassRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherClassRecordController.swift; sourceTree = "<group>"; };
 		B14100D12124104700E732AA /* TImeOptionSelectedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TImeOptionSelectedController.swift; sourceTree = "<group>"; };
+		B14100D32125115200E732AA /* OtherClassSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherClassSearchController.swift; sourceTree = "<group>"; };
 		B17721461FEA9A1C00A3F25C /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationCompleteController.swift; sourceTree = "<group>"; };
 		B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationCompleteController.xib; sourceTree = "<group>"; };
@@ -2144,6 +2146,7 @@
 				8D3607DB1F7B8C0F00EB24A0 /* CYJRECBuildAlertController.swift */,
 				8D56DBB91F7B919900D46A09 /* CYJRECSharedAlertController.swift */,
 				B14100CF2122C2A200E732AA /* OtherClassRecordController.swift */,
+				B14100D32125115200E732AA /* OtherClassSearchController.swift */,
 			);
 			name = Record;
 			sourceTree = "<group>";
@@ -2832,6 +2835,7 @@
 				8D2D51AC1FA87B39003AA96C /* CYJInputViewOutletController.swift in Sources */,
 				8D6374FA1F569E8500F666C9 /* CYJRECBuildInfoViewController.swift in Sources */,
 				8D6374BB1F569BD500F666C9 /* UIButton+imageEveryWhere.swift in Sources */,
+				B14100D42125115200E732AA /* OtherClassSearchController.swift in Sources */,
 				8D16EA8C1FC54362003B4CAC /* CYJButtonItem.swift in Sources */,
 				B12DB1262101DB4700D95FAA /* QuestionnaireEndViewController.swift in Sources */,
 				B1C9AA971FDC60A20038C372 /* CYJNotificationCell.swift in Sources */,
