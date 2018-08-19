@@ -96,7 +96,7 @@ class CYJArchiveDetailController: KYBaseViewController {
     func makePageViewController() {
         //主体答题位置，设置样式为 pageCurl ，
         pageViewController =  UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: [UIPageViewControllerOptionSpineLocationKey: NSNumber(value:UIPageViewControllerSpineLocation.min.rawValue)])
-        pageViewController.view.frame = CGRect(x: 0, y: 64 , width: view.frame.width, height: view.frame.height)
+        pageViewController.view.frame = CGRect(x: 0, y: Theme.Measure.navigationBarHeight , width: view.frame.width, height: view.frame.height)
         pageViewController.delegate = self
         pageViewController.dataSource = self
         

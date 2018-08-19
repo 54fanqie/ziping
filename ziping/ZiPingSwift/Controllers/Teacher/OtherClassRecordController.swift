@@ -21,7 +21,7 @@ class OtherClassRecordController: CYJRECListViewController {
     //    var countView: CYJRecordCountView!
     
     override func viewDidLoad() {
-        let   fakeSearchBarView = UIView(frame: CGRect(x:0 , y: 64, width:view.frame.width,height:46))
+        let   fakeSearchBarView = UIView(frame: CGRect(x:0 , y: Theme.Measure.navigationBarHeight, width:view.frame.width,height:46))
         fakeSearchBarView.theme_backgroundColor = Theme.Color.viewLightColor
         view.addSubview(fakeSearchBarView);
         
@@ -38,7 +38,7 @@ class OtherClassRecordController: CYJRECListViewController {
         haveTabBar = true
         super.viewDidLoad()
         
-        self.tableView.frame = CGRect(x: 0, y: 64 + 50, width: view.frame.width, height: view.frame.height - 64 - 50)
+        self.tableView.frame = CGRect(x: 0, y: Theme.Measure.navigationBarHeight + 50, width: view.frame.width, height: view.frame.height - Theme.Measure.navigationBarHeight - 50)
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         //        请求第一轮数据
         self.fetchDataSource()

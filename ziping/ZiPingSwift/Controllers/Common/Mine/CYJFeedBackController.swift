@@ -11,6 +11,7 @@ import UIKit
 class CYJFeedBackController: KYBaseViewController {
 
     
+    @IBOutlet weak var topSpace: NSLayoutConstraint!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var contentView: UITextView!
     @IBOutlet weak var contractField: UITextField!
@@ -25,6 +26,9 @@ class CYJFeedBackController: KYBaseViewController {
         // Do any additional setup after loading the view.
         title = "意见反馈"
         self.placeholderView.text = " 请填写您的意见.."
+        if Theme.Measure.isIphoneX {
+            self.topSpace.constant = 72 + 24 
+        }
         
         self.uploadButton.layer.theme_borderColor = "Nav.barTintColor"
         self.uploadButton.layer.borderWidth = 1

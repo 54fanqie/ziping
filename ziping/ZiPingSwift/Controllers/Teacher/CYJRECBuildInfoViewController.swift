@@ -152,7 +152,7 @@ class CYJRECBuildInfoViewController: KYBaseCollectionViewController {
     //TODO: 注册Cell and header and footer
     func registerTableViewCellAndReuseView() {
         
-        collectionView.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.tabBarHeight)
+        collectionView.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight )
         
         collectionView.register(UINib(nibName: "CYJRECBuildCVC", bundle: nil), forCellWithReuseIdentifier: CYJRECBuildCVC.CYJRECBuildCVCTime)
         collectionView.register(UINib(nibName: "CYJRECBuildCVC", bundle: nil), forCellWithReuseIdentifier: CYJRECBuildCVC.CYJRECBuildCVCChild)
@@ -167,7 +167,7 @@ class CYJRECBuildInfoViewController: KYBaseCollectionViewController {
     }
     
     func makeActionsView() {
-        actionView = CYJActionsView(frame: CGRect(x: 0, y: view.frame.height - Theme.Measure.tabBarHeight, width: view.frame.width, height: 44))
+        actionView = CYJActionsView(frame: CGRect(x: 0, y: view.frame.height - 44, width: view.frame.width, height: 44))
         actionView.innerPadding = 0.5
         actionView.isFull = true
         
