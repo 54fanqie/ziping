@@ -38,7 +38,7 @@ class CYJRECListViewControllerTeacher: CYJRECListViewController, CYJDropDownView
         items.append(CYJDropDownItem(text: "按幼儿", key: "child"))
         
 
-        let seprateView = UIView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: 44 + 30))
+        let seprateView = UIView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: 44 + 30))
         seprateView.theme_backgroundColor = Theme.Color.line
         
         let dropDownView = CYJRECDropDownView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
@@ -79,10 +79,10 @@ class CYJRECListViewControllerTeacher: CYJRECListViewController, CYJDropDownView
         
         //区分系统版本
         if #available(iOS 11, *) {
-            tableView.frame = CGRect(x: 0, y: 44+30+64, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - (64+44+30))
+            tableView.frame = CGRect(x: 0, y: 44+30+Theme.Measure.navigationBarHeight, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - (Theme.Measure.navigationBarHeight+44+30) - Theme.Measure.tabBarHeight)
 
         } else {
-            tableView.frame = CGRect(x: 0, y: 44+30, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - (64+49+30))
+            tableView.frame = CGRect(x: 0, y: 44+30, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - (Theme.Measure.navigationBarHeight+49+30))
 
         }
 

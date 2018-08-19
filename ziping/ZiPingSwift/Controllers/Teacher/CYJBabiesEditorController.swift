@@ -49,7 +49,7 @@ class CYJBabiesEditorController: KYBaseViewController {
         style.scrolledContentView = false
         
         
-        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: Theme.Measure.screenHeight - 64), segmentStyle: style, titles: ["在班幼儿", "待验证幼儿"], childVcs: setChildVcs(), parentViewController: self)
+        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight), segmentStyle: style, titles: ["在班幼儿", "待验证幼儿"], childVcs: setChildVcs(), parentViewController: self)
         
         view.addSubview(scrollPageView)
     }
@@ -62,14 +62,14 @@ class CYJBabiesEditorController: KYBaseViewController {
         let vc1 = CYJBabiesListController()
         vc1.isWaited = false
         vc1.title = ""
-        vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44 - 64)
+        vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44 - Theme.Measure.navigationBarHeight)
         
         childVCs.append(vc1)
         
         let vc2 = CYJBabiesListController()
         vc2.isWaited = true
         vc2.view.backgroundColor = UIColor.white
-        vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44 - 64 )
+        vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44 - Theme.Measure.navigationBarHeight )
         vc2.title = "待验证幼儿"
         
         childVCs.append(vc2)

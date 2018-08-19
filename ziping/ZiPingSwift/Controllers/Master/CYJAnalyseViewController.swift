@@ -109,7 +109,7 @@ class CYJAnalyseViewController: KYBaseTableViewController {
         
         super.viewDidLoad()
         
-        tabelHeaderView = UIView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: 240))
+        tabelHeaderView = UIView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: 240))
         tabelHeaderView.theme_backgroundColor = Theme.Color.line
         tableView.tableHeaderView = tabelHeaderView
         tableView.tableFooterView = UIView()

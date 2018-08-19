@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import HandyJSON
 class CYJProfessionalAnalyseController: KYBaseViewController {
     
     @IBOutlet weak var label1: UILabel!
@@ -17,6 +17,7 @@ class CYJProfessionalAnalyseController: KYBaseViewController {
     @IBOutlet weak var textField: UITextField!
     
     @IBOutlet weak var uploadButton: UIButton!
+    var isValuation : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,22 +50,50 @@ class CYJProfessionalAnalyseController: KYBaseViewController {
         Third.toast.show {
             
         }
-        RequestManager.POST(urlString: APIManager.Tongji.analPro, params: ["token": LocaleSetting.token, "email": email]) { [unowned self] (data, error) in
-            //如果存在error
-            Third.toast.hide {
+        
+        //专项测评分析申请
+        if isValuation == true{
+            RequestManager.POST(urlString: APIManager.Valuation.teacherApplyReport, params: nil) { [] (data, error) in
+                guard error == nil else {
+                    Third.toast.message((error?.localizedDescription)!)
+                    return
+                }
                 
+                let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: data as? NSDictionary)
+                if custom?.status == 200 {
+                    
+                }else {
+                    
+                }
+                let alert = ValuationAlertController()
+                //                alert.message = info["message"]as! String
+                alert.message = "专项测评专业分析申请已发出"
+                alert.completeHandler = { [] in
+                    alert.dismiss(animated:true, completion: nil)
+                }
+                alert.showAlert()
             }
-            guard error == nil else {
-                Third.toast.message((error?.localizedDescription)!)
-                return
+        }else{
+            //其他申请
+            RequestManager.POST(urlString: APIManager.Tongji.analPro, params: ["token": LocaleSetting.token, "email": email]) { [unowned self] (data, error) in
+                //如果存在error
+                Third.toast.hide {
+                    
+                }
+                guard error == nil else {
+                    Third.toast.message((error?.localizedDescription)!)
+                    return
+                }
+                let alert = UIAlertController(title: nil, message: "申请已提交成功，请耐心等待，注意查收", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { [unowned self] (action) in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                
+                self.present(alert, animated: true, completion: nil)
             }
-            let alert = UIAlertController(title: nil, message: "申请已提交成功，请耐心等待，注意查收", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { [unowned self] (action) in
-                self.navigationController?.popViewController(animated: true)
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
         }
+       
+        
     }
     
     override func didReceiveMemoryWarning() {

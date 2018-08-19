@@ -34,10 +34,12 @@ class CYJRECCacheViewController: KYBaseTableViewController, CYJActionPassOnDelea
         
         NotificationCenter.default.addObserver(self, selector: #selector(listenRecordChanged(notifi:)), name: CYJNotificationName.recordChanged, object: nil)
         
+        self.fetchDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.page = 1
         // 每次都要新数据！
         self.fetchDataSource()
         
@@ -64,7 +66,9 @@ class CYJRECCacheViewController: KYBaseTableViewController, CYJActionPassOnDelea
             //发现目标--表示是从暂存列表进入的，这时候要更新列表了
             if let _ = tableView.cellForRow(at: index) {
                 DispatchQueue.main.async { [weak self] in
-                    self?.tableView.deleteRows(at: [index], with: .none)
+                    self?.dataSource.remove(at: index.row)
+//                    self?.tableView.deleteRows(at: [index], with: .none)
+                    self?.tableView.reloadData()
                 }
             }
         }else {

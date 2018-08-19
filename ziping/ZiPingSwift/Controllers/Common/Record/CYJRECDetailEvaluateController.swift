@@ -21,7 +21,7 @@ class CYJRECDetailEvaluateController: KYBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44 - 64)
+        self.tableView.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44 - Theme.Measure.navigationBarHeight)
         
         tableView.register(CYJRECDetailCommentCell.self, forCellReuseIdentifier: "CYJRECDetailCommentCell")
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)

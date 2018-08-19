@@ -14,6 +14,7 @@ class ValuationStatuModel: CYJBaseModel {
     var groupId         : Int = 0 //当前身份，1=园长，2=教师，3=家长
     var status          : Int? // 前状态，0=未开始，1=进行中，2=己结束，3=己毕业
     var title           : String?     //标题
+    var historyid       : Int = 0
     var isfinish        : Int?  //  是否提交试卷（1=是，0=否（可能从没做过，也可以是没做完））
     var shijuanid       : Int = 0  //当前标题（state=1时，这里为试卷的标题，否则为对应的状态说明标题）
     var remarks         : String?  //备注提示
@@ -69,7 +70,7 @@ class QuestionnaireViewController: KYBaseViewController {
                 //遍历，并赋值
                 let target = JSONDeserializer<ValuationStatuModel>.deserializeFrom(dict: datas )
                 self?.valuatuinStatue = target
-                //                self?.scrollPageView.reloadChildVcsWithNewTitles(["问卷测评", "教师测评结果"], andNewChildVcs: (self?.setChildVcs())!)
+                
                 self?.scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: (self?.view.frame.width)!, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight), segmentStyle: style, titles: ["问卷测评", "教师测评结果"], childVcs: (self?.setChildVcs())!, parentViewController: self!)
                 
                 self?.view.addSubview((self?.scrollPageView)!)
@@ -80,54 +81,63 @@ class QuestionnaireViewController: KYBaseViewController {
     }
     /// swiperView 必须实现的
     func setChildVcs() -> [UIViewController] {
+        var status : Int = 0
+        
+        if self.valuatuinStatue?.isfinish == 1 {
+            status = 3
+        }else{
+            status = (self.valuatuinStatue?.status)!
+        }
         
         var childVCs: [UIViewController] = []
-        switch self.valuatuinStatue?.status {
+        switch status {
         case 0:
             //  问卷测评 未开始
             let vc4 = ValuationNoStartViewController()
             vc4.view.backgroundColor = UIColor.white
-            vc4.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc4.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             vc4.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc4)
         case 1:
             //  问卷测评  进行中
             let vc1 = QuestionnaireIngViewController()
             vc1.view.backgroundColor = UIColor.white
-            vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             vc1.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc1)
         case 3:
             //  问卷测评  已完成
             let vc3 = QuestionnComplentViewController()
             vc3.view.backgroundColor = UIColor.white
-            vc3.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc3.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            vc3.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc3)
         case 4:
             //  问卷测评  已结束
             let vc2 = QuestionnaireEndViewController()
             vc2.view.backgroundColor = UIColor.white
-            vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            vc2.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc2)
         case 5:
             //  问卷测评  已毕业
             let vc5 = GraduationViewController()
             vc5.view.backgroundColor = UIColor.white
-            vc5.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc5.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             childVCs.append(vc5)
             
         default:
             //  空白
             let vc = UIViewController()
             vc.view.backgroundColor = UIColor.white
-            vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             childVCs.append(vc)
         }
         //教师测评结果
         let vc = ValuationResultViewController();
         vc.view.backgroundColor = UIColor.white
         vc.userID = String(format: "%d", (LocaleSetting.userInfo()?.uId)!)
-        vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+        vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
         childVCs.append(vc)
         return childVCs
     }

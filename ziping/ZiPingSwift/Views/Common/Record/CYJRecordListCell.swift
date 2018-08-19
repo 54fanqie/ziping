@@ -13,6 +13,7 @@ class CYJRecordListCell: UITableViewCell {
     
     var role = (LocaleSetting.userInfo()?.role)!
     
+    
     enum CellMode: String {
         case none = "reuseIdentifierWithNoneImageView"
         case one = "reuseIdentifierWithOneImageView"
@@ -211,7 +212,11 @@ class CYJRecordListCell: UITableViewCell {
                 deleteButton.isHidden = true
             }
             if listFrame.role == .teacher || listFrame.role == .master {
+                if listFrame.isOtherClass == true{
+                    deleteButton.isHidden = true
+                }else{
                 deleteButton.isHidden = false
+                }
             }
             
             if let photo = listFrame.record.photo {

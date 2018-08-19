@@ -12,6 +12,7 @@ class QuestionnComplentViewController: KYBaseViewController {
     
     @IBOutlet weak var applyButton: UIButton!
     @IBOutlet weak var firstLab: UILabel!
+    var valuationStatueInfo : ValuationStatuModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         applyButton.layer.cornerRadius = 20
@@ -25,7 +26,7 @@ class QuestionnComplentViewController: KYBaseViewController {
     
     
     @IBAction func applyforMaster(_ sender: Any) {
-        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : 1]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : self.valuationStatueInfo.historyid]) { [weak self] (data, error) in
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return

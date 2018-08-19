@@ -115,7 +115,7 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
         tableView.register(CYJPieChartCell.self, forCellReuseIdentifier: withIdentifier)
         tableView.register(CYJAttentionCountedCell.self, forCellReuseIdentifier: countIdentifier)
         tableView.tableFooterView = UIView()
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, Theme.Measure.tabBarHeight, 0)
         // 滚动条
         var style = SegmentStyle()
         style.showLine = true        // 颜色渐变
@@ -551,7 +551,7 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
         //        scrollView.contentSize = CGSize(width: view.frame.width, height: countedView.frame.maxY)
         chartContainerView = UIView()
         chartContainerView?.theme_backgroundColor = Theme.Color.ground
-        chartContainerView?.frame = CGRect(x: 0, y: (countedView?.frame.maxY)!, width: view.frame.width, height: view.frame.height - 49 - 64)
+        chartContainerView?.frame = CGRect(x: 0, y: (countedView?.frame.maxY)!, width: view.frame.width, height: view.frame.height - Theme.Measure.tabBarHeight - Theme.Measure.navigationBarHeight)
         //        scrollView.addSubview(chartContainerView!)
         
         // 这个是必要的设置

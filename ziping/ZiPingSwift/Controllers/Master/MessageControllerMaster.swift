@@ -1,15 +1,14 @@
 //
-//  CYJMessageControllerTeacher.swift
+//  MessageControllerMaster.swift
 //  ZiPingSwift
 //
-//  Created by kyang on 2017/9/27.
-//  Copyright © 2017年 Chinayoujiao. All rights reserved.
+//  Created by 番茄 on 8/18/18.
+//  Copyright © 2018 Chinayoujiao. All rights reserved.
 //
 
-import Foundation
-import HandyJSON
+import UIKit
 
-class CYJMessageControllerTeacher: KYBaseTableViewController {
+class MessageControllerMaster: KYBaseTableViewController {
     
     var examples = [KYTableExample]()
     let cellIdentifier = "CYJNotificationCell"
@@ -18,15 +17,13 @@ class CYJMessageControllerTeacher: KYBaseTableViewController {
         super.viewDidLoad()
         title = "消息通知"
         
-        let arr = [KYTableExample(key: "good", title: "新收到的赞", selector: #selector(toGood), image: nil),
-                   KYTableExample(key: "replay", title: "新收到的反馈", selector: #selector(toReplay), image: nil),
-                   KYTableExample(key: "readover", title: "新获得园长的批阅", selector: #selector(toReadOver), image: nil),
+        let arr = [KYTableExample(key: "apply", title: "收到的分析申请", selector: #selector(toApply), image: nil),
                    KYTableExample(key: "system", title: "系统消息", selector: #selector(toSystem), image: nil)
         ]
         
         examples = arr
         self.tableView.tableFooterView = UIView()
-        self.tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         NotificationCenter.default.addObserver(self, selector: #selector(messageCountChanged), name: CYJNotificationName.unreadMessageCountChanged, object: nil)
         //进入当前页面时，保证红点的正确
         LocaleSetting.share.fetchUnreadMessageCount()
@@ -37,33 +34,23 @@ class CYJMessageControllerTeacher: KYBaseTableViewController {
         self.tableView.reloadData()
     }
     
-    func toGood() {
-        let messageController =  CYJMessageRecordController()
-        messageController.type = 1
-        messageController.title = "赞"
+    func toApply() {
+        let messageController =  ApplyValuationViewController()
+        messageController.title = "收到的分析申请"
+        messageController.type = 10
         navigationController?.pushViewController(messageController, animated: true)
     }
-    func toReplay() {
-        let messageController =  CYJMessageRecordController()
-        messageController.type = 2
-        messageController.title = "收到反馈"
-        navigationController?.pushViewController(messageController, animated: true)
-    }
-    func toReadOver() {
-        let messageController =  CYJMessageRecordController()
-        messageController.type = 3
-        messageController.title = "园长批阅"
-        navigationController?.pushViewController(messageController, animated: true)
-    }
+    
     func toSystem() {
         let messageController =  CYJMessageSystemController()
-        
+        messageController.title = "系统消息"
+        messageController.type = 5
         navigationController?.pushViewController(messageController, animated: true)
     }
     
 }
 
-extension CYJMessageControllerTeacher {
+extension MessageControllerMaster {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -82,9 +69,7 @@ extension CYJMessageControllerTeacher {
         let jsonData = LocaleSetting.share.unReadMessageCount
         
         switch example.key! {
-        case "good": cell.redIconLable.text = "\(jsonData.thumb)"
-        case "replay": cell.redIconLable.text = "\(jsonData.feedback)"
-        case "readover": cell.redIconLable.text = "\(jsonData.mark)"
+        case "apply": cell.redIconLable.text = "\(jsonData.apply)"
         case "system": cell.redIconLable.text = "\(jsonData.system)"
             
         default:
@@ -93,7 +78,7 @@ extension CYJMessageControllerTeacher {
         
         return cell
     }
-
+    
     //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     //        return 8
     //    }

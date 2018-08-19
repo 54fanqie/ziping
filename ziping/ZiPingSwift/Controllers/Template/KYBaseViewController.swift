@@ -31,7 +31,7 @@ class KYBaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print()
         view.theme_backgroundColor = "Global.backgroundColor"
         
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: self, action: nil)
@@ -170,6 +170,8 @@ extension KYBaseViewController {
         //        }
         //        return nav
     }
+    
+    
 }
 
 

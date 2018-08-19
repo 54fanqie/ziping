@@ -19,7 +19,7 @@ class CYJMessageTableViewCell: UITableViewCell {
     var message: CYJMessage? {
         didSet {
             
-//            photoImageView.kf.setImage(with: URL(fragmentString: message?.avatar) ,placeholder: #imageLiteral(resourceName: "default_user"))
+            photoImageView.kf.setImage(with: URL(fragmentString: message?.avatar) ,placeholder: #imageLiteral(resourceName: "icon_system_default"))
             photoImageView.image = #imageLiteral(resourceName: "icon_system_default")
 
             

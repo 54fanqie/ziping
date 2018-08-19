@@ -12,7 +12,7 @@ import HandyJSON
 class CYJMessageSystemController: KYBaseTableViewController {
     
     var dataSource: [CYJMessage] = []
-    
+    var type: Int = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         

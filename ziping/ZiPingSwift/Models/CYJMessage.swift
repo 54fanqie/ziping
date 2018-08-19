@@ -28,9 +28,9 @@ class CYJUnreadMessageCount: CYJBaseModel {
     var feedback: Int = 0// 收到的反馈未读数
     var mark: Int = 0 // 园长批阅未读数
     var system: Int = 0     // 系统消息未读数
-    
+    var apply: Int = 0     // 测评申请消息未读数
     var sumCount: Int {
-        return thumb + feedback + mark + system
+        return thumb + feedback + mark + system + apply
     }
 
 }

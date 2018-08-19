@@ -30,14 +30,14 @@ class QuestionnaireIngViewController: KYBaseViewController {
 
     @IBAction func starValuationAction(_ sender: Any) {
         var vc : UIViewController
-        if self.valuationStatueInfo?.isfinish == 1 {
-            let mu = MultipleChoiceController();
-            mu.shijuanid = (self.valuationStatueInfo?.shijuanid)!
-            vc = mu
-        }else{
+        if self.valuationStatueInfo?.historyid == 0{
             let instrucVc  = InstructionViewController()
             instrucVc.shijuanid = (self.valuationStatueInfo?.shijuanid)!
             vc = instrucVc
+        }else{
+            let mu = MultipleChoiceController();
+            mu.shijuanid = (self.valuationStatueInfo?.shijuanid)!
+            vc = mu
         }
          self.navigationController?.pushViewController(vc, animated: true)
         

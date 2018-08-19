@@ -456,6 +456,8 @@
 		B1214AD8211AC08D00BFA28A /* CompleteNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1214AD6211AC08D00BFA28A /* CompleteNumberView.swift */; };
 		B1214AD9211AC08D00BFA28A /* CompleteNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1214AD7211AC08D00BFA28A /* CompleteNumberView.xib */; };
 		B1214ADC211AD54500BFA28A /* ScoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */; };
+		B129E4072126A7D10086D6FD /* NoPermissViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B129E4052126A7D10086D6FD /* NoPermissViewController.swift */; };
+		B129E4082126A7D10086D6FD /* NoPermissViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B129E4062126A7D10086D6FD /* NoPermissViewController.xib */; };
 		B12DB11E2100DB3200D95FAA /* ValuationNoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */; };
 		B12DB11F2100DB3200D95FAA /* ValuationNoStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */; };
 		B12DB1222100DC2A00D95FAA /* ValuationEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */; };
@@ -487,6 +489,8 @@
 		B18CBECF20FF747F00827E39 /* ValuationCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */; };
 		B18CBED020FF747F00827E39 /* ValuationCompleteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */; };
 		B1A7C5DF1FD3F6E0006DEEEC /* Pink.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1A7C5DE1FD3F6E0006DEEEC /* Pink.plist */; };
+		B1BD51BF2127DFDF00FFA116 /* MessageControllerMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD51BE2127DFDF00FFA116 /* MessageControllerMaster.swift */; };
+		B1BD51C12128100000FFA116 /* ApplyValuationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD51C02128100000FFA116 /* ApplyValuationViewController.swift */; };
 		B1C9AA971FDC60A20038C372 /* CYJNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9AA951FDC60A20038C372 /* CYJNotificationCell.swift */; };
 		B1C9AA981FDC60A20038C372 /* CYJNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1C9AA961FDC60A20038C372 /* CYJNotificationCell.xib */; };
 		B1F95B4C2106D2EA00BA5EA2 /* InstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F95B4A2106D2EA00BA5EA2 /* InstructionViewController.swift */; };
@@ -1031,6 +1035,8 @@
 		B1214AD6211AC08D00BFA28A /* CompleteNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteNumberView.swift; sourceTree = "<group>"; };
 		B1214AD7211AC08D00BFA28A /* CompleteNumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteNumberView.xib; sourceTree = "<group>"; };
 		B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListTableViewCell.swift; sourceTree = "<group>"; };
+		B129E4052126A7D10086D6FD /* NoPermissViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPermissViewController.swift; sourceTree = "<group>"; };
+		B129E4062126A7D10086D6FD /* NoPermissViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoPermissViewController.xib; sourceTree = "<group>"; };
 		B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationNoStartViewController.swift; sourceTree = "<group>"; };
 		B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationNoStartViewController.xib; sourceTree = "<group>"; };
 		B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationEndViewController.swift; sourceTree = "<group>"; };
@@ -1062,6 +1068,8 @@
 		B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationCompleteController.swift; sourceTree = "<group>"; };
 		B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationCompleteController.xib; sourceTree = "<group>"; };
 		B1A7C5DE1FD3F6E0006DEEEC /* Pink.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pink.plist; sourceTree = "<group>"; };
+		B1BD51BE2127DFDF00FFA116 /* MessageControllerMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageControllerMaster.swift; sourceTree = "<group>"; };
+		B1BD51C02128100000FFA116 /* ApplyValuationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyValuationViewController.swift; sourceTree = "<group>"; };
 		B1C9AA951FDC60A20038C372 /* CYJNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYJNotificationCell.swift; sourceTree = "<group>"; };
 		B1C9AA961FDC60A20038C372 /* CYJNotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CYJNotificationCell.xib; sourceTree = "<group>"; };
 		B1F95B4A2106D2EA00BA5EA2 /* InstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionViewController.swift; sourceTree = "<group>"; };
@@ -1879,6 +1887,7 @@
 		8D63746E1F569BD500F666C9 /* Master */ = {
 			isa = PBXGroup;
 			children = (
+				B1BD51BD2127DF9400FFA116 /* Message */,
 				B18CBECC20FF719A00827E39 /* Valuation */,
 				8D54A6301F74D69B007C0F8E /* Analyse */,
 				8D54A62D1F74D634007C0F8E /* Interest */,
@@ -2147,6 +2156,8 @@
 				8D56DBB91F7B919900D46A09 /* CYJRECSharedAlertController.swift */,
 				B14100CF2122C2A200E732AA /* OtherClassRecordController.swift */,
 				B14100D32125115200E732AA /* OtherClassSearchController.swift */,
+				B129E4052126A7D10086D6FD /* NoPermissViewController.swift */,
+				B129E4062126A7D10086D6FD /* NoPermissViewController.xib */,
 			);
 			name = Record;
 			sourceTree = "<group>";
@@ -2370,6 +2381,15 @@
 				B14100D12124104700E732AA /* TImeOptionSelectedController.swift */,
 			);
 			name = Valuation;
+			sourceTree = "<group>";
+		};
+		B1BD51BD2127DF9400FFA116 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				B1BD51BE2127DFDF00FFA116 /* MessageControllerMaster.swift */,
+				B1BD51C02128100000FFA116 /* ApplyValuationViewController.swift */,
+			);
+			name = Message;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2687,6 +2707,7 @@
 				8D63750E1F56A15500F666C9 /* CYJCommentListCell.xib in Resources */,
 				8D4C8DB01F7F71AB00EDAE28 /* music_pressed@2x.png in Resources */,
 				8D4C8E071F7F71B500EDAE28 /* video_record_bubble@2x.png in Resources */,
+				B129E4082126A7D10086D6FD /* NoPermissViewController.xib in Resources */,
 				8D1654801FA7327F00AC4954 /* portrait.png in Resources */,
 				8D4C8DF01F7F71B500EDAE28 /* delete@2x.png in Resources */,
 				8D6375161F56A1D000F666C9 /* CYJRecordDetailHeaderCell.xib in Resources */,
@@ -2913,6 +2934,7 @@
 				8DF0DC591F9B187C00FA25FC /* CYJRECBuildHelper.swift in Sources */,
 				8D4C8D761F7F714E00EDAE28 /* UIButton+Glossy.m in Sources */,
 				8D6374D01F569BD500F666C9 /* ContentView.swift in Sources */,
+				B1BD51C12128100000FFA116 /* ApplyValuationViewController.swift in Sources */,
 				8DDA2F801F669FB60024CCC8 /* CYJRECStatisticNameHeader.swift in Sources */,
 				8D2839A81F79EE6A00B1133C /* CYJDropDownTimeView.swift in Sources */,
 				8D3607D41F7B413500EB24A0 /* KYDynamicTreeNode.swift in Sources */,
@@ -2949,6 +2971,7 @@
 				8D6374D71F569BD500F666C9 /* SwipeViewController.swift in Sources */,
 				8D59D7191FC2C67500E3619B /* CYJRecordCountView.swift in Sources */,
 				8D6374F21F569DB200F666C9 /* CYJCheckoutViewController.swift in Sources */,
+				B1BD51BF2127DFDF00FFA116 /* MessageControllerMaster.swift in Sources */,
 				8DA8E51C1F7E36050068EA25 /* CYJRECDetailCommentScoreView.swift in Sources */,
 				B1214AD8211AC08D00BFA28A /* CompleteNumberView.swift in Sources */,
 				8DBF9A3E1F8B77860031727D /* CYJTellUsController.swift in Sources */,
@@ -3067,6 +3090,7 @@
 				8DE3C08A1F8F83590022E69B /* CYJRECStatisticX.swift in Sources */,
 				8D02790C1F9D912200955E31 /* CYJLoginViewController.swift in Sources */,
 				8DC9DB9F1F57BBFE00E63461 /* ThirdLibrary.swift in Sources */,
+				B129E4072126A7D10086D6FD /* NoPermissViewController.swift in Sources */,
 				8D8149B41F74EDB30090858D /* CYJSearchViewController.swift in Sources */,
 				8D2839CB1F7A21B800B1133C /* KYImagePickerCell.swift in Sources */,
 				8D6374CF1F569BD500F666C9 /* SwiftNotice.swift in Sources */,

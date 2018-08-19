@@ -135,7 +135,7 @@ class CheckValuationController: KYBaseTableViewController {
         super.viewDidLoad()
         
         self.title = "专项测评"
-        tabelHeaderView = UIView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: 544))
+        tabelHeaderView = UIView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: 544))
         tabelHeaderView.backgroundColor = UIColor.white
         tableView.tableHeaderView = tabelHeaderView
         tableView.separatorStyle = .none
@@ -352,27 +352,13 @@ class CheckValuationController: KYBaseTableViewController {
         // 3
         showButton.defaultColorStyle = false
         let applyButton = CYJFilterButton(title: "申请专业分析") { [unowned self] (sender) in
-            RequestManager.POST(urlString: APIManager.Valuation.teacherApplyReport, params: nil) { [] (data, error) in
-                guard error == nil else {
-                    Third.toast.message((error?.localizedDescription)!)
-                    return
-                }
-                
-                let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: data as? NSDictionary)
-                if custom?.status == 200 {
-                    
-                }else {
-                    
-                }
-                let alert = ValuationAlertController()
-                //                alert.message = info["message"]as! String
-                alert.message = "专项测评专业分析申请已发出"
-                alert.completeHandler = { [] in
-                    alert.dismiss(animated:true, completion: nil)
-                }
-                alert.showAlert()
-            }
+            
+            print("申请专业分析")
+            let applyController = CYJProfessionalAnalyseController()
+            applyController.isValuation = true
+            self.navigationController?.pushViewController(applyController, animated: true)
         }
+        
         applyButton.defaultColorStyle = false
         actionsView.actions = [resetButton, showButton, applyButton]
         tabelHeaderView.addSubview(actionsView)

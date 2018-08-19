@@ -11,6 +11,7 @@ import HandyJSON
 class QuestionnaireEndViewController: KYBaseViewController {
 
     @IBOutlet weak var applyButton: UIButton!
+    var valuationStatueInfo : ValuationStatuModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         applyButton.layer.cornerRadius = 20
@@ -20,7 +21,7 @@ class QuestionnaireEndViewController: KYBaseViewController {
     }
     //像园长申请分析报告
     @IBAction func applyforMaster(_ sender: Any) {
-        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : 1]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : self.valuationStatueInfo.historyid]) { [weak self] (data, error) in
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return

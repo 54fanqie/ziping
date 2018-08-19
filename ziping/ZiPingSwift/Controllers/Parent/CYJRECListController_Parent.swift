@@ -31,7 +31,7 @@ class CYJRECListControllerParent: CYJRECListViewController {
         self.fetchDataSource()
         
         if self.uid != 0 {
-            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49 + 64, 0)
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, Theme.Measure.tabBarHeight + Theme.Measure.navigationBarHeight, 0)
         }
         self.tableView.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44  )
     }

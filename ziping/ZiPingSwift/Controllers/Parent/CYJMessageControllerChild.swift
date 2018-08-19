@@ -12,7 +12,7 @@ import HandyJSON
 class CYJMessageControllerChild: KYBaseTableViewController {
     
     var examples = [KYTableExample]()
-    
+    let cellIdentifier = "CYJNotificationCell"
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "消息通知"
@@ -23,7 +23,7 @@ class CYJMessageControllerChild: KYBaseTableViewController {
         ]
         
         examples = arr
-        
+        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
         self.fetchDataSource()
         
         NotificationCenter.default.addObserver(self, selector: #selector(messageCountChanged), name: CYJNotificationName.unreadMessageCountChanged, object: nil)
@@ -63,34 +63,35 @@ extension CYJMessageControllerChild {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "MessageInfoCell")
-        
-        if cell == nil {
-            cell = UITableViewCell(style: .value1, reuseIdentifier: "MessageInfoCell")
-            cell?.accessoryType = .disclosureIndicator
-            cell?.selectionStyle = .none
-            cell?.detailTextLabel?.theme_textColor = Theme.Color.badge
-        }
+//        var cell = tableView.dequeueReusableCell(withIdentifier: "MessageInfoCell")
+//
+//        if cell == nil {
+//            cell = UITableViewCell(style: .value1, reuseIdentifier: "MessageInfoCell")
+//            cell?.accessoryType = .disclosureIndicator
+//            cell?.selectionStyle = .none
+//            cell?.detailTextLabel?.theme_textColor = Theme.Color.badge
+//        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! CYJNotificationCell
         
         let example = examples[indexPath.row]
-        cell?.textLabel?.text = example.title
+        cell.titleLable.text = example.title
         
         let jsonData = LocaleSetting.share.unReadMessageCount
             
             switch example.key! {
             case "feedback":
-                cell?.detailTextLabel?.text = "\(jsonData.feedback)"
+                cell.redIconLable.text = "\(jsonData.feedback)"
             case "system":
-                cell?.detailTextLabel?.text = "\(jsonData.system)"
+                cell.redIconLable.text = "\(jsonData.system)"
             case "thumb":
-                cell?.detailTextLabel?.text = "\(jsonData.thumb)"
+                cell.redIconLable.text = "\(jsonData.thumb)"
             case "mark":
-                cell?.detailTextLabel?.text = "\(jsonData.mark)"
+                cell.redIconLable.text = "\(jsonData.mark)"
             default:
                 break
             }
         
-        return cell!
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

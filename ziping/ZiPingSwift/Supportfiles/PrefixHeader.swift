@@ -108,6 +108,7 @@ struct Theme {
         // tabBarHeight
         
        static  let tabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
+        
     }
     
     struct Color {

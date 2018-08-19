@@ -213,7 +213,7 @@ class MultipleChoiceCell: UITableViewCell {
     
         let choicesDetailModel =  shiTiDetailModel.choices[button.tag]
         if delegate != nil{
-            delegate?.selectResult(cellIndex : self.tag ,choesIndex: button.tag + 1 ,score: String(format: "%d", choicesDetailModel.score))
+            delegate?.selectResult(cellIndex : self.tag ,choesIndex: choicesDetailModel.scId ,score: String(format: "%d", choicesDetailModel.score))
         }
         
     }

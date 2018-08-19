@@ -149,7 +149,7 @@ class CYJTabBarController: ESTabBarController {
     func pushNotice() {
         //TODO: 角色不同，去不同的地方
         if role == .master {
-            let notice = CYJMessageSystemController()
+            let notice = MessageControllerMaster()
             
             navigationController?.pushViewController(notice, animated: true)
         }else if role == .child

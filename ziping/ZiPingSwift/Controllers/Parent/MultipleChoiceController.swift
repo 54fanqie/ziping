@@ -8,11 +8,37 @@
 
 import UIKit
 import HandyJSON
+class ChoiceslParsam: CYJParameterEncoding, NSCopying{
+    var title : String?
+    var shijuanid : String?
+    var historyid : Int = 0
+    var isfinish : Int = 0
+    var datiNums : Int = 0
+    var spentTime : Int = 0
+    var result_data : String?
+    
+    ///实现copyWithZone方法
+    func copy(with zone: NSZone? = nil) -> Any {
+        let theCopyObj = ChoiceslParsam.init()
+        
+        theCopyObj.title = self.title
+        theCopyObj.shijuanid = self.shijuanid
+        theCopyObj.historyid = self.historyid
+        theCopyObj.datiNums = self.datiNums
+        theCopyObj.spentTime = self.spentTime
+        theCopyObj.result_data = self.result_data
+        return theCopyObj
+    }
+    
+    
+    
+}
+
 
 class ShiJuanModel: CYJBaseModel {
     var historyid : Int = 0
     var isfinish : Int = 0
-    var shijuanid : Int = 0
+    var shijuanid : String?
     var title : String?
     var content : String?
     var shitiData : [ShiTiDetailModel] = []
@@ -40,6 +66,11 @@ class ChoicesDetailModel : CYJBaseModel{
 }
 
 
+
+
+
+
+
 class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableViewDelegate, MultipleChoiceDelegate {
     
     
@@ -52,7 +83,8 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
     var bottmView: UIView!
     
     //要上传的参数
-    var uploadChoiceslParsam = Dictionary<String,Any>()
+    var choiceslParsam = ChoiceslParsam()
+    var optionSource = [Dictionary<String,Any>]()
     
     /// 操作bar
     var actionView: CYJActionsView!
@@ -135,77 +167,83 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
     //暂存  或者提交
     @objc func updataAciton(button:UIButton) {
         if button.tag == 1 {
-            //            let result_data = getDictionaryFromJSONString(jsonString: uploadChoiceslParsam.object(forKey: "result_data") as! String)
-//            let result_data = uploadChoiceslParsam.object(forKey: "result_data") as! NSDictionary
-//            let dataDict = result_data.object(forKey: "data") as! NSArray
-//
-//            for item  in dataDict {
-//                let dict = item as! NSDictionary
-//
-//                if dict.object(forKey: "choice") as! Int == 0 {
-//                    let alert = ValuationAlertController()
-//                    alert.message = "您需将所有题目完成后提交，请检查是否有遗漏掉的题目~"
-//                    alert.completeHandler = { [] in
-//                        alert.dismiss(animated:true, completion: nil)
-//                    }
-//                    alert.showAlert()
-//                    return
-//                }
-//            }
+            for item  in optionSource {
+                let dict = item as NSDictionary
+                if dict.object(forKey: "choice") as! Int == 0 {
+                    let alert = ValuationAlertController()
+                    alert.message = "您需将所有题目完成后提交，请检查是否有遗漏掉的题目~"
+                    alert.completeHandler = { [] in
+                        alert.dismiss(animated:true, completion: nil)
+                    }
+                    alert.showAlert()
+                    return
+                }
+            }
+        }else{//如果是暂存
+            var noSelect : Bool = true
+            for item  in optionSource {
+                let dict = item as NSDictionary
+                if dict.object(forKey: "choice") as! Int != 0 {
+                  noSelect = false
+                }
+            }
+            if noSelect == true{
+                return
+            }
         }
+        choiceslParsam.isfinish =  button.tag
+        var  dataDict = Dictionary<String,NSArray>();
+        dataDict["data"] = optionSource as NSArray
+        choiceslParsam.result_data = toJSONString(dict: dataDict)
         
-        uploadChoiceslParsam["isfinish"] =  button.tag
-        print(toJSONString(dict: uploadChoiceslParsam))
-        
-       
         
         
-        //        print(getDictionaryFromJSONString(jsonString: params))
-        let result_data = uploadChoiceslParsam["result_data"] as! Dictionary<String,Any>
-        let params = [ "datiNums" : "10",
-                       "historyid" : "3",
-                       "spentTime" : "0",
-                       "title" : "笔试班学员专享课后测",
-                       "shijuanid" : "1",
-                       "isfinish" : "0",
-                       "result_data" : nil]
-        print(params)
-//        let parameters: Dictionary = ["key" : "93c921ea8b0348af8e8e7a6a273c41bd"]
-//        let headers: HTTPHeaders = ["Authorization": "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
-//                                    "Accept": "application/json"]
-//        Alamofire.request("http://apis.haoservice.com/weather/city", method: .post,  parameters:parameters) .responseJSON {response  in
-//            print("result==\(response.result)")
-//            //有错误就打印错误，没有就解析数据
-//            if let Error = response.result.error
-//            {
-//                print(Error)
-//            }
-//            else if let jsonValue = response.result.value
-//            {
-//                print("code = \(jsonValue)")
-//            }
-//
-//        }
+        //        //选项数据
+        //        var dataArray = [Dictionary<String,Any>]()
+        //        for shiTiDetailModel in (self.shiJuanModel?.shitiData)! {
+        //            var subDict = Dictionary<String,Int>()
+        //
+        //            subDict["tiid"] = shiTiDetailModel.tiid
+        //            subDict["catid1"] = shiTiDetailModel.catid1
+        //            subDict["catid2"] = shiTiDetailModel.catid2
+        //            subDict["catid3"] = shiTiDetailModel.catid3
+        //            subDict["choice"] = 0
+        //            subDict["score"] = 0
+        //            dataArray.append(subDict)
+        //        }
+        //        var  dataDict = Dictionary<String,NSArray>();
+        //        dataDict["data"] = optionSource as NSArray
+        //
+        //        print(self.choiceslParsam.title)
+        //        print(self.choiceslParsam.shijuanid)
+        //        print(self.choiceslParsam.historyid)
+        //        print(self.choiceslParsam.isfinish)
+        //        print(self.choiceslParsam.datiNums)
+        //        print(self.choiceslParsam.spentTime)
+        //
+        //        let choiceslParsam = ChoiceslParsam()
+        //        choiceslParsam.title = "笔试班学员专享课后测"
+        //        choiceslParsam.shijuanid = "1"
+        //        choiceslParsam.historyid = 1
+        //        choiceslParsam.isfinish = 0
+        //        choiceslParsam.datiNums = 10
+        //        choiceslParsam.spentTime = 0
+        //        choiceslParsam.result_data = toJSONString(dict: dataDict)
         
-
         
-        RequestManager.POST(urlString: APIManager.Valuation.addAnswer, params: params ) { [weak self] (data, error) in
+        
+        RequestManager.POST(urlString: APIManager.Valuation.addAnswer, params: choiceslParsam.encodeToDictionary() ) { [weak self] (data, error) in
             //如果存在error
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return
             }
-            if let info = data as? NSDictionary {
-                //遍历，并赋值
-                if info["status"] as! Int == 200{
-                    self?.navigationController?.popToViewController(self?.navigationController?.viewControllers[1] as! QuestionnaireViewController, animated: true)
-                }
-                Third.toast.message(info["message"]as! String)
-            }
+            self?.navigationController?.popToViewController(self?.navigationController?.viewControllers[1] as! QuestionnaireViewController, animated: true)
+            Third.toast.message("提交成功")
         }
     }
     
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -238,33 +276,31 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
     }
     //答案选择
     func selectResult(cellIndex : Int ,choesIndex : Int, score : String) {
- 
-        print(uploadChoiceslParsam)
-        var result_data = uploadChoiceslParsam["result_data"] as! Dictionary<String,Any>
-        let dataArray = result_data["data"] as! NSArray
         
-        var dict = dataArray[cellIndex] as! Dictionary<String,Any>
+        //        let result_data = getDictionaryFromJSONString(jsonString: choiceslParsam.result_data! )
+        //        let dataArray = result_data["data"] as! NSArray
+        
+        var dict = optionSource[cellIndex]
+        print(dict)
         dict["choice"] = choesIndex
-        dict["score"] = score
+        dict["score"] = Int(score)
+        optionSource[cellIndex] = dict
     }
     
     
     //数据组装
     func assemblyData()  {
         
-        var muDict = Dictionary<String,Any>()
-//        var muDict : [String : Any] = [String : Any]()
-        
-        muDict["title"] = self.shiJuanModel?.title
-        muDict["shijuanid"] = (self.shiJuanModel?.shijuanid)!
-        muDict["historyid"] = (self.shiJuanModel?.historyid)!
-        muDict["isfinish"] = 0
-        muDict["spentTime"] = 0
-        muDict["datiNums"] = 10
+        //标题等基本信息数据
+        choiceslParsam.title = self.shiJuanModel?.title
+        choiceslParsam.shijuanid = (self.shiJuanModel?.shijuanid)!
+        choiceslParsam.historyid = (self.shiJuanModel?.historyid)!
+        choiceslParsam.isfinish = 0
+        choiceslParsam.spentTime = 0
+        choiceslParsam.datiNums = 10
         
         
         //选项数据
-        let dataArray = NSMutableArray()
         for shiTiDetailModel in (self.shiJuanModel?.shitiData)! {
             var subDict = Dictionary<String,Int>()
             
@@ -272,16 +308,22 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
             subDict["catid1"] = shiTiDetailModel.catid1
             subDict["catid2"] = shiTiDetailModel.catid2
             subDict["catid3"] = shiTiDetailModel.catid3
+        
             subDict["choice"] = 0
             subDict["score"] = 0
-            dataArray.add(subDict)
+            for choicesDetailModel in shiTiDetailModel.choices{
+                if choicesDetailModel.answer != 0{
+                    subDict["choice"] = choicesDetailModel.scId
+                    subDict["score"] = choicesDetailModel.score
+                }
+            }
+            
+            optionSource.append(subDict)
         }
-        var  dataDict = Dictionary<String,NSArray>();
-        dataDict["data"] = dataArray as NSArray
-        
-        muDict["result_data"] = dataDict
-        uploadChoiceslParsam = muDict
-        
+        //        var  dataDict = Dictionary<String,NSArray>();
+        //        dataDict["data"] = dataArray as NSArray
+        //
+        //        choiceslParsam.result_data = toJSONString(dict: dataDict)
     }
     
     func toJSONString(dict: Any)-> String{
@@ -295,7 +337,22 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
             return ""
         }
     }
-    
+    /// JSONString转换为字典
+    ///
+    /// - Parameter jsonString: <#jsonString description#>
+    /// - Returns: <#return value description#>
+    func getDictionaryFromJSONString(jsonString:String) ->NSDictionary{
+        
+        let jsonData:Data = jsonString.data(using: .utf8)!
+        
+        let dict = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+        if dict != nil {
+            return dict as! NSDictionary
+        }
+        return NSDictionary()
+        
+        
+    }
     
     /*
      // Override to support conditional editing of the table view.

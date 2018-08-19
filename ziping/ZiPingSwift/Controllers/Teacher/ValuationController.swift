@@ -41,7 +41,7 @@ class ValuationController: KYBaseViewController {
         switch statue {
         case 1:
             let completeVC = ValuationCompleteController();
-            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             //添加获取到的视图控制器的视图
             completeVC.valuationStatuModel = target
             view.addSubview(completeVC.view)
@@ -49,7 +49,7 @@ class ValuationController: KYBaseViewController {
             
         case 2:
             let  noStartVC = ValuationNoStartViewController();
-            noStartVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            noStartVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(noStartVC.view)
             noStartVC.valuationStatueInfo = target
             addChildViewController(noStartVC)
@@ -57,14 +57,14 @@ class ValuationController: KYBaseViewController {
             
         case 3:
             let  endVC = ValuationEndViewController();
-            endVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            endVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(endVC.view)
             addChildViewController(endVC)
             
             
         default:
             let completeVC = ValuationCompleteController();
-            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(completeVC.view)
             addChildViewController(completeVC)
         }

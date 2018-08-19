@@ -105,7 +105,7 @@ class CYJRECCacheCell: UITableViewCell {
     }()
     
     weak var delegate: CYJActionPassOnDeleagte?
-    var imageSufix: String = "?imageMogr2/thumbnail/100x"
+    var imageSufix: String = "?imageMogr2/thumbnail/200x"
     
     //设置数据源
     var listFrame: CYJRECCacheCellFrame! {

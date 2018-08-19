@@ -508,7 +508,7 @@ struct CYJRECDetailCellFrame {
 
 /// RecordListCell 的高度
 struct CYJRecordCellFrame {
-    
+    var isOtherClass : Bool = false
     var record: CYJRecord
     
     var leftBaseLine: CGFloat =  82.5

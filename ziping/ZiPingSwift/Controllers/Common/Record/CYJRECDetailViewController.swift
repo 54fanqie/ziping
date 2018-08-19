@@ -195,7 +195,7 @@ class CYJRECDetailViewController: KYBaseViewController {
             let viewControllers = setChildVcs()
             let titles = viewControllers.map { $0.title! }
             
-            let scrollRect = CGRect(x: 0, y: 64, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44)
+            let scrollRect = CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 44)
             scrollPageView = ScrollPageView(frame: scrollRect, segmentStyle: style, titles: titles, childVcs: viewControllers, parentViewController: self)
             
             scrollPageView?.theme_backgroundColor = Theme.Color.viewLightColor
@@ -235,14 +235,14 @@ class CYJRECDetailViewController: KYBaseViewController {
         let vc1 = CYJRECDetailDescroptionController()
         vc1.title = "描述"
         vc1.record = self.record!
-        vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64 - 44)
+        vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight - 44)
         
         childVCs.append(vc1)
         
         let vc2 = CYJRECDetailEvaluateController()
         vc2.grId = self.recordId
         vc2.ownerId = (self.record?.uId)!
-        vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64 - 44)
+        vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight - 44)
         vc2.title = "评价"
         
         childVCs.append(vc2)

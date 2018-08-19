@@ -92,7 +92,8 @@ class OtherClassRecordController: CYJRECListViewController {
                 records.forEach({
                     let target = JSONDeserializer<CYJRecord>.deserializeFrom(dict: $0 as? NSDictionary)
                     
-                    let recordFrame = CYJRecordCellFrame(record: target!, role: .master)
+                    var recordFrame = CYJRecordCellFrame(record: target!, role: nil)
+                    recordFrame.isOtherClass = true
                     tmpFrame.append(recordFrame)
                 })
                 if tmpFrame.count < 10 {
@@ -133,13 +134,13 @@ class OtherClassRecordController: CYJRECListViewController {
             cell.deleteActionHandler = {
                 if let index = self.tableView.indexPath(for: $0) {
                     let record = self.dataSource[index.row].record
-                    
+
                     let alert = UIAlertController(title: "提示", message: "是否要删除此条成长记录？", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
                     alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { (action) in
-                        
+
                         let parameter: [String: Any] = ["grId" : "\(record.grId)", "token" : LocaleSetting.token]
-                        
+
                         RequestManager.POST(urlString: APIManager.Record.delete, params: parameter) { [unowned self] (data, error) in
                             //如果存在error
                             guard error == nil else {
@@ -149,9 +150,9 @@ class OtherClassRecordController: CYJRECListViewController {
                             self.dataSource.remove(at: index.row)
                             self.tableView.deleteRows(at: [index], with: .none)
                         }
-                        
+
                     }))
-                    
+
                     self.present(alert, animated: true, completion: nil)
                 }
             }

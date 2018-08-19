@@ -25,7 +25,7 @@ class CYJAddBabyViewController: KYBaseViewController {
         
         
         // Do any additional setup after loading the view.
-        accountField = KYInputField(hint: "手机号/账号", frame: CGRect(x: 0, y: 64, width: Theme.Measure.screenWidth, height: Theme.Measure.inputHeight))
+        accountField = KYInputField(hint: "手机号/账号", frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: Theme.Measure.screenWidth, height: Theme.Measure.inputHeight))
         
         nameField = KYInputField(hint: "姓名", frame: CGRect(x: 0, y: accountField.frame.maxY, width: Theme.Measure.screenWidth, height: Theme.Measure.inputHeight))
 

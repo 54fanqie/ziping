@@ -102,6 +102,7 @@ extension RequestManager
             case .success(let value):
                 //根据返回值判断custom 错误
                 let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: value as? NSDictionary)
+                print(custom?.message)
                 if custom?.status == 200 {
                     complete(custom?.data, nil)
                 }else

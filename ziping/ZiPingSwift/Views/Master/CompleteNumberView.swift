@@ -32,9 +32,7 @@ class CompleteNumberView: UIView {
             
             
             leftCountLab.text = thisTestStatistics["overComplete"] as? String
-            let a = Int((thisTestStatistics["overNoStart"] as? String)!)
-            let b = Int((thisTestStatistics["overStart"] as? String)!)
-            rightCountLab.text =  String(format: "%d", a!+b!)
+            rightCountLab.text =  thisTestStatistics["noComplete"] as? String
         }
     }
     var lastTestStatistics = NSDictionary()
@@ -53,14 +51,7 @@ class CompleteNumberView: UIView {
                 
                 leftCountLab.text = String(format: "%@/%@", (thisTestStatistics["overComplete"] as? String)!,(lastTestStatistics["overComplete"] as? String)!)
                 
-                
-                let a = Int((thisTestStatistics["overNoStart"] as? String)!)
-                let b = Int((thisTestStatistics["overStart"] as? String)!)
-                
-                let c = Int((lastTestStatistics["overNoStart"] as? String)!)
-                let d = Int((lastTestStatistics["overStart"] as? String)!)
-                
-                rightCountLab.text = String(format: "%@/%@", String(format: "%d", a!+b!),String(format: "%d", c!+d!))
+                rightCountLab.text = String(format: "%@/%@", (thisTestStatistics["noComplete"] as? String)!,(lastTestStatistics["noComplete"] as? String)!)
                 
             
             }else{//不对比

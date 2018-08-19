@@ -37,7 +37,7 @@ class CYJRECStatisticC: KYBaseViewController {
     var emptyLabel: UILabel!
     
     override func viewDidLoad() {
-        let title = UILabel(frame: CGRect(x: 0, y: 64, width: Theme.Measure.screenWidth, height: 44))
+        let title = UILabel(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: Theme.Measure.screenWidth, height: 44))
         title.font = UIFont.systemFont(ofSize: 12)
         title.numberOfLines = 0
         title.lineBreakMode = .byWordWrapping
@@ -199,7 +199,7 @@ class CYJRECStatisticC: KYBaseViewController {
         
         //TODO: 如果 statisticView 为空，那么新建，否则更新
         if statisticView == nil {
-            let sView = CYJStatisticView(frame: CGRect(origin: CGPoint(x: 8, y: 64+44), size: CGSize(width: view.frame.width - 16, height: view.frame.height - 44 - 49 - 64 )))
+            let sView = CYJStatisticView(frame: CGRect(origin: CGPoint(x: 8, y: Theme.Measure.navigationBarHeight+44), size: CGSize(width: view.frame.width - 16, height: view.frame.height - 44 - 49 - Theme.Measure.navigationBarHeight )))
             self.currentData = (xVals,yVals,sVals)
             sView.data = (xVals,yVals,sVals)
             sView.delegate = self
@@ -255,7 +255,7 @@ extension CYJRECStatisticC: CYJStatisticViewDelegate {
             let vc1 = CYJRECListControllerParent()
             vc1.uid = childId
             vc1.title = child.text
-            vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             self.navigationController?.pushViewController(vc1, animated: true)
         }
     }
@@ -273,7 +273,7 @@ extension CYJRECStatisticC: CYJStatisticViewDelegate {
             vc1.uid = childId
             vc1.did = domain.xId
             vc1.title = child.text
-            vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+            vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             self.navigationController?.pushViewController(vc1, animated: true)
         }
     }

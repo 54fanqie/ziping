@@ -93,7 +93,7 @@ class ValuationResultViewController: KYBaseViewController {
             params = ["historyid" : 1]
             titleMeasge = "专项测评专业分析申请已发送给园长，将由园长与平台沟通哦~"
         } else { //教师、园长申请生成报告
-           
+            titleMeasge = "专项测评专业分析申请已发送给园长，将由园长与平台沟通哦~"
             urlString = APIManager.Valuation.teacherApplyReport
         }
         

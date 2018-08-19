@@ -40,7 +40,7 @@ class CYJBabiesPageController: KYBaseViewController {
         style.normalTitleColor = normalColor
         style.selectedTitleColor = color
         
-        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: Theme.Measure.screenHeight - 64), segmentStyle: style, titles: ["成长记录", "专项测评结果" ,"档案袋"], childVcs: setChildVcs(), parentViewController: self)
+        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight), segmentStyle: style, titles: ["成长记录", "专项测评结果" ,"档案袋"], childVcs: setChildVcs(), parentViewController: self)
         
         view.addSubview(scrollPageView)
     }
@@ -53,7 +53,7 @@ class CYJBabiesPageController: KYBaseViewController {
         let vc1 = CYJRECListControllerParent()
         vc1.uid = self.uid
         vc1.title = "成长记录"
-        vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+        vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
         
         childVCs.append(vc1)
         
@@ -63,13 +63,13 @@ class CYJBabiesPageController: KYBaseViewController {
         vc.view.backgroundColor = UIColor.white
         vc.userID = String(format: "%d", self.uid)
 
-        vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+        vc.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
         childVCs.append(vc)
         
         let vc2 = CYJArchiveListViewController()
         vc2.uid = self.uid
         vc2.view.backgroundColor = UIColor.white
-        vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64)
+        vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
         vc2.title = "档案袋"
         
         childVCs.append(vc2)

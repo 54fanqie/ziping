@@ -106,7 +106,7 @@ class KYBaseTableViewController: KYBaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 //        创建表格
-        tableView =  UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - (haveTabBar ? 44 : 0)), style: style)
+        tableView =  UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - (haveTabBar ? Theme.Measure.tabBarHeight : 0)), style: style)
         view.addSubview(tableView)
 
         // 表格属性
