@@ -37,17 +37,10 @@ class ValuationController: KYBaseViewController {
     }
     
     func goToVC( index : Int,target : ValuationStatuModel)  {
-        let statue = index + 1
+        let statue = index
         switch statue {
-        case 1:
-            let completeVC = ValuationCompleteController();
-            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
-            //添加获取到的视图控制器的视图
-            completeVC.valuationStatuModel = target
-            view.addSubview(completeVC.view)
-            addChildViewController(completeVC)
-            
-        case 2:
+        case 0://未开始
+          
             let  noStartVC = ValuationNoStartViewController();
             noStartVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(noStartVC.view)
@@ -55,7 +48,15 @@ class ValuationController: KYBaseViewController {
             addChildViewController(noStartVC)
             
             
-        case 3:
+        case 1://进行中
+            let completeVC = ValuationCompleteController();
+            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            //添加获取到的视图控制器的视图
+            completeVC.valuationStatuModel = target
+            view.addSubview(completeVC.view)
+            addChildViewController(completeVC)
+            
+        case 2://已结束
             let  endVC = ValuationEndViewController();
             endVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(endVC.view)

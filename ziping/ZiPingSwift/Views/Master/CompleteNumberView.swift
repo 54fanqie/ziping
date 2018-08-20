@@ -62,9 +62,7 @@ class CompleteNumberView: UIView {
                 averageLab.text = "园内同年龄组平均分"
                 
                 leftCountLab.text = thisTestStatistics["overComplete"] as? String
-                let a = Int((thisTestStatistics["overNoStart"] as? String)!)
-                let b = Int((thisTestStatistics["overStart"] as? String)!)
-                rightCountLab.text =  String(format: "%d", a!+b!)
+                rightCountLab.text =  thisTestStatistics["noComplete"] as? String
                 
                 
             }

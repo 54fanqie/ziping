@@ -172,6 +172,9 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
                 self.classCondition.title = "全部"
                 
                 self.interestParam.cId = 0
+                
+                self.interestParam.stime = self.semesterScope.start.stringWithYMD()
+                self.interestParam.endtime = self.semesterScope.end.stringWithYMD()
             }
             self.navigationController?.pushViewController(optionController, animated: true)
         }
@@ -193,6 +196,9 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
                 self.classCondition.title = "全部"
                 
                 self.interestParam.cId = 0
+                
+                self.interestParam.stime = self.semesterScope.start.stringWithYMD()
+                self.interestParam.endtime = self.semesterScope.end.stringWithYMD()
                 
             }
             self.navigationController?.pushViewController(optionController, animated: true)

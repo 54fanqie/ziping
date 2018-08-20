@@ -313,11 +313,15 @@ class CheckValuationController: KYBaseTableViewController {
             self.gradeIndex = 0
             self.timeIndex = 0
             
-           
-            self.completeNumberView.removeFromSuperview()
-            self.completeNumberView = nil
-            self.compareButton.removeFromSuperview()
-            self.compareButton = nil
+            if (self.completeNumberView != nil) {
+                self.completeNumberView.removeFromSuperview()
+                self.completeNumberView = nil
+            }
+            if (self.compareButton != nil){
+                self.compareButton.removeFromSuperview()
+                self.compareButton = nil
+            }
+            
             
             
             self.thisListDatas.removeAll()

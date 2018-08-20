@@ -2342,13 +2342,13 @@
 		B18CBEBF20FF6F6200827E39 /* Valuation */ = {
 			isa = PBXGroup;
 			children = (
+				B13ACFCA21030FFE00700C06 /* ValuationController.swift */,
 				B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */,
 				B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */,
 				B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */,
 				B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */,
 				B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */,
 				B12DB1212100DC2A00D95FAA /* ValuationEndViewController.xib */,
-				B13ACFCA21030FFE00700C06 /* ValuationController.swift */,
 				B13ACFD42103359200700C06 /* ValuationResultViewController.swift */,
 			);
 			name = Valuation;
