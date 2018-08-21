@@ -86,18 +86,6 @@ extension ApplyValuationViewController {
         return cell
     }
     
-    //    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    //        return 8
-    //    }
-    //    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    //        let space = UIView()
-    //        space.theme_backgroundColor = Theme.Color.line
-    //        return space
-    //    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let example = examples[indexPath.row]
 //

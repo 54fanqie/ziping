@@ -9,7 +9,7 @@
 import UIKit
 
 class CYJMessageTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var photoImageView: UIImageView!
     
     @IBOutlet weak var fromLabel: UILabel!
@@ -18,14 +18,16 @@ class CYJMessageTableViewCell: UITableViewCell {
     
     var message: CYJMessage? {
         didSet {
+            if message?.dataType == 3 {
+                photoImageView.kf.setImage(with: URL(fragmentString: message?.avatar) ,placeholder: #imageLiteral(resourceName: "icon_system_default"))
+                fromLabel.text = message?.realName
+            }else{
+                photoImageView.image = #imageLiteral(resourceName: "icon_system_default")
+                fromLabel.text =  "系统消息" //message?.realName
+            }
             
-            photoImageView.kf.setImage(with: URL(fragmentString: message?.avatar) ,placeholder: #imageLiteral(resourceName: "icon_system_default"))
-            photoImageView.image = #imageLiteral(resourceName: "icon_system_default")
-
-            
-            fromLabel.text =  "系统消息" //message?.realName
             //FIXME: 系统消息的时间去哪儿了
-            timeLabel.text = message?.dataContent
+            timeLabel.text = String(format: "%@  %@", (message?.createtime?.toTimeStringMMDD())!,(message?.createtime?.toTimeStringHHmm())!)
             detailLabel.text = message?.content
             
         }
@@ -41,10 +43,10 @@ class CYJMessageTableViewCell: UITableViewCell {
         timeLabel.theme_textColor = Theme.Color.textColorlight
         detailLabel.theme_textColor = Theme.Color.textColorDark
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

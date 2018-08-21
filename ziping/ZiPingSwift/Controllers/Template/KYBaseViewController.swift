@@ -123,6 +123,11 @@ extension KYBaseViewController {
                         let archiveDetail = CYJMessageArchivesDetailController()
                         archiveDetail.arId = dataId
                         self.getTopNavigationController()?.pushViewController(archiveDetail, animated: true)
+                    }else if dataType == 3 {
+                        
+                        let archiveDetail = CYJMessageArchivesDetailController()
+                        archiveDetail.arId = dataId
+                        self.getTopNavigationController()?.pushViewController(archiveDetail, animated: true)
                     }
                 }else {
                     let notice = CYJMessageSystemController()
