@@ -86,7 +86,7 @@ extension KYBaseViewController {
             //因为不知道 测评申请的chnType是 多少 所以直接判断 dataType == 3情况就是测评审批消息
             if dataType == 3 {
                 let applyValuation = ApplyValuationViewController()
-                //                        applyValuation.arId = dataId
+                applyValuation.type = 10
                 self.getTopNavigationController()?.pushViewController(applyValuation, animated: true)
                 return
             }
