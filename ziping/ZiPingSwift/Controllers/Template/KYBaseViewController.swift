@@ -72,6 +72,31 @@ extension KYBaseViewController {
                 type = intType
             }
             
+            
+            //解析 dataType String 和 Int
+            var dataType: Int = 0
+            if (userInfo["dataType"] != nil) {
+                if let strType = userInfo["dataType"] as? String {
+                    dataType = Int(strType)!
+                }else if let intType = userInfo["dataType"] as? Int {
+                    dataType = intType
+                }
+            }
+            
+            //因为不知道 测评申请的chnType是 多少 所以直接判断 dataType == 3情况就是测评审批消息
+            if dataType == 3 {
+                let applyValuation = ApplyValuationViewController()
+                //                        applyValuation.arId = dataId
+                self.getTopNavigationController()?.pushViewController(applyValuation, animated: true)
+                return
+            }
+            
+            
+            
+            
+            
+            
+            
             switch type {
             case 0 :
                 DLog("do nothing")
@@ -119,11 +144,6 @@ extension KYBaseViewController {
                         detail.userId = (LocaleSetting.userInfo()?.uId)!
                         self.getTopNavigationController()?.pushViewController(detail, animated: true)
                     }else if dataType == 2 {
-                        
-                        let archiveDetail = CYJMessageArchivesDetailController()
-                        archiveDetail.arId = dataId
-                        self.getTopNavigationController()?.pushViewController(archiveDetail, animated: true)
-                    }else if dataType == 3 {
                         
                         let archiveDetail = CYJMessageArchivesDetailController()
                         archiveDetail.arId = dataId
