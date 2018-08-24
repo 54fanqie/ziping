@@ -44,7 +44,7 @@ class ValuationResultViewController: KYBaseViewController {
             uploadButton.setTitleColor(UIColor.white, for: UIControlState.normal)
             uploadButton.theme_backgroundColor = "Nav.barTintColor"
             uploadButton.layer.cornerRadius = 19
-            view.addSubview(uploadButton)
+//            view.addSubview(uploadButton)
             
             uploadButton.snp.makeConstraints { (make) in
                 make.centerX.equalTo(view).offset(0)

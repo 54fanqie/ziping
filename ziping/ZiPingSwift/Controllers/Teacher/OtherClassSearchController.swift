@@ -98,7 +98,15 @@ class OtherClassSearchController: KYBaseCollectionViewController {
         fakeBar = UIView(frame: CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: 35))
         fakeBar.backgroundColor = UIColor.clear
         
-        view.addSubview(fakeBar)
+//        view.addSubview(fakeBar)
+        navigationItem.titleView = fakeBar
+        
+        let titleLab = UILabel(frame: CGRect(x: Theme.Measure.screenWidth/2 - 30, y: 0, width: 60, height: 35))
+        titleLab.text = "筛选"
+        titleLab.textColor = UIColor.white
+        titleLab.font = UIFont.systemFont(ofSize: 18)
+        fakeBar.addSubview(titleLab)
+       
         
         searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth - 70, height: 35))
         searchBar.delegate = self
@@ -107,13 +115,20 @@ class OtherClassSearchController: KYBaseCollectionViewController {
         searchBar.placeholder = "输入学生，筛选"
         //        fakeBar.addSubview(searchBar)
         
-        let cancelButton = UIButton(frame: CGRect(x: Theme.Measure.screenWidth - 70, y: 0, width: 60, height: 35))
+//        let cancelButton = UIButton(type: .custom)
+        let cancelButton =    UIButton(frame: CGRect(x: Theme.Measure.screenWidth - 70, y: 0, width: 60, height: 35))
         cancelButton.setTitle("取消", for: .normal)
         cancelButton.theme_setTitleColor(Theme.Color.ground, forState: .normal)
         cancelButton.addTarget(self, action: #selector(searchBarCanceled), for: .touchUpInside)
         fakeBar.addSubview(cancelButton)
+
         
-        navigationItem.titleView = fakeBar
+        
+      
+        
+        
+        
+
         
         makeFilterView()
         

@@ -22,18 +22,17 @@ class ValuationCompleteController: KYBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //四周均不延伸
-        self.edgesForExtendedLayout = []
-        topView.theme_backgroundColor = "Nav.barTintColor"
-        
-        
+        let color = UIColor.init(red: 246/255.0, green: 76/255.0, blue: 128/255.0, alpha: 1)
+        topView.backgroundColor = color
+        self.title = "专项测评"
+       
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         bigTitleLab.text = valuationStatuModel.title
         scopetitleLab.text = valuationStatuModel.remarks
         let dict  = valuationStatuModel.testStatistics
-        
+
         compentLab.text = dict?["overComplete"] as? String
         noCompentLab.text = dict?["overNoStart"] as? String
         noStartLab.text = dict?["overStart"] as? String

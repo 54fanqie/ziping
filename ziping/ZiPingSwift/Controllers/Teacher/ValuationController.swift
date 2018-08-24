@@ -9,13 +9,11 @@
 import UIKit
 import HandyJSON
 class ValuationController: KYBaseViewController {
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        //四周均不延伸
-        self.edgesForExtendedLayout = []
-        
-        
+        self.title = "专项测评"
+        self.view.theme_backgroundColor = "Nav.barTintColor"
         
         //请求数据查看是否完成
         RequestManager.POST(urlString: APIManager.Valuation.check, params: nil, complete: { [weak self] (data, error) in
@@ -35,22 +33,64 @@ class ValuationController: KYBaseViewController {
         
        
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //关闭导航栏半透明效果
+        //设置背景色透明
+        navigationController?.navigationBar.setBackgroundImage(nil , for: UIBarMetrics.default)
+        //清除navibar的下划线
+        navigationController?.navigationBar.shadowImage = nil
+        navigationController?.navigationBar.isTranslucent = false
+    }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 1.设置导航栏标题属性：设置标题颜色
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        // 2.设置导航栏前景色：设置item指示色
+        navigationController?.navigationBar.tintColor = UIColor.white
+        
+        // 3.设置导航栏半透明
+        navigationController?.navigationBar.isTranslucent = true
+        
+        let color = UIColor.init(red: 246/255.0, green: 76/255.0, blue: 128/255.0, alpha: 1)
+        // 4.设置导航栏背景图片
+        navigationController?.navigationBar.setBackgroundImage(getImageWithColor(color: color), for: UIBarMetrics.default)
+        
+        // 5.设置导航栏阴影图片
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    /// 将颜色转换为图片
+    ///
+    /// - Parameter color: <#color description#>
+    /// - Returns: <#return value description#>
+    func getImageWithColor(color:UIColor)->UIImage{
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context!.setFillColor(color.cgColor)
+        context!.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
     func goToVC( index : Int,target : ValuationStatuModel)  {
         let statue = index
         switch statue {
         case 0://未开始
           
             let  noStartVC = ValuationNoStartViewController();
-            noStartVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            noStartVC.view.frame = CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(noStartVC.view)
             noStartVC.valuationStatueInfo = target
             addChildViewController(noStartVC)
             
             
-        case 1://进行中
+        case 1://进行中并完成
             let completeVC = ValuationCompleteController();
-            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            completeVC.view.frame = CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             //添加获取到的视图控制器的视图
             completeVC.valuationStatuModel = target
             view.addSubview(completeVC.view)
@@ -58,14 +98,14 @@ class ValuationController: KYBaseViewController {
             
         case 2://已结束
             let  endVC = ValuationEndViewController();
-            endVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            endVC.view.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(endVC.view)
             addChildViewController(endVC)
             
             
         default:
             let completeVC = ValuationCompleteController();
-            completeVC.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            completeVC.view.frame = CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(completeVC.view)
             addChildViewController(completeVC)
         }
