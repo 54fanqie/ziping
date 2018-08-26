@@ -224,16 +224,32 @@ extension CYJMineViewController {
         }
         
         if role == .teacher ||  role == .teacherL{
-            let  valuatiov = ValuationController()
-            navigationController?.pushViewController(valuatiov, animated: true)
+            //请求数据查看是否完成
+            RequestManager.POST(urlString: APIManager.Valuation.check, params: nil, complete: { [weak self] (data, error) in
+                
+                guard error == nil else {
+                    Third.toast.message((error?.localizedDescription)!)
+                    return
+                }
+                
+                if let datas = data as? NSDictionary {
+                    //遍历，并赋值
+                    let target = JSONDeserializer<ValuationStatuModel>.deserializeFrom(dict: datas )
+                    let  valuatiov = ValuationController()
+                    valuatiov.target = target
+                    self?.navigationController?.pushViewController(valuatiov, animated: true)
+                }
+            })
+            
+            
         }
         
         if role == .child {
             let valuatiov = QuestionnaireViewController()
             valuatiov.statue = 6
             //如果可以测评并且还未测评进入
-//            let valuatiov =  InstructionViewController()
-//            valuatiov.title = "问卷调查"
+            //            let valuatiov =  InstructionViewController()
+            //            valuatiov.title = "问卷调查"
             navigationController?.pushViewController(valuatiov, animated: true)
         }   
     }
@@ -251,7 +267,7 @@ extension CYJMineViewController {
             if custom?.status == -1 {
                 let noPermiss = NoPermissViewController()
                 self?.navigationController?.pushViewController(noPermiss, animated: true)
-
+                
             }else{
                 let  otherClas = OtherClassRecordController()
                 otherClas.title = "浏览其他班级记录"
@@ -275,7 +291,7 @@ extension CYJMineViewController {
         self.navigationController?.pushViewController(setting, animated: true)
     }
     
-func showBoundUsers() {
+    func showBoundUsers() {
         let boundUser = CYJCheckoutViewController()
         self.navigationController?.pushViewController(boundUser, animated: true)
     }

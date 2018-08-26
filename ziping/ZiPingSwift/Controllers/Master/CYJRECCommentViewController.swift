@@ -161,7 +161,7 @@ class CYJRECCommentViewController: KYBaseViewController {
         view.addSubview(excellentButton)
         view.addSubview(uploadButton)
         
-        scoreTitleLabel.frame = CGRect(x: 15, y: 64 + 20, width: 150, height: 15)
+        scoreTitleLabel.frame = CGRect(x: 15, y: Theme.Measure.navigationBarHeight + 20, width: 150, height: 15)
         scoreLabel1.frame = CGRect(x: 15, y: scoreTitleLabel.frame.maxY + 15, width: 100, height: 15)
         scoreLabel2.frame = CGRect(x: 15, y: scoreLabel1.frame.maxY + 15, width: 100, height: 15)
         scoreLabel3.frame = CGRect(x: 15, y: scoreLabel2.frame.maxY + 15, width: 100, height: 15)

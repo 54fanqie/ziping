@@ -29,7 +29,7 @@ class QuestionnaireViewController: KYBaseViewController {
     var uid: Int = 0
     var statue :Int = Int()
     var valuatuinStatue : ValuationStatuModel?
-    
+    var style : SegmentStyle!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class QuestionnaireViewController: KYBaseViewController {
         automaticallyAdjustsScrollViewInsets = false
         //        hidesBottomBarWhenPushed = true
         // 滚动条
-        var style = SegmentStyle()
+        style = SegmentStyle()
         style.showLine = true        // 颜色渐变
         style.gradualChangeTitleColor = true         // 滚动条颜色
         //        style.scrollLineColor =  UIColor(red: 41/255.0, green: 167/255.0, blue: 158/255.0, alpha: 1)
@@ -57,6 +57,21 @@ class QuestionnaireViewController: KYBaseViewController {
         style.normalTitleColor = normalColor
         style.selectedTitleColor = color
         
+      
+        //请求数据
+        requestData()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionnaireViewStatue), name:
+            NSNotification.Name("QuestionnaireViewStatue"), object: nil)
+    }
+    //刷新页面
+    func reloadQuestionnaireViewStatue()  {
+        if (self.scrollPageView != nil) {
+            self.scrollPageView.removeFromSuperview()
+            self.scrollPageView = nil
+        }
+        requestData()
+    }
+    func requestData(){
         //请求数据查看是否完成
         RequestManager.POST(urlString: APIManager.Valuation.check, params: nil, complete: { [weak self] (data, error) in
             
@@ -71,14 +86,14 @@ class QuestionnaireViewController: KYBaseViewController {
                 let target = JSONDeserializer<ValuationStatuModel>.deserializeFrom(dict: datas )
                 self?.valuatuinStatue = target
                 
-                self?.scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: (self?.view.frame.width)!, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight), segmentStyle: style, titles: ["问卷测评", "教师测评结果"], childVcs: (self?.setChildVcs())!, parentViewController: self!)
+                self?.scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: (self?.view.frame.width)!, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight), segmentStyle: (self?.style)!, titles: ["问卷测评", "教师测评结果"], childVcs: (self?.setChildVcs())!, parentViewController: self!)
                 
                 self?.view.addSubview((self?.scrollPageView)!)
             }
         })
-        
-        
     }
+    
+    
     /// swiperView 必须实现的
     func setChildVcs() -> [UIViewController] {
         var status : Int = 0

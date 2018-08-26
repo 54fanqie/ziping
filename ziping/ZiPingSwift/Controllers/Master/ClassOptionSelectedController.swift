@@ -78,32 +78,6 @@ class ClassOptionSelectedController: KYBaseViewController ,UITableViewDataSource
         
         
         
-        //        let gradeTabelHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
-        //        gradeTabelHeaderView.theme_backgroundColor = Theme.Color.viewLightColor
-        //        gradeTableView.tableHeaderView = gradeTabelHeaderView
-        //        let rightLine = UILabel();
-        //        rightLine.theme_backgroundColor = Theme.Color.line
-        //        gradeTabelHeaderView.addSubview(rightLine)
-        
-        //        rightLine.snp.makeConstraints({ (make)in
-        //            make.top.equalTo(gradeTabelHeaderView).offset(0)
-        //            make.bottom.equalTo(gradeTabelHeaderView).offset(0)
-        //            make.right.equalTo(gradeTabelHeaderView).offset(0)
-        //            make.width.equalTo(1)
-        //        })
-        
-        //        let gradeLabel = UILabel()
-        //        gradeLabel.text = "请选择年级"
-        //        gradeLabel.theme_textColor = Theme.Color.textColor
-        //        gradeLabel.font = UIFont.systemFont(ofSize: 14)
-        //        gradeTabelHeaderView.addSubview(gradeLabel)
-        //        gradeLabel.snp.makeConstraints { (make) in
-        //            make.left.equalTo(gradeTabelHeaderView).offset(15)
-        //            make.centerY.equalTo(gradeTabelHeaderView)
-        //            make.width.equalTo(100)
-        //        }
-        
-        
         //班级
         classTableView = UITableView(frame: CGRect(x :rect.size.width/2, y:0 , width:rect.size.width/2 ,height:rect.size.height  ))
         classTableView.tag = 120
@@ -114,21 +88,6 @@ class ClassOptionSelectedController: KYBaseViewController ,UITableViewDataSource
         classTableView.bounces = false
         classTableView.tableFooterView = UIView()
         classTableView.separatorStyle = .none
-        
-        //        let classTabelHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
-        //        classTabelHeaderView.theme_backgroundColor = Theme.Color.viewLightColor
-        //        classTableView.tableHeaderView = classTabelHeaderView
-        //
-        //        let classLabel = UILabel()
-        //        classLabel.text = "请选择班级"
-        //        classLabel.theme_textColor = Theme.Color.textColor
-        //        classLabel.font = UIFont.systemFont(ofSize: 14)
-        //        classTabelHeaderView.addSubview(classLabel)
-        //        classLabel.snp.makeConstraints { (make) in
-        //            make.left.equalTo(classTabelHeaderView).offset(15)
-        //            make.centerY.equalTo(classTabelHeaderView)
-        //            make.width.equalTo(100)
-        //        }
         
     }
     

@@ -34,7 +34,7 @@ struct CYJUserDefaultKey{
     /// 是否拒绝接受通知，默认 false
     static let refuseNotification = "CYJUSERDEFAULT_refuseNotification"
     static let currentTheme = "CYJUSERDEFAULT_currentTheme"
-
+    
 }
 
 struct CYJNotificationName {
@@ -44,7 +44,7 @@ struct CYJNotificationName {
     static let videoSelectedFinish = NSNotification.Name("CYJNotificationNameKeyvideoSelectedFinish")
     static let unreadMessageCountChanged = NSNotification.Name("CYJNotificationNameKeyunreadMessageCountChanged")
     static let remoteNotification = NSNotification.Name("CYJNotificationNameKeyremoteNotification")
-
+    
 }
 
 struct Theme {
@@ -75,11 +75,11 @@ struct Theme {
         
         // 屏幕宽度
         
-       static let JMTWindowWidth = UIScreen.main.bounds.size.width
+        static let JMTWindowWidth = UIScreen.main.bounds.size.width
         
         // 屏幕高度
         
-       static let JMTWindowHeight = UIScreen.main.bounds.size.height
+        static let JMTWindowHeight = UIScreen.main.bounds.size.height
         
         // iPhone4
         
@@ -87,15 +87,15 @@ struct Theme {
         
         // iPhone 5
         
-       static let isIphone5 = JMTWindowHeight  == 568 ? true : false
+        static let isIphone5 = JMTWindowHeight  == 568 ? true : false
         
         // iPhone 6
         
-       static let isIphone6 = JMTWindowHeight  == 667 ? true : false
+        static let isIphone6 = JMTWindowHeight  == 667 ? true : false
         
         // iphone 6P
         
-      static  let isIphone6P = JMTWindowHeight == 736 ? true : false
+        static  let isIphone6P = JMTWindowHeight == 736 ? true : false
         
         // iphone X
         
@@ -103,11 +103,13 @@ struct Theme {
         
         // navigationBarHeight
         
-       static let navigationBarHeight : CGFloat = isIphoneX ? 88 : 64
+        static let navigationBarHeight : CGFloat = isIphoneX ? 88 : 64
         
+        //navigationStatueBarHeight
+        static let navigationStatueBarHeight : CGFloat = isIphoneX ? 44 : 20
         // tabBarHeight
         
-       static  let tabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
+        static  let tabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
         
     }
     
@@ -139,7 +141,7 @@ struct Theme {
 
 func DLog<T>(_ message: T, file: String = #file, method: String = #function, line: Int = #line) {
     #if DEBUG
-        print("\((file as NSString).lastPathComponent)[\(line)],\(method):\(message)")
+    print("\((file as NSString).lastPathComponent)[\(line)],\(method):\(message)")
     #endif
 }
 

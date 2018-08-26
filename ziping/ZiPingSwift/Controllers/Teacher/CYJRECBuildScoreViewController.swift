@@ -145,7 +145,7 @@ extension CYJRECBuildScoreViewController {
         
         self.segmentStyle = style
         
-        segView = CustomScrollSegmentView(frame: CGRect(x: 0, y: 64, width: view.frame.width, height: 50), segmentStyle: style, titles: children, images: images)
+        segView = CustomScrollSegmentView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: 50), segmentStyle: style, titles: children, images: images)
         
         segmentView.theme_backgroundColor = Theme.Color.ground
         view.addSubview(segmentView)
@@ -187,7 +187,7 @@ extension CYJRECBuildScoreViewController {
     /// 创建 主要内容的视图
     func makeContentView() {
         
-        contentView = ContentView(frame: CGRect(x: 0, y: 65 + 50 + 5, width: view.frame.width, height: view.frame.height - (65 + 50 + 44)), childVcs: setChildVcs(), parentViewController: self)
+        contentView = ContentView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight + 1 + 50 + 5, width: view.frame.width, height: view.frame.height - (Theme.Measure.navigationBarHeight + 1 + 50 + 44)), childVcs: setChildVcs(), parentViewController: self)
         contentView.delegate = self
         // 避免循环引用
         segView.titleBtnOnClick = {[unowned self] (label: UILabel, index: Int) in
@@ -211,7 +211,7 @@ extension CYJRECBuildScoreViewController {
             vc.title = children[i]
             vc.childIndex = i
             vc.allDomains = self.allDomains
-            vc.view.frame = CGRect(x: 0, y: 8, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64 - 50 - 44)
+            vc.view.frame = CGRect(x: 0, y: 8, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight - 50 - 44)
             childVCs.append(vc)
         }
         

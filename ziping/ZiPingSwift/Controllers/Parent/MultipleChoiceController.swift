@@ -17,6 +17,7 @@ class ChoiceslParsam: CYJParameterEncoding, NSCopying{
     var spentTime : Int = 0
     var result_data : String?
     
+    
     ///实现copyWithZone方法
     func copy(with zone: NSZone? = nil) -> Any {
         let theCopyObj = ChoiceslParsam.init()
@@ -71,7 +72,7 @@ class ChoicesDetailModel : CYJBaseModel{
 
 
 
-class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableViewDelegate, MultipleChoiceDelegate {
+class MultipleChoiceController: KYBaseViewController,UITableViewDataSource, UITableViewDelegate, MultipleChoiceDelegate {
     
     
     var shijuanid : Int = 0
@@ -86,6 +87,8 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
     var choiceslParsam = ChoiceslParsam()
     var optionSource = [Dictionary<String,Any>]()
     
+    //是否是暂存
+    var tmp : Bool  = false
     /// 操作bar
     var actionView: CYJActionsView!
     override func viewDidLoad() {
@@ -166,7 +169,9 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
     
     //暂存  或者提交
     @objc func updataAciton(button:UIButton) {
+        var popMessaeg : String!
         if button.tag == 1 {
+            popMessaeg = "提交成功"
             for item  in optionSource {
                 let dict = item as NSDictionary
                 if dict.object(forKey: "choice") as! Int == 0 {
@@ -180,11 +185,17 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
                 }
             }
         }else{//如果是暂存
+            popMessaeg = "暂存成功"
+            //如果没有暂存过 并且已经删除栈内的 controller
+            if self.shiJuanModel?.historyid == 0 && self.tmp == false{
+                self.tmp = true
+                self.navigationController?.viewControllers.remove(at: 2)
+            }
             var noSelect : Bool = true
             for item  in optionSource {
                 let dict = item as NSDictionary
                 if dict.object(forKey: "choice") as! Int != 0 {
-                  noSelect = false
+                    noSelect = false
                 }
             }
             if noSelect == true{
@@ -238,10 +249,19 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
                 Third.toast.message((error?.localizedDescription)!)
                 return
             }
-            self?.navigationController?.popToViewController(self?.navigationController?.viewControllers[1] as! QuestionnaireViewController, animated: true)
-            Third.toast.message("提交成功")
+            if button.tag == 1{
+                NotificationCenter.default.post(name: NSNotification.Name("QuestionnaireViewStatue"), object: nil)
+                if self?.tmp == true{
+                    self?.navigationController?.popToViewController(self?.navigationController?.viewControllers[1] as! QuestionnaireViewController, animated: true)
+                }else{
+                   self?.navigationController?.popToViewController(self?.navigationController?.viewControllers[1] as! QuestionnaireViewController, animated: true)
+                }
+                
+            }
+            Third.toast.message(popMessaeg)
         }
     }
+    
     
     
     
@@ -308,7 +328,7 @@ class MultipleChoiceController: UIViewController,UITableViewDataSource, UITableV
             subDict["catid1"] = shiTiDetailModel.catid1
             subDict["catid2"] = shiTiDetailModel.catid2
             subDict["catid3"] = shiTiDetailModel.catid3
-        
+            
             subDict["choice"] = 0
             subDict["score"] = 0
             for choicesDetailModel in shiTiDetailModel.choices{

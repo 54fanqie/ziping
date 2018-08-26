@@ -37,7 +37,10 @@ class ValuationCompleteController: KYBaseViewController {
         noCompentLab.text = dict?["overNoStart"] as? String
         noStartLab.text = dict?["overStart"] as? String
     }
-    
+ 
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

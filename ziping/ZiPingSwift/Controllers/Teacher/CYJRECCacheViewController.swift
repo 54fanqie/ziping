@@ -12,6 +12,8 @@ import HandyJSON
 class CYJRECCacheViewController: KYBaseTableViewController, CYJActionPassOnDeleagte{
     
     var dataSource: [CYJRECCacheCellFrame] = []
+    var recordGrId : Int = 0
+    var selectIndex: Int = 0
     
     override func viewDidLoad() {
         haveTabBar = true
@@ -39,11 +41,45 @@ class CYJRECCacheViewController: KYBaseTableViewController, CYJActionPassOnDelea
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.page = 1
-        // 每次都要新数据！
-        self.fetchDataSource()
+        
+        
+//        if self.recordGrId != 0{
+//            fetchRecordInfoSource()
+//        }else{
+            self.page = 1
+            // 每次都要新数据！
+            self.fetchDataSource()
+//        }
         
     }
+    //更新某条数据
+    func fetchRecordInfoSource() {
+        
+        Third.toast.show {}
+        let parameter: [String: Any] = ["token" : LocaleSetting.token, "grId" : self.recordGrId]
+        
+        RequestManager.POST(urlString: APIManager.Record.info, params: parameter) { [unowned self] (data, error) in
+            //如果存在error
+            guard error == nil else {
+                Third.toast.hide {}
+                Third.toast.message((error?.localizedDescription)!)
+                return
+            }
+            
+            if let recordDict = data as? NSDictionary{
+                let target = JSONDeserializer<CYJRecord>.deserializeFrom(dict: recordDict)
+                let cellframe = CYJRECCacheCellFrame(record: target!)
+                print(self.selectIndex)
+                self.dataSource[self.selectIndex] = cellframe
+                self.tableView.reloadData()
+                Third.toast.hide {
+                    self.recordGrId = 0
+                    self.selectIndex = 0
+                }
+            }
+        }
+    }
+    
     
     func listenRecordChanged(notifi: Notification) {
         
@@ -54,7 +90,7 @@ class CYJRECCacheViewController: KYBaseTableViewController, CYJActionPassOnDelea
                 if self?.tableView.contentOffset.y == 0 {
                     //没有位移
                     DLog("//刷新+++++++++++++++++=")
-
+                    
                     self?.page = 1
                     self?.tableView.mj_footer.resetNoMoreData()
                     self?.fetchDataSource()
@@ -67,7 +103,7 @@ class CYJRECCacheViewController: KYBaseTableViewController, CYJActionPassOnDelea
             if let _ = tableView.cellForRow(at: index) {
                 DispatchQueue.main.async { [weak self] in
                     self?.dataSource.remove(at: index.row)
-//                    self?.tableView.deleteRows(at: [index], with: .none)
+                    //                    self?.tableView.deleteRows(at: [index], with: .none)
                     self?.tableView.reloadData()
                 }
             }
@@ -165,13 +201,18 @@ extension CYJRECCacheViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Third.toast.show {}
+        print(String(format: "点击了%d", indexPath.row))
         //进去编辑页面
         let record = dataSource[indexPath.row].record
         let buildFirst = CYJRECBuildInfoViewController()
         buildFirst.grId = record.grId
+        self.recordGrId = record.grId
+        self.selectIndex = indexPath.row
         CYJRECBuildHelper.default.buildStep = .cached(indexPath)
         let buildNav = KYNavigationController(rootViewController: buildFirst)
         self.present(buildNav, animated: true, completion: nil)
+        Third.toast.hide {}
     }
     
     func actionsPass(on sender: UITableViewCell) {
