@@ -191,8 +191,14 @@ class CYJRecordListCell: UITableViewCell {
             if listFrame.role == .master {
                 byLabel.text = "by: \(listFrame.record.teacherName ?? "") (\(listFrame.record.cName ?? ""))"
 
-            }else {
-                byLabel.text = "by: \(listFrame.record.teacherName ?? "")"
+            }else
+            {
+                if listFrame.isOtherClass {
+                    byLabel.text = "by: (\(listFrame.record.cName ?? "")) \(listFrame.record.teacherName ?? "")"
+                }else{
+                    byLabel.text = "by: \(listFrame.record.teacherName ?? "")"
+                }
+                
             }
             
             contentLabel.text = listFrame.record.describe

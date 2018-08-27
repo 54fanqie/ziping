@@ -74,8 +74,6 @@ class ChoicesDetailModel : CYJBaseModel{
 
 class MultipleChoiceController: KYBaseViewController,UITableViewDataSource, UITableViewDelegate, MultipleChoiceDelegate {
     
-    
-    var shijuanid : Int = 0
     var shiJuanModel : ShiJuanModel?
     
     var dataSource : [ShiTiDetailModel] = []
@@ -87,36 +85,16 @@ class MultipleChoiceController: KYBaseViewController,UITableViewDataSource, UITa
     var choiceslParsam = ChoiceslParsam()
     var optionSource = [Dictionary<String,Any>]()
     
-    //是否是暂存
-    var tmp : Bool  = false
     /// 操作bar
     var actionView: CYJActionsView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "问卷测评"
         
-        print(["shijuanid": self.shijuanid])
-        //请求数据查看是否完成
-        RequestManager.POST(urlString: APIManager.Valuation.getShiti, params: ["shijuanid": self.shijuanid], complete: { [weak self] (data, error) in
-            
-            guard error == nil else {
-                Third.toast.message((error?.localizedDescription)!)
-                return
-            }
-            
-            
-            if let datas = data as? NSDictionary {
-                print(datas)
-                //遍历，并赋值
-                let target = JSONDeserializer<ShiJuanModel>.deserializeFrom(dict: datas )
-                self?.shiJuanModel = target
-                self?.dataSource = (self?.shiJuanModel?.shitiData)!
-                self?.table.reloadData()
-                //获取到数据后处理下准备上传的数据
-                self?.assemblyData();
-            }
-        })
+        self.dataSource = (self.shiJuanModel?.shitiData)!
         
+        //获取到数据后处理下准备上传的数据
+        self.assemblyData();
         
         table = UITableView()
         table.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -187,8 +165,7 @@ class MultipleChoiceController: KYBaseViewController,UITableViewDataSource, UITa
         }else{//如果是暂存
             popMessaeg = "暂存成功"
             //如果没有暂存过 并且已经删除栈内的 controller
-            if self.shiJuanModel?.historyid == 0 && self.tmp == false{
-                self.tmp = true
+            if self.shiJuanModel?.historyid == 0 {
                 self.navigationController?.viewControllers.remove(at: 2)
             }
             var noSelect : Bool = true
@@ -207,54 +184,21 @@ class MultipleChoiceController: KYBaseViewController,UITableViewDataSource, UITa
         dataDict["data"] = optionSource as NSArray
         choiceslParsam.result_data = toJSONString(dict: dataDict)
         
-        
-        
-        //        //选项数据
-        //        var dataArray = [Dictionary<String,Any>]()
-        //        for shiTiDetailModel in (self.shiJuanModel?.shitiData)! {
-        //            var subDict = Dictionary<String,Int>()
-        //
-        //            subDict["tiid"] = shiTiDetailModel.tiid
-        //            subDict["catid1"] = shiTiDetailModel.catid1
-        //            subDict["catid2"] = shiTiDetailModel.catid2
-        //            subDict["catid3"] = shiTiDetailModel.catid3
-        //            subDict["choice"] = 0
-        //            subDict["score"] = 0
-        //            dataArray.append(subDict)
-        //        }
-        //        var  dataDict = Dictionary<String,NSArray>();
-        //        dataDict["data"] = optionSource as NSArray
-        //
-        //        print(self.choiceslParsam.title)
-        //        print(self.choiceslParsam.shijuanid)
-        //        print(self.choiceslParsam.historyid)
-        //        print(self.choiceslParsam.isfinish)
-        //        print(self.choiceslParsam.datiNums)
-        //        print(self.choiceslParsam.spentTime)
-        //
-        //        let choiceslParsam = ChoiceslParsam()
-        //        choiceslParsam.title = "笔试班学员专享课后测"
-        //        choiceslParsam.shijuanid = "1"
-        //        choiceslParsam.historyid = 1
-        //        choiceslParsam.isfinish = 0
-        //        choiceslParsam.datiNums = 10
-        //        choiceslParsam.spentTime = 0
-        //        choiceslParsam.result_data = toJSONString(dict: dataDict)
-        
-        
-        
         RequestManager.POST(urlString: APIManager.Valuation.addAnswer, params: choiceslParsam.encodeToDictionary() ) { [weak self] (data, error) in
             //如果存在error
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return
             }
+            
+            
             if button.tag == 1{
                 NotificationCenter.default.post(name: NSNotification.Name("QuestionnaireViewStatue"), object: nil)
-                if self?.tmp == true{
-                    self?.navigationController?.popToViewController(self?.navigationController?.viewControllers[1] as! QuestionnaireViewController, animated: true)
-                }else{
-                   self?.navigationController?.popToViewController(self?.navigationController?.viewControllers[1] as! QuestionnaireViewController, animated: true)
+                self?.navigationController?.popToViewController(self?.navigationController?.viewControllers[1] as! QuestionnaireViewController, animated: true)
+            }else{
+                //暂存或者上传成功返回histeryid 更新id
+                if let histeryid = data as? String{
+                    NotificationCenter.default.post(name: NSNotification.Name("ReloadHistoryID"), object: histeryid)
                 }
                 
             }
@@ -340,10 +284,6 @@ class MultipleChoiceController: KYBaseViewController,UITableViewDataSource, UITa
             
             optionSource.append(subDict)
         }
-        //        var  dataDict = Dictionary<String,NSArray>();
-        //        dataDict["data"] = dataArray as NSArray
-        //
-        //        choiceslParsam.result_data = toJSONString(dict: dataDict)
     }
     
     func toJSONString(dict: Any)-> String{

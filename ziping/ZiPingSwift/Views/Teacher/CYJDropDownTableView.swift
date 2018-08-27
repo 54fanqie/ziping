@@ -46,7 +46,7 @@ class CYJDropDownTableView: UIView {
                 cancel()
             }
         }
-        resetButton.defaultCircleColorStyle = true
+        resetButton.filterButtonStyle = .circle_light_Style
         
         let sureButton = CYJFilterButton(title: "确定") { [unowned self] (sender) in
             
@@ -73,7 +73,7 @@ class CYJDropDownTableView: UIView {
             }
         }
         
-        sureButton.defaultCircleColorStyle = false
+        sureButton.filterButtonStyle = .circle_color_Style
         
         buttonActionView.actions = [resetButton, sureButton]
         buttonActionView.theme_backgroundColor = Theme.Color.ground

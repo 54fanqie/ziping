@@ -302,7 +302,7 @@ class CheckValuationController: KYBaseTableViewController {
             
             
             self.classCondition.title = "请选择班级"
-            self.valuationTimeCondition.title = "请选择时间"
+            self.valuationTimeCondition.title = "请选择测评时间"
             
             
             self.checkValuationParamModel.grade = 0
@@ -336,7 +336,7 @@ class CheckValuationController: KYBaseTableViewController {
             //            self.clearAllCharts()
             
         }
-        resetButton.defaultColorStyle = true
+        resetButton.filterButtonStyle = .nomal_light_Style
         // 2
         let showButton = CYJFilterButton(title: "查看报告") {[weak self] (sender) in
             print("查看报告")
@@ -354,7 +354,7 @@ class CheckValuationController: KYBaseTableViewController {
             
         }
         // 3
-        showButton.defaultColorStyle = false
+        showButton.filterButtonStyle = .nomal_color_Style
         let applyButton = CYJFilterButton(title: "申请专业分析") { [unowned self] (sender) in
             
             print("申请专业分析")
@@ -363,7 +363,7 @@ class CheckValuationController: KYBaseTableViewController {
             self.navigationController?.pushViewController(applyController, animated: true)
         }
         
-        applyButton.defaultColorStyle = false
+        applyButton.filterButtonStyle = .nomal_color_Style
         actionsView.actions = [resetButton, showButton, applyButton]
         tabelHeaderView.addSubview(actionsView)
         

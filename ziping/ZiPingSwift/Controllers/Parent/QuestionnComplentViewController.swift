@@ -26,7 +26,7 @@ class QuestionnComplentViewController: KYBaseViewController {
     
     
     @IBAction func applyforMaster(_ sender: Any) {
-        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : self.valuationStatueInfo.historyid]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : self.valuationStatueInfo.historyid, "shijuanid" :self.valuationStatueInfo.shijuanid],callBackAll : true) { [weak self] (data, error) in
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return
@@ -34,18 +34,18 @@ class QuestionnComplentViewController: KYBaseViewController {
             
             let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: data as? NSDictionary)
             if custom?.status == 200 {
-                
-            }else
-            {
-                
+                Third.toast.hide {
+                    
+                }
+                let alert = ValuationAlertController()
+                alert.message = custom?.message
+                alert.completeHandler = { [] in
+                    alert.dismiss(animated:true, completion: nil)
+                }
+                alert.showAlert()
+            }else{
+                Third.toast.message((custom?.message)!)
             }
-            let alert = ValuationAlertController()
-            //                alert.message = info["message"]as! String
-            alert.message = "专项测评专业分析申请已发送给园长，将由园长与平台沟通哦~"
-            alert.completeHandler = { [] in
-                alert.dismiss(animated:true, completion: nil)
-            }
-            alert.showAlert()
         }
     }
     

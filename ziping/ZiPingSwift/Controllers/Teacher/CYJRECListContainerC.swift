@@ -44,7 +44,7 @@ class CYJRECListViewControllerTeacher: CYJRECListViewController, CYJDropDownView
         let dropDownView = CYJRECDropDownView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
         dropDownView.contianerView = self.view
         dropDownView.delegate = self
-        
+         
         seprateView.addSubview(dropDownView)
         dropDownView.reloadDropDownView()
         self.dropDownView = dropDownView

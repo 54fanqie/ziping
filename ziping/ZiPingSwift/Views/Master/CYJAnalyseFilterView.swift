@@ -211,11 +211,8 @@ class CYJTimeConditionView: UIView {
         let button = CYJFilterButton(title: "起始日期", complete: {[unowned self] (sender) in
             self.startHandler(sender)
         })
-        button.defaultColorStyle = true
-
-        button.theme_setTitleColor(Theme.Color.textColor, forState: .normal)
+        button.filterButtonStyle = .nomal_whithColor_Style
         button.setTitle("起始日期", for: .normal)
-        button.theme_backgroundColor = Theme.Color.ground
         //FIXME: 给按钮设置两个图片
         return button
     }()
@@ -240,10 +237,8 @@ class CYJTimeConditionView: UIView {
         let button = CYJFilterButton(title: "截止日期", complete: {[unowned self] (sender) in
             self.endHandler(sender)
         })
-        button.defaultColorStyle = true
-        button.theme_setTitleColor(Theme.Color.textColor, forState: .normal)
+        button.filterButtonStyle = .nomal_whithColor_Style
         button.setTitle("截止日期", for: .normal)
-        button.theme_backgroundColor = Theme.Color.ground
         //FIXME: 给按钮设置两个图片
         return button
     }()

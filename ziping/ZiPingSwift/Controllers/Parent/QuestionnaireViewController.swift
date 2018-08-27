@@ -62,6 +62,8 @@ class QuestionnaireViewController: KYBaseViewController {
         requestData()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionnaireViewStatue), name:
             NSNotification.Name("QuestionnaireViewStatue"), object: nil)
+        
+        
     }
     //刷新页面
     func reloadQuestionnaireViewStatue()  {

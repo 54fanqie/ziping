@@ -552,6 +552,17 @@ struct CYJRecordCellFrame {
         layoutContainerView()
     }
     
+    init(record: CYJRecord, role: CYJRole? ,isOtherClass : Bool) {
+        if let rol = role {
+            self.role = rol
+        }else {
+            self.role = (LocaleSetting.userInfo()?.role)!
+        }
+        self.isOtherClass = isOtherClass
+        self.record = record
+        layoutContainerView()
+    }
+    
     mutating func layoutContainerView() {
         //
         var x: CGFloat = 15
@@ -664,7 +675,11 @@ struct CYJRecordCellFrame {
         if role == .master {
             byLabelFrame = CGRect(x: x, y: y, width: 180, height: 13)
         }else {
-            byLabelFrame = CGRect(x: x, y: y, width: 100, height: 13)
+            if isOtherClass {
+                byLabelFrame = CGRect(x: x, y: y, width: 196, height: 13)
+            }else{
+                byLabelFrame = CGRect(x: x, y: y, width: 100, height: 13)
+            }
 
         }
         

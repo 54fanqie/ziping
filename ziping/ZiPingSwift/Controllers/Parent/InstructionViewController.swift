@@ -9,18 +9,23 @@
 import UIKit
 
 class InstructionViewController: KYBaseViewController {
-    var shijuanid : Int = 0
+    var shiJuanModel : ShiJuanModel!
+    
+    @IBOutlet weak var titleLab: UILabel!
+    @IBOutlet weak var contentLab: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "问卷测评"
         // Do any additional setup after loading the view.
+        titleLab.text = shiJuanModel.title
+        contentLab.text = shiJuanModel.content
     }
 
   
     @IBAction func startQuestionnaireAction(_ sender: Any) {
         let muVC = MultipleChoiceController();
-        muVC.shijuanid = self.shijuanid
+        muVC.shiJuanModel = shiJuanModel
         self.navigationController?.pushViewController(muVC, animated: true);
     }
     override func didReceiveMemoryWarning() {

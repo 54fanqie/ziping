@@ -31,26 +31,25 @@ class ValuationEndViewController: KYBaseViewController {
     }
     //教师、园长申请生成报告
     @IBAction func applyAction(_ sender: Any) {
-        RequestManager.POST(urlString: APIManager.Valuation.teacherApplyReport, params: nil) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.teacherApplyReport, params: nil ,callBackAll : true) { [weak self] (data, error) in
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return
             }
-            
             let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: data as? NSDictionary)
             if custom?.status == 200 {
-                
-            }else
-            {
-                
+                Third.toast.hide {
+                    
+                }
+                let alert = ValuationAlertController()
+                alert.message = custom?.message
+                alert.completeHandler = { [] in
+                    alert.dismiss(animated:true, completion: nil)
+                }
+                alert.showAlert()
+            }else{
+                Third.toast.message((custom?.message)!)
             }
-            let alert = ValuationAlertController()
-            //                alert.message = info["message"]as! String
-            alert.message = "专项测评专业分析申请已发出"
-            alert.completeHandler = { [] in
-                alert.dismiss(animated:true, completion: nil)
-            }
-            alert.showAlert()
         }
     }
     override func didReceiveMemoryWarning() {

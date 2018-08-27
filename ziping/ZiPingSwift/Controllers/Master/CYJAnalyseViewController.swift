@@ -314,7 +314,7 @@ class CYJAnalyseViewController: KYBaseTableViewController {
             self.clearAllCharts()
 
         }
-        resetButton.defaultColorStyle = true
+        resetButton.filterButtonStyle = .nomal_light_Style
         
         let showButton = CYJFilterButton(title: "查看报告") {[weak self] (sender) in
             print("查看报告")
@@ -326,14 +326,17 @@ class CYJAnalyseViewController: KYBaseTableViewController {
             
             self?.fetchBarDataFromServer()
         }
-        showButton.defaultColorStyle = false
+        showButton.filterButtonStyle = .nomal_color_Style
+        
+        
         let applyButton = CYJFilterButton(title: "申请专业分析") { [unowned self] (sender) in
             print("申请专业分析")
             let applyController = CYJProfessionalAnalyseController()
             
             self.navigationController?.pushViewController(applyController, animated: true)
         }
-        applyButton.defaultColorStyle = false
+        applyButton.filterButtonStyle = .nomal_color_Style
+        
         
         actionsView.actions = [resetButton, showButton, applyButton]
         tabelHeaderView.addSubview(actionsView)

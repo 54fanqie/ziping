@@ -233,7 +233,7 @@ class CYJSearchViewController: KYBaseCollectionViewController {
             ]
             self.collectionView.reloadData()
         }
-        resetButton.defaultColorStyle = true
+        resetButton.filterButtonStyle = .circle_light_Style
         
         let showButton = CYJFilterButton(title: "确定") {[unowned self] (sender) in
             print("完成选择")
@@ -241,7 +241,7 @@ class CYJSearchViewController: KYBaseCollectionViewController {
             self.finishSelected(self.listparam, self.classInGrade)
             self.dismiss(animated: true, completion: nil)
         }
-        showButton.defaultColorStyle = false
+        showButton.filterButtonStyle = .circle_color_Style
         
         actionsView.actions = [resetButton, showButton]
         self.view.addSubview(actionsView)
@@ -722,6 +722,7 @@ class CYJFilterTimeCell: UICollectionViewCell {
         let minTimeButton = CYJFilterButton(title: "起始日期", complete: { (sender) in
             self.lowAction()
         })
+        minTimeButton.filterButtonStyle = .nomal_whithColor_Style
         minTimeButton.frame =  CGRect(x: self.titleLabel.frame.maxX , y: 14, width: 100, height: 32)
         return minTimeButton
     }()
@@ -739,6 +740,7 @@ class CYJFilterTimeCell: UICollectionViewCell {
         let maxTimeButton = CYJFilterButton(title: "结束日期", complete: { (sender) in
             self.highAction()
         })
+        maxTimeButton.filterButtonStyle = .nomal_whithColor_Style
         maxTimeButton.frame = CGRect(x: self.daoLabel.frame.maxX + 8, y: 14, width: 100, height: 32)
 
         return maxTimeButton

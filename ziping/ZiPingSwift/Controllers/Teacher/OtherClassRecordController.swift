@@ -92,8 +92,7 @@ class OtherClassRecordController: CYJRECListViewController {
                 records.forEach({
                     let target = JSONDeserializer<CYJRecord>.deserializeFrom(dict: $0 as? NSDictionary)
                     
-                    var recordFrame = CYJRecordCellFrame(record: target!, role: nil)
-                    recordFrame.isOtherClass = true
+                    let recordFrame = CYJRecordCellFrame(record: target!, role: nil, isOtherClass : true)
                     tmpFrame.append(recordFrame)
                 })
                 if tmpFrame.count < 10 {

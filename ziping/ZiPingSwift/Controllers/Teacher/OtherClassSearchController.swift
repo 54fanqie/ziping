@@ -246,7 +246,7 @@ class OtherClassSearchController: KYBaseCollectionViewController {
             ]
             self.collectionView.reloadData()
         }
-        resetButton.defaultColorStyle = true
+         resetButton.filterButtonStyle = .circle_light_Style
         
         let showButton = CYJFilterButton(title: "确定") {[unowned self] (sender) in
             print("完成选择")
@@ -254,7 +254,7 @@ class OtherClassSearchController: KYBaseCollectionViewController {
             self.finishSelected(self.listparam, self.classInGrade)
             self.dismiss(animated: true, completion: nil)
         }
-        showButton.defaultColorStyle = false
+        showButton.filterButtonStyle = .circle_color_Style
         
         actionsView.actions = [resetButton, showButton]
         self.view.addSubview(actionsView)

@@ -328,7 +328,7 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
             
             self.clearChartView()
         }
-        resetButton.defaultColorStyle = true
+        resetButton.filterButtonStyle = .nomal_light_Style
         
         let showButton = CYJFilterButton(title: "查看报告") {[unowned self] (sender) in
             print("查看报告")
@@ -337,7 +337,7 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
             self.fetchInterestFromServer()
             //            self.addChartView()
         }
-        showButton.defaultColorStyle = false
+        showButton.filterButtonStyle = .nomal_color_Style
         
         actionsView.actions = [resetButton, showButton]
         //        scrollView.addSubview(actionsView)

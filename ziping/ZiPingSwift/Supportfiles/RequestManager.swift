@@ -55,8 +55,12 @@ class RequestManager: NSObject {
     ///   - params: <#params description#>
     ///   - complete: <#complete description#>
     class func POST(urlString: String, params: [String: Any]?, complete: @escaping requestCompleteBlock) {
-        RequestManager.default.POST(urlString: urlString, params: params, complete: complete)
+        RequestManager.default.POST(urlString: urlString, params: params,callBackAll : false, complete: complete)
     }
+    class func POST(urlString: String, params: [String: Any]?, callBackAll : Bool, complete: @escaping requestCompleteBlock) {
+        RequestManager.default.POST(urlString: urlString, params: params,callBackAll : callBackAll, complete: complete)
+    }
+    
     /// UPLOAD
     ///
     /// - Parameters:
@@ -72,7 +76,7 @@ class RequestManager: NSObject {
 
 extension RequestManager
 {
-    fileprivate func POST(urlString: String, params: [String: Any]?, complete: @escaping requestCompleteBlock) {
+    fileprivate func POST(urlString: String, params: [String: Any]?, callBackAll: Bool , complete: @escaping requestCompleteBlock) {
         
         #if DEBUG
             //拼接路径--看起来清楚点
@@ -102,9 +106,14 @@ extension RequestManager
             case .success(let value):
                 //根据返回值判断custom 错误
                 let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: value as? NSDictionary)
-                print(custom?.message)
+                print(custom?.message as Any)
                 if custom?.status == 200 {
-                    complete(custom?.data, nil)
+                    if callBackAll == true {
+                        complete(value, nil)
+                    }else{
+                      complete(custom?.data, nil)
+                    }
+                    
                 }else
                 {
                     let error = NSError(domain: CYJErrorDomainName, code: (custom?.status)!, userInfo: [NSLocalizedDescriptionKey: custom?.message ?? "未知错误"])

@@ -58,7 +58,7 @@ class CYJDropDownTimeView: UIView {
         let button = CYJFilterButton(title: "截止日期", complete: {[unowned self] (sender) in
 //            self.startHandler(sender)
         })
-        button.defaultColorStyle = true
+        button.filterButtonStyle = .nomal_whithColor_Style
         
         button.theme_setTitleColor(Theme.Color.textColor, forState: .normal)
         button.setTitle("起始日期", for: .normal)
@@ -85,7 +85,7 @@ class CYJDropDownTimeView: UIView {
         let button = CYJFilterButton(title: "截止日期", complete: {[unowned self] (sender) in
 //            self.endHandler(sender)
         })
-        button.defaultColorStyle = true
+        button.filterButtonStyle = .nomal_whithColor_Style
         button.theme_setTitleColor(Theme.Color.textColor, forState: .normal)
         button.setTitle("截止日期", for: .normal)
         button.theme_backgroundColor = Theme.Color.ground
@@ -189,8 +189,7 @@ class CYJDropDownTimeView: UIView {
                 selectedBtn.isSelected = false
             }
         }
-        resetButton.defaultCircleColorStyle = true
-        
+        resetButton.filterButtonStyle = .circle_light_Style
         let sureButton = CYJFilterButton(title: "确定") { [unowned self] (sender) in
             
             let minDate = self.startTime
@@ -203,8 +202,8 @@ class CYJDropDownTimeView: UIView {
 
             self.sureButtonHandler(minDate!, maxDate!, self.selectedTimeIndex)
         }
-        sureButton.defaultCircleColorStyle = false
-
+        sureButton.filterButtonStyle = .circle_color_Style
+        
         buttonActionView.actions = [resetButton, sureButton]
         buttonActionView.theme_backgroundColor = Theme.Color.ground
         addSubview(buttonActionView)

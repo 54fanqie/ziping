@@ -2357,6 +2357,7 @@
 		B18CBECB20FF719100827E39 /* Valuation */ = {
 			isa = PBXGroup;
 			children = (
+				B12DB1302101DCAB00D95FAA /* QuestionnaireViewController.swift */,
 				B12DB1242101DB4700D95FAA /* QuestionnaireEndViewController.swift */,
 				B12DB1252101DB4700D95FAA /* QuestionnaireEndViewController.xib */,
 				B12DB1282101DB5B00D95FAA /* QuestionnaireIngViewController.swift */,
@@ -2368,7 +2369,6 @@
 				B1F95B4A2106D2EA00BA5EA2 /* InstructionViewController.swift */,
 				B1F95B4B2106D2EA00BA5EA2 /* InstructionViewController.xib */,
 				B137AFDB2108854A0095FAEE /* MultipleChoiceController.swift */,
-				B12DB1302101DCAB00D95FAA /* QuestionnaireViewController.swift */,
 			);
 			name = Valuation;
 			sourceTree = "<group>";
