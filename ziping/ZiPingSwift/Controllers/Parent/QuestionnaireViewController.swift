@@ -58,13 +58,15 @@ class QuestionnaireViewController: KYBaseViewController {
         style.selectedTitleColor = color
         
       
-        //请求数据
+        //更新界面请求数据
         requestData()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadQuestionnaireViewStatue), name:
             NSNotification.Name("QuestionnaireViewStatue"), object: nil)
-        
+        //更新HistoryID
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadHistoryID), name: NSNotification.Name("ReloadHistoryID"), object: nil)
         
     }
+   
     //刷新页面
     func reloadQuestionnaireViewStatue()  {
         if (self.scrollPageView != nil) {
@@ -73,6 +75,12 @@ class QuestionnaireViewController: KYBaseViewController {
         }
         requestData()
     }
+    func reloadHistoryID(notify :Notification)  {
+        print(notify)
+        self.valuatuinStatue?.historyid = Int(notify.object as! String)!
+    }
+    
+    
     func requestData(){
         //请求数据查看是否完成
         RequestManager.POST(urlString: APIManager.Valuation.check, params: nil, complete: { [weak self] (data, error) in

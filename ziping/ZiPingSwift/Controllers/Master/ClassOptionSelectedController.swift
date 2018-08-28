@@ -192,6 +192,7 @@ class ClassOptionSelectedController: KYBaseViewController ,UITableViewDataSource
 class ClassOptionTableCell: UITableViewCell {
     var bottomLine: UILabel!
     var rightLine: UILabel!
+    var leftLine: UILabel!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initial()
@@ -216,7 +217,19 @@ class ClassOptionTableCell: UITableViewCell {
             make.top.equalTo(self).offset(0)
             make.bottom.equalTo(self).offset(0)
             make.right.equalTo(self).offset(0)
-            make.width.equalTo(1)
+            make.width.equalTo(0.7)
+        })
+        
+        
+        leftLine = UILabel();
+        leftLine.theme_backgroundColor = Theme.Color.line
+        self.addSubview(leftLine)
+        
+        leftLine?.snp.makeConstraints({ (make)in
+            make.top.equalTo(self).offset(0)
+            make.bottom.equalTo(self).offset(0)
+            make.left.equalTo(self).offset(0)
+            make.width.equalTo(0.7)
         })
         
         bottomLine = UILabel();

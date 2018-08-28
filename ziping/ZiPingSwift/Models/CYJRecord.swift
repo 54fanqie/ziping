@@ -676,7 +676,7 @@ struct CYJRecordCellFrame {
             byLabelFrame = CGRect(x: x, y: y, width: 180, height: 13)
         }else {
             if isOtherClass {
-                byLabelFrame = CGRect(x: x, y: y, width: 196, height: 13)
+                byLabelFrame = CGRect(x: x, y: y, width: 186, height: 13)
             }else{
                 byLabelFrame = CGRect(x: x, y: y, width: 100, height: 13)
             }
@@ -690,15 +690,23 @@ struct CYJRecordCellFrame {
         //Bottom
         if role == .teacher || role == .teacherL {
             
-            goodImageViewFrame = CGRect(x: byLabelFrame.maxX+5, y: y + 1.5, width: 12.5, height: 10.5)
-            
-            goodLabelFrame = CGRect(x: goodImageViewFrame.maxX + 8, y: y, width: 30, height: 12)
-            
-            replyImageViewFrame = CGRect(x: goodLabelFrame.maxX + 35, y: y + 1, width: 13, height: 11)
-            replyLabelFrame = CGRect(x: replyImageViewFrame.maxX + 8, y: y, width: 30, height: 12)
+        
+            if isOtherClass {
+                replyLabelFrame = CGRect(x: width - 25 - 5, y: y, width: 25, height: 12)
+                replyImageViewFrame = CGRect(x: replyLabelFrame.minX - 8 - 13, y: y + 1, width: 13, height: 11)
+                
+                goodLabelFrame = CGRect(x: replyImageViewFrame.minX - 8 - 25, y: y, width: 25, height: 12)
+                goodImageViewFrame = CGRect(x: goodLabelFrame.minX - 5 - 12.5, y: y + 1.5, width: 12.5, height: 10.5)
+
+            }else{
+                goodImageViewFrame = CGRect(x: byLabelFrame.maxX+5, y: y + 1.5, width: 12.5, height: 10.5)
+                goodLabelFrame = CGRect(x: goodImageViewFrame.maxX + 8, y: y, width: 30, height: 12)
+                replyImageViewFrame = CGRect(x: goodLabelFrame.maxX + 35, y: y + 1, width: 13, height: 11)
+                replyLabelFrame = CGRect(x: replyImageViewFrame.maxX + 8, y: y, width: 30, height: 12)
+                
+            }
             
             readOverImageViewFrame = CGRect(x: width - 40 - 15, y: y, width: 35, height: 30)
-
 //            print("y-teacher\(y + 13 + 15)")
             cellHeight = y + 15 + 15
         }else if role == .master {

@@ -27,14 +27,11 @@ class QuestionnaireIngViewController: KYBaseViewController {
         starValuationBtn.layer.masksToBounds = true
         starValuationBtn.theme_backgroundColor = Theme.Color.main
         // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadHistoryID), name: NSNotification.Name("ReloadHistoryID"), object: nil)
+        
         
         
     }
-    func reloadHistoryID(notify :Notification)  {
-        print(notify)
-        self.valuationStatueInfo?.historyid = Int(notify.object as! String)!
-    }
+    
 
     @IBAction func starValuationAction(_ sender: Any) {
 
