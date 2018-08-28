@@ -255,19 +255,24 @@ extension CYJMineViewController {
     }
     //浏览其他班级
     func otherClasses(){
-        RequestManager.POST(urlString: APIManager.Record.list, params: nil) { [weak self] (data, error) in
-            
+        let listParam = RECListSearchParam()
+        listParam.page = 1
+        listParam.limit = "10"
+        listParam.isother = 0
+        RequestManager.POST(urlString: APIManager.Record.list, params: listParam.encodeToDictionary()  ,callBackAll : true) { [weak self] (data, error) in
+
             //如果存在error
             guard error == nil else {
-                
+
                 Third.toast.message((error?.localizedDescription)!)
                 return
             }
+            
             let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: data as? NSDictionary)
             if custom?.status == -1 {
                 let noPermiss = NoPermissViewController()
                 self?.navigationController?.pushViewController(noPermiss, animated: true)
-                
+
             }else{
                 let  otherClas = OtherClassRecordController()
                 otherClas.title = "浏览其他班级记录"

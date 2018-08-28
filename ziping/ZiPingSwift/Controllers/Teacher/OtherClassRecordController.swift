@@ -55,6 +55,7 @@ class OtherClassRecordController: CYJRECListViewController {
     override func fetchDataSource() {
         
         self.listParam.page = self.page
+        self.listParam.isother = 1
         if self.page == 1 {
             
             //            if let _ = tableView.cellForRow(at: IndexPath(row: 0, section: 0 )) {

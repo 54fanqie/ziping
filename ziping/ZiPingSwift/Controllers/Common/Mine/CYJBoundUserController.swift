@@ -20,7 +20,7 @@ class CYJBoundUserController: KYBaseViewController {
         super.viewDidLoad()
         
         title = "添加关联账号"
-        accountField = KYInputField(hint: "手机号/账号", frame: CGRect(x: 0, y: 64, width: view.frame.width, height: Theme.Measure.inputHeight))
+        accountField = KYInputField(hint: "手机号/账号", frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: Theme.Measure.inputHeight))
         view.addSubview(accountField)
         
         passwordField = KYInputField(_passwordImage: nil, hint: "输入密码", frame: CGRect(x: 0, y: accountField.frame.maxY, width: view.frame.width, height: Theme.Measure.inputHeight))

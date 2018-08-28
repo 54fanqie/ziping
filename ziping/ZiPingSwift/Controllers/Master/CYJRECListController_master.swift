@@ -27,7 +27,7 @@ class RECListSearchParam: CYJParameterEncoding, NSCopying{
     var endTime: String?   //记录结束日期
     var page: Int = 1    //页码 不传默认第一页
     var limit: String = "10"   //条数 不传默认10条
-    
+    var isother : Int = 0   //浏览其他班级
     /// 清除当前数据
     func clear() {
         self.cId = nil
@@ -112,6 +112,7 @@ class CYJRECListControllerMaster: CYJRECListViewController {
     override func fetchDataSource() {
         
         self.listParam.page = self.page
+        self.listParam.isother = 0
         if self.page == 1 {
             
 //            if let _ = tableView.cellForRow(at: IndexPath(row: 0, section: 0 )) {
@@ -162,27 +163,7 @@ class CYJRECListControllerMaster: CYJRECListViewController {
             }
         }
     }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 30
-//    }
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let seprateView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30))
-//        seprateView.theme_backgroundColor = Theme.Color.ground
-//
-//        //创建  countedView
-//        countView = CYJRecordCountView(frame: CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: 30))
-//        countView.clearButtonClickHandler = {[unowned self] _ in
-//            self.listParam.clear()
-//            self.page = 1
-//            self.fetchDataSource()
-//        }
-//
-//        seprateView.addSubview(countView)
-//
-//        return seprateView
-//    }
-//
+
     // 园长端增加删除 功能
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         

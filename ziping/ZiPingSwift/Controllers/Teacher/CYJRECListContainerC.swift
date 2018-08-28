@@ -94,11 +94,12 @@ class CYJRECListViewControllerTeacher: CYJRECListViewController, CYJDropDownView
         
     }
     
+    
     /// 请求数据
     override func fetchDataSource() {
         
         self.listParam.page = self.page
-        
+        self.listParam.isother = 0
         RequestManager.POST(urlString: APIManager.Record.list, params: listParam.encodeToDictionary()) { [weak self] (data, error) in
             //如果存在error
             self?.endRefreshing()
@@ -128,7 +129,7 @@ class CYJRECListViewControllerTeacher: CYJRECListViewController, CYJDropDownView
                 DispatchQueue.main.async {
                     self?.dataSource.append(contentsOf: recordTmp)
                     self?.countedView?.count = (self?.dataSource.first?.record.total) ?? 0
-
+    
                     self?.tableView.reloadData()
                 }
             }else {
@@ -137,6 +138,8 @@ class CYJRECListViewControllerTeacher: CYJRECListViewController, CYJDropDownView
 
         }
     }
+    
+    
     
     func numberOfItemIn(dropdownView: CYJRECDropDownView) -> Int {
         return 4
