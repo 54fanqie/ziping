@@ -37,6 +37,9 @@ class TImeOptionSelectedController: KYBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
+        self.title = "选择测评时间"
+        
+        
     }
 }
 

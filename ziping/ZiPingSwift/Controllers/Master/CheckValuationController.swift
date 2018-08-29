@@ -169,7 +169,11 @@ class CheckValuationController: KYBaseTableViewController {
                 
                 //TODO: 选年--刷新--班级--测评时间
                 self.classCondition.title = "请选择班级"
-                self.valuationTimeCondition.title = "请选择时间"
+                if self.valuationTimeArray.count == 0 {
+                    self.valuationTimeCondition.title = "该学期暂无测评"
+                }else{
+                    self.valuationTimeCondition.title = "请选择测评时间"
+                }
                 
                 
                 self.checkValuationParamModel.grade = 0
@@ -204,7 +208,11 @@ class CheckValuationController: KYBaseTableViewController {
                 self.checkValuationParamModel.semester = op.opId
                 //TODO: 更换季节--刷新--班级--测评时间
                 self.classCondition.title = "请选择班级"
-                self.valuationTimeCondition.title = "请选择时间"
+                if self.valuationTimeArray.count == 0 {
+                    self.valuationTimeCondition.title = "该学期暂无测评"
+                }else{
+                    self.valuationTimeCondition.title = "请选择测评时间"
+                }
                 self.checkValuationParamModel.grade = 0
                 self.checkValuationParamModel.classId = 0
                 self.checkValuationParamModel.shijuanid = 0
@@ -265,16 +273,24 @@ class CheckValuationController: KYBaseTableViewController {
         //=======================================测评时间====================================================
         scopeConditionView = CYJConditionView(title: "测评时间:", key: "time")
         self.timeIndex = 0
-        valuationTimeCondition = CYJConditionButton(title: "请选择测评时间", key: "test_time") { [unowned self] (sender) in
-            
-            let testTimeController = TImeOptionSelectedController(currentIndex: self.timeIndex, options: self.valuationTimeArray) { [unowned sender](op , selectIndex) in
+        var titleContent = "请选择测评时间"
+        if self.valuationTimeArray.count == 0 {
+            titleContent = "该学期暂无测评"
+        }
+        
+        valuationTimeCondition = CYJConditionButton(title: titleContent, key: "test_time") { [unowned self] (sender) in
+            if self.valuationTimeArray.count != 0 {
+                let testTimeController = TImeOptionSelectedController(currentIndex: self.timeIndex, options: self.valuationTimeArray) { [unowned sender](op , selectIndex) in
+                    
+                    print("\(String(describing: op.testTime))")
+                    sender.title = op.testTime
+                    self.checkValuationParamModel.shijuanid = Int(op.shijuanid!)!
+                    self.timeIndex = selectIndex
+                }
                 
-                print("\(String(describing: op.testTime))")
-                sender.title = op.testTime
-                self.checkValuationParamModel.shijuanid = Int(op.shijuanid!)!
-                self.timeIndex = selectIndex
+                self.navigationController?.pushViewController(testTimeController, animated: true)
             }
-            self.navigationController?.pushViewController(testTimeController, animated: true)
+            
         }
         scopeConditionView.addCondition(valuationTimeCondition)
         scopeConditionView.frame.origin = CGPoint(x: 0, y: classConditionView.frame.maxY)
@@ -302,7 +318,12 @@ class CheckValuationController: KYBaseTableViewController {
             
             
             self.classCondition.title = "请选择班级"
-            self.valuationTimeCondition.title = "请选择测评时间"
+            if self.valuationTimeArray.count == 0 {
+                self.valuationTimeCondition.title = "该学期暂无测评"
+            }else{
+                self.valuationTimeCondition.title = "请选择测评时间"
+            }
+            
             
             
             self.checkValuationParamModel.grade = 0

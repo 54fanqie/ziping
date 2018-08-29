@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstructionViewController" customModule="ZiPingSwift" customModuleProvider="target">
             <connections>
                 <outlet property="contentLab" destination="h9d-fm-nco" id="qXc-bS-qUw"/>
-                <outlet property="titleLab" destination="yTf-OD-0o4" id="uFp-gD-Ihu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,14 +21,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="儿童社会发展情况问卷" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTf-OD-0o4">
-                    <rect key="frame" x="56" y="50" width="263.5" height="31.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9d-fm-nco">
-                    <rect key="frame" x="30" y="122" width="315" height="0.0"/>
+                    <rect key="frame" x="30" y="94" width="315" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -50,16 +43,14 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="h9d-fm-nco" secondAttribute="trailing" constant="30" id="2i1-bW-mzO"/>
-                <constraint firstItem="h9d-fm-nco" firstAttribute="top" secondItem="yTf-OD-0o4" secondAttribute="bottom" constant="40" id="3T9-37-4RP"/>
-                <constraint firstItem="ymf-fy-IIu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="HUz-yU-dL9"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ymf-fy-IIu" secondAttribute="bottom" id="QFN-k4-MRm"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ymf-fy-IIu" secondAttribute="trailing" id="RKK-9N-lCV"/>
-                <constraint firstItem="yTf-OD-0o4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="vgo-zB-WKu"/>
-                <constraint firstItem="h9d-fm-nco" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="wIw-4f-zGF"/>
-                <constraint firstItem="yTf-OD-0o4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="yR2-d2-3Nl"/>
+                <constraint firstAttribute="trailing" secondItem="h9d-fm-nco" secondAttribute="trailing" constant="30" id="2i1-bW-mzO"/>
+                <constraint firstItem="ymf-fy-IIu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HUz-yU-dL9"/>
+                <constraint firstAttribute="bottom" secondItem="ymf-fy-IIu" secondAttribute="bottom" id="QFN-k4-MRm"/>
+                <constraint firstAttribute="trailing" secondItem="ymf-fy-IIu" secondAttribute="trailing" id="RKK-9N-lCV"/>
+                <constraint firstItem="h9d-fm-nco" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="94" id="np2-ro-AIJ"/>
+                <constraint firstItem="h9d-fm-nco" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="wIw-4f-zGF"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <viewLayoutGuide key="safeArea" id="wSS-3y-hNV"/>
             <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>
     </objects>

@@ -11,14 +11,13 @@ import UIKit
 class InstructionViewController: KYBaseViewController {
     var shiJuanModel : ShiJuanModel!
     
-    @IBOutlet weak var titleLab: UILabel!
     @IBOutlet weak var contentLab: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "问卷测评"
         // Do any additional setup after loading the view.
-        titleLab.text = shiJuanModel.title
+    
         contentLab.text = shiJuanModel.content
     }
 

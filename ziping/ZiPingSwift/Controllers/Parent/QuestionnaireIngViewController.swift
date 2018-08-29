@@ -55,15 +55,15 @@ class QuestionnaireIngViewController: KYBaseViewController {
             }
             
             
-            if shiJuanModel.historyid == 0{
+//            if shiJuanModel.historyid == 0{
                 let instrucVc  = InstructionViewController()
                 instrucVc.shiJuanModel = shiJuanModel
                 self?.navigationController?.pushViewController(instrucVc, animated: true)
-            }else{
-                let mu = MultipleChoiceController();
-                mu.shiJuanModel = shiJuanModel
-                self?.navigationController?.pushViewController(mu, animated: true)
-            }
+//            }else{
+//                let mu = MultipleChoiceController();
+//                mu.shiJuanModel = shiJuanModel
+//                self?.navigationController?.pushViewController(mu, animated: true)
+//            }
             
         })
         
