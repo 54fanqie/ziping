@@ -169,11 +169,9 @@ class CheckValuationController: KYBaseTableViewController {
                 
                 //TODO: 选年--刷新--班级--测评时间
                 self.classCondition.title = "请选择班级"
-                if self.valuationTimeArray.count == 0 {
-                    self.valuationTimeCondition.title = "该学期暂无测评"
-                }else{
-                    self.valuationTimeCondition.title = "请选择测评时间"
-                }
+        
+                self.valuationTimeCondition.title = "请选择测评时间"
+             
                 
                 
                 self.checkValuationParamModel.grade = 0
@@ -184,8 +182,7 @@ class CheckValuationController: KYBaseTableViewController {
                 self.gradeIndex = 0
                 self.timeIndex = 0
                 
-                //刷新评测时间
-                self.getValuationTimeList()
+          
                 
                 self.analyseParam.cId = 0
                 self.analyseParam.dId = nil
@@ -208,11 +205,9 @@ class CheckValuationController: KYBaseTableViewController {
                 self.checkValuationParamModel.semester = op.opId
                 //TODO: 更换季节--刷新--班级--测评时间
                 self.classCondition.title = "请选择班级"
-                if self.valuationTimeArray.count == 0 {
-                    self.valuationTimeCondition.title = "该学期暂无测评"
-                }else{
-                    self.valuationTimeCondition.title = "请选择测评时间"
-                }
+               
+                self.valuationTimeCondition.title = "请选择测评时间"
+             
                 self.checkValuationParamModel.grade = 0
                 self.checkValuationParamModel.classId = 0
                 self.checkValuationParamModel.shijuanid = 0
@@ -221,8 +216,7 @@ class CheckValuationController: KYBaseTableViewController {
                 self.gradeIndex = 0
                 self.timeIndex = 0
                 
-                //刷新评测时间
-                self.getValuationTimeList()
+               
                 
                 
                 
@@ -254,8 +248,8 @@ class CheckValuationController: KYBaseTableViewController {
                 sender.title = "\(gradeName)" + "-" + "\(className)"
                 self.gradeIndex = gradeIndex
                 self.classIndex = classIndex
-                
-                
+                //刷新评测时间
+                self.getValuationTimeList()
             })
             self.navigationController?.pushViewController(optionController, animated: true)
         }
@@ -266,30 +260,28 @@ class CheckValuationController: KYBaseTableViewController {
         
         
         
-        //请求测评时间信息
-        getValuationTimeList()
+       
         
         
         //=======================================测评时间====================================================
         scopeConditionView = CYJConditionView(title: "测评时间:", key: "time")
         self.timeIndex = 0
-        var titleContent = "请选择测评时间"
-        if self.valuationTimeArray.count == 0 {
-            titleContent = "该学期暂无测评"
-        }
-        
+        let titleContent = "请选择测评时间"
         valuationTimeCondition = CYJConditionButton(title: titleContent, key: "test_time") { [unowned self] (sender) in
-            if self.valuationTimeArray.count != 0 {
-                let testTimeController = TImeOptionSelectedController(currentIndex: self.timeIndex, options: self.valuationTimeArray) { [unowned sender](op , selectIndex) in
-                    
-                    print("\(String(describing: op.testTime))")
-                    sender.title = op.testTime
-                    self.checkValuationParamModel.shijuanid = Int(op.shijuanid!)!
-                    self.timeIndex = selectIndex
-                }
-                
-                self.navigationController?.pushViewController(testTimeController, animated: true)
+            if self.checkValuationParamModel.classId == 0  || self.checkValuationParamModel.grade == 0{
+                Third.toast.message("请选择班级")
+                return
             }
+            
+            let testTimeController = TImeOptionSelectedController(currentIndex: self.timeIndex, options: self.valuationTimeArray) { [unowned sender](op , selectIndex) in
+                
+                print("\(String(describing: op.testTime))")
+                sender.title = op.testTime
+                self.checkValuationParamModel.shijuanid = Int(op.shijuanid!)!
+                self.timeIndex = selectIndex
+            }
+            
+            self.navigationController?.pushViewController(testTimeController, animated: true)
             
         }
         scopeConditionView.addCondition(valuationTimeCondition)
@@ -318,11 +310,8 @@ class CheckValuationController: KYBaseTableViewController {
             
             
             self.classCondition.title = "请选择班级"
-            if self.valuationTimeArray.count == 0 {
-                self.valuationTimeCondition.title = "该学期暂无测评"
-            }else{
-                self.valuationTimeCondition.title = "请选择测评时间"
-            }
+            self.valuationTimeCondition.title = "请选择测评时间"
+    
             
             
             
@@ -458,7 +447,8 @@ class CheckValuationController: KYBaseTableViewController {
     
     //获取测评时间
     func getValuationTimeList(){
-        RequestManager.POST(urlString: APIManager.Valuation.getTestTime, params: ["year":self.analyseParam.year,"semester":self.analyseParam.year]) { [weak self] (data, error) in
+       
+        RequestManager.POST(urlString: APIManager.Valuation.getTestTime, params: ["year":self.analyseParam.year,"semester":self.analyseParam.semester,"classId":self.checkValuationParamModel.classId,"grade":self.checkValuationParamModel.grade]) { [weak self] (data, error) in
             
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
@@ -472,6 +462,11 @@ class CheckValuationController: KYBaseTableViewController {
                     let target = JSONDeserializer<TestTimeModel>.deserializeFrom(dict: $0 as? NSDictionary)
                     self?.valuationTimeArray.append(target!)
                 })
+            }
+            if self?.valuationTimeArray.count == 0{
+                self?.valuationTimeCondition.title = "该学期暂无测评"
+            }else{
+                self?.valuationTimeCondition.title = "请选择测评时间"
             }
         }
     }
