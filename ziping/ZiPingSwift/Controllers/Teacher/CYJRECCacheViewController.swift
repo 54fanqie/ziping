@@ -43,13 +43,13 @@ class CYJRECCacheViewController: KYBaseTableViewController, CYJActionPassOnDelea
         super.viewWillAppear(animated)
         
         
-//        if self.recordGrId != 0{
-//            fetchRecordInfoSource()
-//        }else{
-            self.page = 1
+        if self.recordGrId != 0{
+            fetchRecordInfoSource()
+        }else{
+//            self.page = 1
             // 每次都要新数据！
             self.fetchDataSource()
-//        }
+        }
         
     }
     //更新某条数据
