@@ -35,40 +35,55 @@ class CompleteNumberView: UIView {
             rightCountLab.text =  thisTestStatistics["noComplete"] as? String
         }
     }
-    var lastTestStatistics = NSDictionary()
-    
-    var isComparison : Bool = false {
+    var lastTestStatistics = NSDictionary(){
         didSet{
-            if isComparison == true {//进行对比
                 leftTitleLab.text = "本/上次完成测评幼儿"
                 rightTitleLab.text = "本/上次未完成测评幼儿"
                 ageSexLab.text = "年龄段/性别"
-              
+                
                 tatolLab.text = "班级总分平均分 \n （本/上次）"
                 averageLab.text = "园内同年龄组平均分 \n （本/上次）"
                 
-              
+                
                 
                 leftCountLab.text = String(format: "%@/%@", (thisTestStatistics["overComplete"] as? String)!,(lastTestStatistics["overComplete"] as? String)!)
                 
-                rightCountLab.text = String(format: "%@/%@", (thisTestStatistics["noComplete"] as? String)!,(lastTestStatistics["noComplete"] as? String)!)
-                
-            
-            }else{//不对比
-                leftTitleLab.text = "完成测评幼儿"
-                rightTitleLab.text = "未完成测评幼儿"
-                ageSexLab.text = "年龄段/性别"
-                tatolLab.text = "班级总分平均分"
-                averageLab.text = "园内同年龄组平均分"
-                
-                leftCountLab.text = thisTestStatistics["overComplete"] as? String
-                rightCountLab.text =  thisTestStatistics["noComplete"] as? String
-                
-                
+                rightCountLab.text = String(format: "%@/%@", (thisTestStatistics["noComplete"] as? String)!,(lastTestStatistics["noComplete"] as? String)!)   
             }
-            
-        }
     }
+    
+//    var isComparison : Bool = false {
+//        didSet{
+//            if isComparison == true {//进行对比
+//                leftTitleLab.text = "本/上次完成测评幼儿"
+//                rightTitleLab.text = "本/上次未完成测评幼儿"
+//                ageSexLab.text = "年龄段/性别"
+//              
+//                tatolLab.text = "班级总分平均分 \n （本/上次）"
+//                averageLab.text = "园内同年龄组平均分 \n （本/上次）"
+//                
+//              
+//                
+//                leftCountLab.text = String(format: "%@/%@", (thisTestStatistics["overComplete"] as? String)!,(lastTestStatistics["overComplete"] as? String)!)
+//                
+//                rightCountLab.text = String(format: "%@/%@", (thisTestStatistics["noComplete"] as? String)!,(lastTestStatistics["noComplete"] as? String)!)
+//                
+//            
+//            }else{//不对比
+//                leftTitleLab.text = "完成测评幼儿"
+//                rightTitleLab.text = "未完成测评幼儿"
+//                ageSexLab.text = "年龄段/性别"
+//                tatolLab.text = "班级总分平均分"
+//                averageLab.text = "园内同年龄组平均分"
+//                
+//                leftCountLab.text = thisTestStatistics["overComplete"] as? String
+//                rightCountLab.text =  thisTestStatistics["noComplete"] as? String
+//                
+//                
+//            }
+//            
+//        }
+//    }
     
    
     

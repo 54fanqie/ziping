@@ -17,7 +17,7 @@ class ScoreListTableViewCell: UITableViewCell {
 
     var testGroupData = TestGroupData(){
         didSet{
-            typeLab?.text = String(format: "%@/%@", testGroupData.rangeAge as! String,testGroupData.sex as! String)
+            typeLab?.text = testGroupData.rangeToAge
             tatolLab?.text = testGroupData.averageScore
             averageLab?.text = testGroupData.averageAge
         }

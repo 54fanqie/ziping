@@ -36,10 +36,9 @@ class AnalysisModel: CYJBaseModel {
 
 //列表对比数据
 class TestGroupData: CYJBaseModel {
-    var rangeAge : String?
-    var sex : String?
     var averageScore : String?
     var averageAge : String?
+    var rangeToAge : String?
 }
 
 
@@ -123,11 +122,8 @@ class CheckValuationController: KYBaseTableViewController {
     var analyseParam: CYJAnalyseParam = CYJAnalyseParam()
     
     
-    
-    //单次列表数据
-    var thisListDatas = [TestGroupData]()
-    //封装对比数据
-    var valuation = [TestGroupData]()
+    //统计数据列表
+    var compareListDatas  = [TestGroupData]()
     //是否对比数据
     var isComparison : Bool = false
     
@@ -332,10 +328,8 @@ class CheckValuationController: KYBaseTableViewController {
                 self.compareButton = nil
             }
             
-            
-            
-            self.thisListDatas.removeAll()
-            self.valuation.removeAll()
+        
+            self.compareListDatas.removeAll()
             self.tableView.reloadData()
             
             let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
@@ -419,12 +413,11 @@ class CheckValuationController: KYBaseTableViewController {
     }
     
     
-    
+    //对比数据
     func compareAciton(button : UIButton){
         button.isSelected = !button.isSelected
-        self.completeNumberView.isComparison = button.isSelected
         isComparison = button.isSelected
-        tableView.reloadData()
+        getValuationAnalysis()
     }
     //获取班级信息
     func getClassDetailList(){
@@ -480,13 +473,7 @@ class CheckValuationController: KYBaseTableViewController {
                 Third.toast.message((error?.localizedDescription)!)
                 return
             }
-            //先清空数据
-            if (self?.thisListDatas.count)! > 0 || (self?.valuation.count)! > 0 {
-                self?.thisListDatas.removeAll()
-                self?.valuation.removeAll()
-            }
-            
-            
+           
             let dictionary = data as? NSDictionary
             let this = dictionary!["thisTime"] as? NSDictionary
             let last = dictionary!["lastTime"] as? NSDictionary
@@ -495,26 +482,38 @@ class CheckValuationController: KYBaseTableViewController {
             let lastListDatas  = JSONDeserializer<AnalysisModel>.deserializeFrom(dict: last)
             if (self?.completeNumberView == nil) || (self?.compareButton == nil){
                 self?.initUI()
-                self?.completeNumberView.thisTestStatistics = (thisListDatas?.testStatistics)!
-                self?.completeNumberView.lastTestStatistics = (lastListDatas?.testStatistics)!
-                //单次数据
-                self?.thisListDatas = (thisListDatas?.testGroupData)!
-                //封装对比数据
-                self?.compareData(lastListDatas: (lastListDatas?.testGroupData)!)
-                self?.tableView.reloadData()
             }
+         
+            if self?.isComparison == false{
+                //单次数据
+                self?.completeNumberView.thisTestStatistics = (thisListDatas?.testStatistics)!
+                self?.compareListDatas = (thisListDatas?.testGroupData)!
+            }else{
+                //如果有上一次的记录数据，就封装上一次的数据
+                if lastListDatas != nil {
+                    self?.completeNumberView.lastTestStatistics = (lastListDatas?.testStatistics)!
+                    //对比数据
+                    self?.compareListDatas = (self?.compareData(thisListDatas:(thisListDatas?.testGroupData)! ,lastListDatas: (lastListDatas?.testGroupData)!))!
+                }else{
+                    Third.toast.message("没有上一次的对比数据")
+                }
+            }
+            self?.tableView.reloadData()
+    
         }
     }
+    
     //组装列表数据
-    func compareData(lastListDatas:[TestGroupData]){
-        for i in 0..<self.thisListDatas.count{
+    func compareData(thisListDatas:[TestGroupData],lastListDatas:[TestGroupData]) -> [TestGroupData]{
+
+        for i in 0..<thisListDatas.count{
             let model = TestGroupData();
-            model.rangeAge = self.thisListDatas[i].rangeAge
-            model.sex = self.thisListDatas[i].sex
-            model.averageScore = String(format: "%@/%@",self.thisListDatas[i].averageScore!, lastListDatas[i].averageScore!)
-            model.averageAge = String(format: "%@/%@",self.thisListDatas[i].averageAge!, lastListDatas[i].averageAge!)
-            valuation.append(model)
+            model.rangeToAge = thisListDatas[i].rangeToAge
+            model.averageScore = String(format: "%@/%@",thisListDatas[i].averageScore!, lastListDatas[i].averageScore!)
+            model.averageAge = String(format: "%@/%@",thisListDatas[i].averageAge!, lastListDatas[i].averageAge!)
+            compareListDatas.append(model)
         }
+        return compareListDatas
     }
     
     
@@ -536,12 +535,7 @@ extension CheckValuationController {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isComparison == true {
-            return valuation.count
-        }else{
-            return thisListDatas.count
-        }
-        
+      return  self.compareListDatas.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 42
@@ -553,12 +547,8 @@ extension CheckValuationController {
         }
         cell.selectionStyle = .none
         
-        if isComparison == true {
-            cell.testGroupData = self.valuation[indexPath.row]
-        }else{
-            cell.testGroupData = self.thisListDatas[indexPath.row]
-        }
-        
+       
+        cell.testGroupData = self.compareListDatas[indexPath.row]
         return cell
         
     }
