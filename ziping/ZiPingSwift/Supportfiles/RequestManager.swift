@@ -114,8 +114,9 @@ extension RequestManager
                       complete(custom?.data, nil)
                     }
                     
-                }else
-                {
+                }else if custom?.status == 201 {
+                    
+                }else{
                     let error = NSError(domain: CYJErrorDomainName, code: (custom?.status)!, userInfo: [NSLocalizedDescriptionKey: custom?.message ?? "未知错误"])
                     
                     if error.code == 205 {

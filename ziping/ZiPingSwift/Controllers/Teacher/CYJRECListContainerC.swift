@@ -99,7 +99,7 @@ class CYJRECListViewControllerTeacher: CYJRECListViewController, CYJDropDownView
     override func fetchDataSource() {
         
         self.listParam.page = self.page
-        self.listParam.isother = 0
+//        self.listParam.isother = 0
         RequestManager.POST(urlString: APIManager.Record.list, params: listParam.encodeToDictionary()) { [weak self] (data, error) in
             //如果存在error
             self?.endRefreshing()

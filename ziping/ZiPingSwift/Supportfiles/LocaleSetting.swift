@@ -172,6 +172,7 @@ extension LocaleSetting {
             //如果存在error
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
+                print((error?.localizedDescription)!)
                 return
             }
             //解析数据

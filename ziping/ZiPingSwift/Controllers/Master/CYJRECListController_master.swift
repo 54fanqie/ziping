@@ -27,7 +27,7 @@ class RECListSearchParam: CYJParameterEncoding, NSCopying{
     var endTime: String?   //记录结束日期
     var page: Int = 1    //页码 不传默认第一页
     var limit: String = "10"   //条数 不传默认10条
-    var isother : Int = 0   //浏览其他班级
+    var isother : Int?   //浏览其他班级
     /// 清除当前数据
     func clear() {
         self.cId = nil
@@ -112,7 +112,7 @@ class CYJRECListControllerMaster: CYJRECListViewController {
     override func fetchDataSource() {
         
         self.listParam.page = self.page
-        self.listParam.isother = 0
+//        self.listParam.isother = 0
         if self.page == 1 {
             
 //            if let _ = tableView.cellForRow(at: IndexPath(row: 0, section: 0 )) {

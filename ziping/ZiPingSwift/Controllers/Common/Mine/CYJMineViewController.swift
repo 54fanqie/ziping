@@ -258,7 +258,7 @@ extension CYJMineViewController {
         let listParam = RECListSearchParam()
         listParam.page = 1
         listParam.limit = "10"
-        listParam.isother = 0
+        listParam.isother = 1
         RequestManager.POST(urlString: APIManager.Record.list, params: listParam.encodeToDictionary()  ,callBackAll : true) { [weak self] (data, error) in
 
             //如果存在error

@@ -52,6 +52,17 @@ class CheckValuationParamModel: CYJBaseModel {
     var isComparison : Int = 0    
 }
 
+class TestTitleDetail: NSObject {
+    var leftTitleLab : String!
+    var rightTitleLab : String!
+    var ageSexLab : String!
+    
+    var tatolLab : String!
+    var averageLab : String!
+    
+    var leftCountLabText : String!
+    var rightCountLabText : String!
+}
 
 class CheckValuationController: KYBaseTableViewController {
     
@@ -124,6 +135,12 @@ class CheckValuationController: KYBaseTableViewController {
     
     //统计数据列表
     var compareListDatas  = [TestGroupData]()
+    
+    //本次统计测评数据
+    var thisListDatas  : AnalysisModel!
+    //上次统计测评数据
+    var lastListDatas  : AnalysisModel!
+    
     //是否对比数据
     var isComparison : Bool = false
     
@@ -165,9 +182,9 @@ class CheckValuationController: KYBaseTableViewController {
                 
                 //TODO: 选年--刷新--班级--测评时间
                 self.classCondition.title = "请选择班级"
-        
+                
                 self.valuationTimeCondition.title = "请选择测评时间"
-             
+                
                 
                 
                 self.checkValuationParamModel.grade = 0
@@ -178,42 +195,6 @@ class CheckValuationController: KYBaseTableViewController {
                 self.gradeIndex = 0
                 self.timeIndex = 0
                 
-          
-                
-                self.analyseParam.cId = 0
-                self.analyseParam.dId = nil
-                self.analyseParam.diId = nil
-            }
-            self.navigationController?.pushViewController(optionController, animated: true)
-        }
-        //季节
-        let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
-        let seasonCondition = CYJConditionButton(title: self.semesterArray[season!].title , key: "time_season") { (sender) in
-            
-            let index = self.semesterArray.index { $0.opId == self.analyseParam.semester} ?? 0
-            
-            let optionController = CYJOptionsSelectedController(currentIndex: index, options: self.semesterArray) { [unowned sender](op) in
-                print("\(op.title)")
-                sender.setTitle(op.title, for: .normal)
-                
-                self.analyseParam.semester = op.opId
-                
-                self.checkValuationParamModel.semester = op.opId
-                //TODO: 更换季节--刷新--班级--测评时间
-                self.classCondition.title = "请选择班级"
-               
-                self.valuationTimeCondition.title = "请选择测评时间"
-             
-                self.checkValuationParamModel.grade = 0
-                self.checkValuationParamModel.classId = 0
-                self.checkValuationParamModel.shijuanid = 0
-                self.checkValuationParamModel.isComparison = 0
-                self.classIndex = 0
-                self.gradeIndex = 0
-                self.timeIndex = 0
-                
-               
-                
                 
                 
                 self.analyseParam.cId = 0
@@ -222,9 +203,45 @@ class CheckValuationController: KYBaseTableViewController {
             }
             self.navigationController?.pushViewController(optionController, animated: true)
         }
+        //        //季节
+        //        let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
+        //        let seasonCondition = CYJConditionButton(title: self.semesterArray[season!].title , key: "time_season") { (sender) in
+        //
+        //            let index = self.semesterArray.index { $0.opId == self.analyseParam.semester} ?? 0
+        //
+        //            let optionController = CYJOptionsSelectedController(currentIndex: index, options: self.semesterArray) { [unowned sender](op) in
+        //                print("\(op.title)")
+        //                sender.setTitle(op.title, for: .normal)
+        //
+        //                self.analyseParam.semester = op.opId
+        //
+        //                self.checkValuationParamModel.semester = op.opId
+        //                //TODO: 更换季节--刷新--班级--测评时间
+        //                self.classCondition.title = "请选择班级"
+        //
+        //                self.valuationTimeCondition.title = "请选择测评时间"
+        //
+        //                self.checkValuationParamModel.grade = 0
+        //                self.checkValuationParamModel.classId = 0
+        //                self.checkValuationParamModel.shijuanid = 0
+        //                self.checkValuationParamModel.isComparison = 0
+        //                self.classIndex = 0
+        //                self.gradeIndex = 0
+        //                self.timeIndex = 0
+        //
+        //
+        //
+        //
+        //
+        //                self.analyseParam.cId = 0
+        //                self.analyseParam.dId = nil
+        //                self.analyseParam.diId = nil
+        //            }
+        //            self.navigationController?.pushViewController(optionController, animated: true)
+        //        }
         
         termConditionView.addCondition(yearCondition)
-        termConditionView.addCondition(seasonCondition)
+        //        termConditionView.addCondition(seasonCondition)
         termConditionView.frame.origin = CGPoint(x: 0, y: 0)
         tabelHeaderView.addSubview(termConditionView)
         
@@ -256,7 +273,7 @@ class CheckValuationController: KYBaseTableViewController {
         
         
         
-       
+        
         
         
         //=======================================测评时间====================================================
@@ -307,7 +324,7 @@ class CheckValuationController: KYBaseTableViewController {
             
             self.classCondition.title = "请选择班级"
             self.valuationTimeCondition.title = "请选择测评时间"
-    
+            
             
             
             
@@ -328,13 +345,13 @@ class CheckValuationController: KYBaseTableViewController {
                 self.compareButton = nil
             }
             
-        
+            
             self.compareListDatas.removeAll()
             self.tableView.reloadData()
             
-            let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
+            //            let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
             yearCondition.setTitle("\(self.analyseParam.year)", for: .normal)
-            seasonCondition.setTitle("\(self.semesterArray[season!].title)", for: .normal)
+            //            seasonCondition.setTitle("\(self.semesterArray[season!].title)", for: .normal)
             
             
             //            self.clearAllCharts()
@@ -417,7 +434,15 @@ class CheckValuationController: KYBaseTableViewController {
     func compareAciton(button : UIButton){
         button.isSelected = !button.isSelected
         isComparison = button.isSelected
-        getValuationAnalysis()
+        //如果有上一次的记录数据，就封装上一次的数据
+        if button.isSelected == true {
+            self.completeNumberView.testTitleDetail = self.completeNumberTitle(isSelect: true, thisTest: self.thisListDatas.testStatistics!, lastTest: self.lastListDatas.testStatistics!)
+            //对比数据
+            self.compareListDatas = self.compareData(thisListDatas:(self.thisListDatas.testGroupData) ,lastListDatas: (self.lastListDatas.testGroupData))
+        }else{
+            self.completeNumberView.testTitleDetail = self.completeNumberTitle(isSelect: false, thisTest: self.thisListDatas.testStatistics!, lastTest: self.lastListDatas.testStatistics!)
+            self.compareListDatas = self.thisListDatas.testGroupData
+        }
     }
     //获取班级信息
     func getClassDetailList(){
@@ -440,8 +465,8 @@ class CheckValuationController: KYBaseTableViewController {
     
     //获取测评时间
     func getValuationTimeList(){
-       
-        RequestManager.POST(urlString: APIManager.Valuation.getTestTime, params: ["year":self.analyseParam.year,"semester":self.analyseParam.semester,"classId":self.checkValuationParamModel.classId,"grade":self.checkValuationParamModel.grade]) { [weak self] (data, error) in
+        
+        RequestManager.POST(urlString: APIManager.Valuation.getTestTime, params: ["year":self.analyseParam.year,"classId":self.checkValuationParamModel.classId,"grade":self.checkValuationParamModel.grade]) { [weak self] (data, error) in
             
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
@@ -467,45 +492,79 @@ class CheckValuationController: KYBaseTableViewController {
     
     //查询测评-分析
     func getValuationAnalysis(){
-        RequestManager.POST(urlString: APIManager.Valuation.analysis, params: ["year":self.checkValuationParamModel.year ,"semester":self.checkValuationParamModel.semester,"grade":self.checkValuationParamModel.grade,"classId":self.checkValuationParamModel.classId,"shijuanid":self.checkValuationParamModel.shijuanid,"isComparison":self.checkValuationParamModel.isComparison]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.analysis, params: ["year":self.checkValuationParamModel.year ,"grade":self.checkValuationParamModel.grade,"classId":self.checkValuationParamModel.classId,"shijuanid":self.checkValuationParamModel.shijuanid,"isComparison": 1]) { [weak self] (data, error) in
             
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return
             }
-           
+            
             let dictionary = data as? NSDictionary
             let this = dictionary!["thisTime"] as? NSDictionary
             let last = dictionary!["lastTime"] as? NSDictionary
             
-            let thisListDatas  = JSONDeserializer<AnalysisModel>.deserializeFrom(dict: this )
-            let lastListDatas  = JSONDeserializer<AnalysisModel>.deserializeFrom(dict: last)
+            let thisList = JSONDeserializer<AnalysisModel>.deserializeFrom(dict: this )
+            let lastList  = JSONDeserializer<AnalysisModel>.deserializeFrom(dict: last)
             if (self?.completeNumberView == nil) || (self?.compareButton == nil){
                 self?.initUI()
             }
-         
-            if self?.isComparison == false{
-                //单次数据
-                self?.completeNumberView.thisTestStatistics = (thisListDatas?.testStatistics)!
-                self?.compareListDatas = (thisListDatas?.testGroupData)!
-            }else{
-                //如果有上一次的记录数据，就封装上一次的数据
-                if lastListDatas != nil {
-                    self?.completeNumberView.lastTestStatistics = (lastListDatas?.testStatistics)!
-                    //对比数据
-                    self?.compareListDatas = (self?.compareData(thisListDatas:(thisListDatas?.testGroupData)! ,lastListDatas: (lastListDatas?.testGroupData)!))!
-                }else{
-                    Third.toast.message("没有上一次的对比数据")
-                }
+                //本次数据
+            self?.thisListDatas = AnalysisModel()
+            self?.thisListDatas = thisList
+                //上次数据
+            self?.lastListDatas = AnalysisModel()
+            self?.lastListDatas = lastList
+        
+            
+            //每次请求默认显示单次数据
+            self?.completeNumberView.testTitleDetail = (self?.completeNumberTitle(isSelect: false, thisTest: (self?.thisListDatas.testStatistics!)!, lastTest: (self?.lastListDatas.testStatistics!)!))!
+            self?.compareListDatas = (thisList?.testGroupData)!
+            
+            
+            //如果有上一次的记录数据，就封装上一次的数据
+            if lastList?.testGroupData.count == 0 {
+                self?.compareButton.isHidden = true
             }
             self?.tableView.reloadData()
-    
         }
     }
     
+   
+    //封装表头显示数据
+    func completeNumberTitle(isSelect : Bool,thisTest : NSDictionary ,lastTest : NSDictionary) ->TestTitleDetail {
+        let testTitleDetail = TestTitleDetail()
+        if isSelect == true {//进行对比
+            
+            testTitleDetail.leftTitleLab = "本/上次完成测评幼儿"
+            testTitleDetail.rightTitleLab = "本/上次未完成测评幼儿"
+            testTitleDetail.ageSexLab = "年龄段/性别"
+            
+            testTitleDetail.tatolLab = "班级总分平均分 \n （本/上次）"
+            testTitleDetail.averageLab = "园内同年龄组平均分 \n （本/上次）"
+            
+            
+            testTitleDetail.leftCountLabText = String(format: "%@/%@", (thisTest["overComplete"] as? String)!,(lastTest["overComplete"] as? String)!)
+            testTitleDetail.rightCountLabText = String(format: "%@/%@", (thisTest["noComplete"] as? String)!,(lastTest["noComplete"] as? String)!)
+            
+        }else{//不对比
+            testTitleDetail.leftTitleLab  = "完成测评幼儿"
+            testTitleDetail.rightTitleLab = "未完成测评幼儿"
+            testTitleDetail.ageSexLab = "年龄段/性别"
+            
+            testTitleDetail.tatolLab = "班级总分平均分"
+            testTitleDetail.averageLab = "园内同年龄组平均分"
+            
+            testTitleDetail.leftCountLabText = thisTest["overComplete"] as? String
+            testTitleDetail.rightCountLabText =  thisTest["noComplete"] as? String
+            
+        }
+        return testTitleDetail
+    }
+    
+    
     //组装列表数据
     func compareData(thisListDatas:[TestGroupData],lastListDatas:[TestGroupData]) -> [TestGroupData]{
-
+        
         for i in 0..<thisListDatas.count{
             let model = TestGroupData();
             model.rangeToAge = thisListDatas[i].rangeToAge
@@ -535,7 +594,7 @@ extension CheckValuationController {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return  self.compareListDatas.count
+        return  self.compareListDatas.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 42
@@ -547,7 +606,7 @@ extension CheckValuationController {
         }
         cell.selectionStyle = .none
         
-       
+        
         cell.testGroupData = self.compareListDatas[indexPath.row]
         return cell
         
