@@ -475,7 +475,7 @@ class CYJAnalyseViewController: KYBaseTableViewController {
                 let barChartData = BarChartData(dataSets: dataSets)
                 barChartData.barWidth = 0.5
                 barChartDatas.append(barChartData)
-                barChartTitle.append("按：\(domain.dName ?? "--")进行整体分析")
+                barChartTitle.append("按\(domain.dName ?? "--")进行整体分析")
             }
         })
         dataSource?.dimension?.forEach({ (demision) in
@@ -498,7 +498,7 @@ class CYJAnalyseViewController: KYBaseTableViewController {
                 let barChartData = BarChartData(dataSets: dataSets)
                 barChartData.barWidth = 0.5
                 barChartDatas.append(barChartData)
-                barChartTitle.append("按：\(demision.diName ?? "--")进行整体分析")
+                barChartTitle.append("按\(demision.diName ?? "--")进行整体分析")
             }
         })
         tableView.reloadData()

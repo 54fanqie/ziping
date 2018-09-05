@@ -21,10 +21,32 @@ class ValuationNoStartViewController: KYBaseViewController {
             valuationTimeLab.text = self.valuationStatueInfo?.title
             remarkLab.text = self.valuationStatueInfo?.remarks
             let testTime = self.valuationStatueInfo?.testTime
-            firstTimeLab.text = testTime?[0] as? String
-            secondTimeLab.text = testTime?[1] as? String
-            thirdTimeLab.text = testTime?[2] as? String
-            fourTimeLab.text = testTime?[3] as? String
+      
+            switch testTime?.count {
+            case 1:
+                firstTimeLab.text = testTime?[0] as? String
+                break
+            case 2:
+                firstTimeLab.text = testTime?[0] as? String
+                secondTimeLab.text = testTime?[1] as? String
+                break
+            case 3:
+                firstTimeLab.text = testTime?[0] as? String
+                secondTimeLab.text = testTime?[1] as? String
+                thirdTimeLab.text = testTime?[2] as? String
+                break
+            case 4:
+                firstTimeLab.text = testTime?[0] as? String
+                secondTimeLab.text = testTime?[1] as? String
+                thirdTimeLab.text = testTime?[2] as? String
+                fourTimeLab.text = testTime?[3] as? String
+                break
+            default:
+                firstTimeLab.text = nil
+                secondTimeLab.text = nil
+                thirdTimeLab.text = nil
+                fourTimeLab.text = nil
+            }
         }
     }
     

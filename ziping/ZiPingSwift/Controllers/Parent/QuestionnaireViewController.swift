@@ -109,7 +109,7 @@ class QuestionnaireViewController: KYBaseViewController {
         var status : Int = 0
         
         if self.valuatuinStatue?.isfinish == 1 {
-            status = 3
+            status = 4
         }else{
             status = (self.valuatuinStatue?.status)!
         }
@@ -130,26 +130,25 @@ class QuestionnaireViewController: KYBaseViewController {
             vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             vc1.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc1)
+        case 2://  问卷测评  已结束
+            let vc2 = QuestionnaireEndViewController()
+            vc2.view.backgroundColor = UIColor.white
+            vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            vc2.valuationStatueInfo = self.valuatuinStatue!
+            childVCs.append(vc2)
         case 3:
+            //  问卷测评  已毕业
+            let vc5 = GraduationViewController()
+            vc5.view.backgroundColor = UIColor.white
+            vc5.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            childVCs.append(vc5)
+        case 4:
             //  问卷测评  已完成
             let vc3 = QuestionnComplentViewController()
             vc3.view.backgroundColor = UIColor.white
             vc3.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             vc3.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc3)
-        case 4:
-            //  问卷测评  已结束
-            let vc2 = QuestionnaireEndViewController()
-            vc2.view.backgroundColor = UIColor.white
-            vc2.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
-            vc2.valuationStatueInfo = self.valuatuinStatue!
-            childVCs.append(vc2)
-        case 5:
-            //  问卷测评  已毕业
-            let vc5 = GraduationViewController()
-            vc5.view.backgroundColor = UIColor.white
-            vc5.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
-            childVCs.append(vc5)
             
         default:
             //  空白

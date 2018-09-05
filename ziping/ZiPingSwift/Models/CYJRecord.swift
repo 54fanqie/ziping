@@ -706,7 +706,7 @@ struct CYJRecordCellFrame {
                 
             }
             
-            readOverImageViewFrame = CGRect(x: width - 40 - 15, y: y, width: 35, height: 30)
+            readOverImageViewFrame = CGRect(x: width - 35, y: y, width: 35, height: 30)
 //            print("y-teacher\(y + 13 + 15)")
             cellHeight = y + 15 + 15
         }else if role == .master {

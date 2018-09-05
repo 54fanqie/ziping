@@ -489,6 +489,8 @@
 		B18CBECF20FF747F00827E39 /* ValuationCompleteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */; };
 		B18CBED020FF747F00827E39 /* ValuationCompleteController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */; };
 		B1A7C5DF1FD3F6E0006DEEEC /* Pink.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1A7C5DE1FD3F6E0006DEEEC /* Pink.plist */; };
+		B1AA46D7214004F600C18FB6 /* NoPartakeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AA46D5214004F600C18FB6 /* NoPartakeViewController.swift */; };
+		B1AA46D8214004F600C18FB6 /* NoPartakeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1AA46D6214004F600C18FB6 /* NoPartakeViewController.xib */; };
 		B1BD51BF2127DFDF00FFA116 /* MessageControllerMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD51BE2127DFDF00FFA116 /* MessageControllerMaster.swift */; };
 		B1BD51C12128100000FFA116 /* ApplyValuationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BD51C02128100000FFA116 /* ApplyValuationViewController.swift */; };
 		B1C9AA971FDC60A20038C372 /* CYJNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C9AA951FDC60A20038C372 /* CYJNotificationCell.swift */; };
@@ -1068,6 +1070,8 @@
 		B18CBECD20FF747F00827E39 /* ValuationCompleteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationCompleteController.swift; sourceTree = "<group>"; };
 		B18CBECE20FF747F00827E39 /* ValuationCompleteController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationCompleteController.xib; sourceTree = "<group>"; };
 		B1A7C5DE1FD3F6E0006DEEEC /* Pink.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Pink.plist; sourceTree = "<group>"; };
+		B1AA46D5214004F600C18FB6 /* NoPartakeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPartakeViewController.swift; sourceTree = "<group>"; };
+		B1AA46D6214004F600C18FB6 /* NoPartakeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoPartakeViewController.xib; sourceTree = "<group>"; };
 		B1BD51BE2127DFDF00FFA116 /* MessageControllerMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageControllerMaster.swift; sourceTree = "<group>"; };
 		B1BD51C02128100000FFA116 /* ApplyValuationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyValuationViewController.swift; sourceTree = "<group>"; };
 		B1C9AA951FDC60A20038C372 /* CYJNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYJNotificationCell.swift; sourceTree = "<group>"; };
@@ -2350,6 +2354,8 @@
 				B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */,
 				B12DB1212100DC2A00D95FAA /* ValuationEndViewController.xib */,
 				B13ACFD42103359200700C06 /* ValuationResultViewController.swift */,
+				B1AA46D5214004F600C18FB6 /* NoPartakeViewController.swift */,
+				B1AA46D6214004F600C18FB6 /* NoPartakeViewController.xib */,
 			);
 			name = Valuation;
 			sourceTree = "<group>";
@@ -2649,6 +2655,7 @@
 				8D4C8DD51F7F71AB00EDAE28 /* voice_pressed@2x.png in Resources */,
 				8DE6C2DA1F60F095006A42B5 /* CYJThemeDisplayCell.xib in Resources */,
 				8D4C8D9A1F7F71A100EDAE28 /* FilterResource.bundle in Resources */,
+				B1AA46D8214004F600C18FB6 /* NoPartakeViewController.xib in Resources */,
 				8D4C8DB61F7F71AB00EDAE28 /* qingxin@2x.png in Resources */,
 				8D1654941FA732A100AC4954 /* composite@2x.png in Resources */,
 				8D1654831FA7327F00AC4954 /* quick2.png in Resources */,
@@ -3071,6 +3078,7 @@
 				8D6374FC1F569E9C00F666C9 /* CYJRECBuildScoreViewController.swift in Sources */,
 				8D07D1AA1FB5440C009BE014 /* ISRDataHelper.swift in Sources */,
 				8DA819CA1F7CEEA1002E03D5 /* CYJGarden.swift in Sources */,
+				B1AA46D7214004F600C18FB6 /* NoPartakeViewController.swift in Sources */,
 				8D0279061F9D911700955E31 /* CYJInitialViewController.swift in Sources */,
 				8D2839C91F7A21B800B1133C /* KYAddImageCell.swift in Sources */,
 				8D25F1031FAAE36000ABE7D1 /* CYJThemeTabBarItem.swift in Sources */,

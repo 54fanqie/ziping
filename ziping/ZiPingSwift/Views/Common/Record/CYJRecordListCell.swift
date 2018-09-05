@@ -193,11 +193,11 @@ class CYJRecordListCell: UITableViewCell {
 
             }else
             {
-                if listFrame.isOtherClass {
-                    byLabel.text = "by: (\(listFrame.record.cName ?? "")) \(listFrame.record.teacherName ?? "")"
-                }else{
+//                if listFrame.isOtherClass {
+//                    byLabel.text = "by: (\(listFrame.record.cName ?? "")) \(listFrame.record.teacherName ?? "")"
+//                }else{
                     byLabel.text = "by: \(listFrame.record.teacherName ?? "")"
-                }
+//                }
                 
             }
             
@@ -341,7 +341,7 @@ class CYJRecordListCell: UITableViewCell {
             replayImageView.frame = listFrame.replyImageViewFrame
             replayLabel.frame = listFrame.replyLabelFrame
             
-//            readOverImageView.frame = listFrame.readOverImageViewFrame
+            readOverImageView.frame = listFrame.readOverImageViewFrame
 
         }else if role == .master {
             

@@ -48,10 +48,15 @@ class CYJMineViewController: KYBaseTableViewController {
         // Do any additional setup after loading the view.
         automaticallyAdjustsScrollViewInsets = false
         examples.append(KYTableExample(key: "specialvaluation", title: "专项测评", selector: #selector(specialvaluation), image: #imageLiteral(resourceName: "leftbaar-ic-ceping") ))
-        if role == .teacher {
+        
+        if role == .teacher  || role == .teacherL{
             examples.append(KYTableExample(key: "checkOtherClasses", title: "浏览其他班级记录", selector: #selector(otherClasses), image: #imageLiteral(resourceName: "leftbaar-ic-qitabanji")))
+        }
+        if role == .teacher  {
             examples.append(KYTableExample(key: "children", title: "管理本班幼儿", selector: #selector(showBabies), image: #imageLiteral(resourceName: "icon_deepblue_manage")))
         }
+        
+     
         
         examples.append(KYTableExample(key: "checkout", title: "切换账号", selector: #selector(showBoundUsers), image: #imageLiteral(resourceName: "icon_deepblue_user")))
         examples.append(KYTableExample(key: "info", title: "我的资料", selector: #selector(showMineInfo), image: #imageLiteral(resourceName: "icon_deepblue_paper")))
@@ -261,13 +266,6 @@ extension CYJMineViewController {
         listParam.isother = 1
         RequestManager.POST(urlString: APIManager.Record.list, params: listParam.encodeToDictionary()  ,callBackAll : true) { [weak self] (data, error) in
 
-            //如果存在error
-            guard error == nil else {
-
-                Third.toast.message((error?.localizedDescription)!)
-                return
-            }
-            
             let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: data as? NSDictionary)
             if custom?.status == -1 {
                 let noPermiss = NoPermissViewController()

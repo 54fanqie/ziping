@@ -34,8 +34,8 @@ class ValuationCompleteController: KYBaseViewController {
         let dict  = valuationStatuModel.testStatistics
 
         compentLab.text = dict?["overComplete"] as? String
-        noCompentLab.text = dict?["overNoStart"] as? String
-        noStartLab.text = dict?["overStart"] as? String
+        noCompentLab.text = dict?["overStart"] as? String
+        noStartLab.text = dict?["overNoStart"] as? String
     }
  
     @IBAction func backButtonAction(_ sender: Any) {

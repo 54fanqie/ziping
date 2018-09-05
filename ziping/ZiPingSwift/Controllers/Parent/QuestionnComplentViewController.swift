@@ -18,11 +18,14 @@ class QuestionnComplentViewController: KYBaseViewController {
         applyButton.layer.cornerRadius = 20
         applyButton.layer.masksToBounds = true
         applyButton.theme_backgroundColor = Theme.Color.main
-        firstLab.text = "您已完成2017年秋季第一次问卷测评~"
+        
     }
     
     @IBOutlet weak var applyAction: UIButton!
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        firstLab.text = self.valuationStatueInfo.title
+    }
     
     
     @IBAction func applyforMaster(_ sender: Any) {

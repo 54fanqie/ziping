@@ -13,13 +13,21 @@ class ValuationController: KYBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "专项测评"
+        //当本年级一个专项测评都没有完成时
+        let s = self.target.testStatistics?.object(forKey: "overComplete") as! String
+        let  count = Int(s)!
+        if count == 0{
+            self.target.status = 3
+        }
+        
+        
         if target.status == 1 {
            self.view.theme_backgroundColor = "Nav.barTintColor"
         }
         
-        
-        //根据请求的数据，显示是否状态
+      //根据请求的数据，显示是否状态
         goToVC(index: (target?.status)!, target: target!)
+        
         
        
     }
@@ -61,7 +69,11 @@ class ValuationController: KYBaseViewController {
             endVC.view.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(endVC.view)
             addChildViewController(endVC)
-            
+        case 3://本年级暂未参与专项测评哦~
+            let  nopart = NoPartakeViewController();
+            nopart.view.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            view.addSubview(nopart.view)
+            addChildViewController(nopart)
             
         default:
             let completeVC = ValuationCompleteController();

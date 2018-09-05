@@ -51,7 +51,7 @@ class CYJRECDetailBarView: UIView {
             {
                 textView.isHidden = false
                 commentLabel.isHidden = false
-                commentLabel.text = "写点感想或者想说的话..."
+                commentLabel.text = "写点感想或者想说的话，仅能反馈一次哦"
                 sendButton.isHidden = false
             }
         }
@@ -191,7 +191,7 @@ extension CYJRECDetailBarView: UITextViewDelegate {
         if textView.text.characters.count > 0 {
             commentLabel.isHidden = true
         }else {
-            commentLabel.text = "写点感想或者想说的话..."
+            commentLabel.text = "写点感想或者想说的话，仅能反馈一次哦"
             commentLabel.isHidden = false
         }
         
