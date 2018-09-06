@@ -31,6 +31,8 @@ class CYJRECDetailViewController: KYBaseViewController {
     var goodButton: CYJButtonItem?
     var readButton: CYJButtonItem?
     
+    var isOtherClass: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +41,7 @@ class CYJRECDetailViewController: KYBaseViewController {
         view.theme_backgroundColor = Theme.Color.ground
 
         self.fetchDataSource()
+      
         
     }
     
@@ -150,14 +153,17 @@ class CYJRECDetailViewController: KYBaseViewController {
     }
     func makeShareButton() {
         
-        if LocaleSetting.userInfo()?.role == .teacherL {
-            if LocaleSetting.userInfo()?.uId == self.record?.uId {
-                //是自己的
+        if self.isOtherClass == false {
+            if LocaleSetting.userInfo()?.role == .teacherL {
+                if LocaleSetting.userInfo()?.uId == self.record?.uId {
+                    //是自己的
+                    navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_white_share"), style: .plain, target: self, action: #selector(shareButtonAction))
+                }
+            }else if LocaleSetting.userInfo()?.role == .teacher {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_white_share"), style: .plain, target: self, action: #selector(shareButtonAction))
             }
-        }else if LocaleSetting.userInfo()?.role == .teacher {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_white_share"), style: .plain, target: self, action: #selector(shareButtonAction))
         }
+        
     }
     
     /// 下面的滑动视图

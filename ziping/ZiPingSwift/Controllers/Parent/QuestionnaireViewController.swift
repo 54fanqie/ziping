@@ -110,6 +110,8 @@ class QuestionnaireViewController: KYBaseViewController {
         
         if self.valuatuinStatue?.isfinish == 1 {
             status = 4
+        }else if self.valuatuinStatue?.shijuanid == 0 {
+            status = 5
         }else{
             status = (self.valuatuinStatue?.status)!
         }
@@ -149,6 +151,13 @@ class QuestionnaireViewController: KYBaseViewController {
             vc3.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             vc3.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc3)
+        case 5:
+            //  本年级暂不参与专项测评哦~
+            let vc5 = NoPartakeViewController()
+            vc5.view.backgroundColor = UIColor.white
+            vc5.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
+            vc5.titleLab.text = "本年级暂不参与专项测评哦~"
+            childVCs.append(vc5)
             
         default:
             //  空白

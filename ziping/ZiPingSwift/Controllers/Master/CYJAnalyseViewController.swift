@@ -134,6 +134,7 @@ class CYJAnalyseViewController: KYBaseTableViewController {
 //                self.classCondition.setTitle("全部", for: .normal)
                 self.classCondition.title = "全部"
                 self.scopeCondition.title = "筛选"
+                self.getClassbyYear()
                 self.fetchDomainsFromServer()
 
                 self.analyseParam.cId = 0
@@ -159,7 +160,7 @@ class CYJAnalyseViewController: KYBaseTableViewController {
 
 //                self.scopeCondition.setTitle("范围", for: .normal)
                 self.scopeCondition.title = "筛选"
-
+                self.getClassbyYear()
                 self.fetchDomainsFromServer()
 
                 self.analyseParam.cId = 0
@@ -200,6 +201,7 @@ class CYJAnalyseViewController: KYBaseTableViewController {
 //                self.scopeCondition.setTitle("范围", for: .normal)
                 self.scopeCondition.title = "筛选"
 
+                
                 self.fetchDomainsFromServer()
 
                 self.analyseParam.cId = 0
@@ -310,7 +312,8 @@ class CYJAnalyseViewController: KYBaseTableViewController {
             self.classCondition.title = "全部"
 
             self.scopeCondition.title = "筛选"
-        
+            // 获取一下班级信息
+            self.getClassbyYear()
             self.clearAllCharts()
 
         }

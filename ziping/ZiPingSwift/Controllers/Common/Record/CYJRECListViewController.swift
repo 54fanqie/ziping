@@ -119,6 +119,7 @@ extension CYJRECListViewController {
             
             let vc = CYJRECDetailViewController()
             vc.recordId = cellFrame.record.grId
+            vc.isOtherClass = cellFrame.isOtherClass
             vc.indexPath = indexPath
             vc.isPraisedHandler = { [unowned self] in
                 if let indexP = $0 as? IndexPath{

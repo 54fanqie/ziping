@@ -172,7 +172,7 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
                 self.classCondition.title = "全部"
                 
                 self.interestParam.cId = 0
-                
+                self.getClassbyYear()
                 self.interestParam.stime = self.semesterScope.start.stringWithYMD()
                 self.interestParam.endtime = self.semesterScope.end.stringWithYMD()
             }
@@ -196,7 +196,7 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
                 self.classCondition.title = "全部"
                 
                 self.interestParam.cId = 0
-                
+                self.getClassbyYear()
                 self.interestParam.stime = self.semesterScope.start.stringWithYMD()
                 self.interestParam.endtime = self.semesterScope.end.stringWithYMD()
                 
@@ -325,7 +325,7 @@ class CYJAttentionAnalyseController: KYBaseTableViewController {
             //            self.classCondition.setTitle("全部", for: .normal)
             self.classCondition.title = "全部"
             self.semesterScope = Date().getSemester()
-            
+            self.getClassbyYear()
             self.clearChartView()
         }
         resetButton.filterButtonStyle = .nomal_light_Style

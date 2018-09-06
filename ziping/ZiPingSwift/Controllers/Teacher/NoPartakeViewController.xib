@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoPartakeViewController" customModule="ZiPingSwift" customModuleProvider="target">
             <connections>
+                <outlet property="titleLab" destination="zFG-9c-4wV" id="M8k-kt-9TO"/>
                 <outlet property="view" destination="xul-Qd-XcU" id="Y20-eS-bqz"/>
             </connections>
         </placeholder>
