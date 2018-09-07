@@ -154,12 +154,7 @@ class CheckValuationController: KYBaseTableViewController {
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         
-        
-        //请求班级信息
-        getClassDetailList()
-        
-        
-        
+    
         
         //=======================================记录时间===================================================
         //MARK: 设置初始年与学期
@@ -184,8 +179,8 @@ class CheckValuationController: KYBaseTableViewController {
                 self.classCondition.title = "请选择班级"
                 
                 self.valuationTimeCondition.title = "请选择测评时间"
-                
-                
+                //更新班级
+                self.getClassDetailList()
                 
                 self.checkValuationParamModel.grade = 0
                 self.checkValuationParamModel.classId = 0
@@ -246,7 +241,8 @@ class CheckValuationController: KYBaseTableViewController {
         tabelHeaderView.addSubview(termConditionView)
         
         
-        
+        //请求班级信息
+        getClassDetailList()
         //=======================================筛选班级====================================================
         self.gradeIndex = 0
         self.classIndex = 0
@@ -446,7 +442,7 @@ class CheckValuationController: KYBaseTableViewController {
     }
     //获取班级信息
     func getClassDetailList(){
-        RequestManager.POST(urlString: APIManager.Valuation.getClass, params: nil) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.getClass, params: ["year":self.analyseParam.year]) { [weak self] (data, error) in
             
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
