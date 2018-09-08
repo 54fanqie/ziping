@@ -108,12 +108,19 @@ class QuestionnaireViewController: KYBaseViewController {
     func setChildVcs() -> [UIViewController] {
         var status : Int = 0
         
-        if self.valuatuinStatue?.isfinish == 1 {
+        if self.valuatuinStatue?.isfinish == 1 {//未daxie完成问卷
             status = 4
-        }else if self.valuatuinStatue?.shijuanid == 0 {
-            status = 5
         }else{
-            status = (self.valuatuinStatue?.status)!
+            
+            if self.valuatuinStatue?.status == 1 {
+                if self.valuatuinStatue?.shijuanid == 0 {
+                    status = 5
+                }else{
+                    status = (self.valuatuinStatue?.status)!
+                }
+            }else {
+                status = (self.valuatuinStatue?.status)!
+            }
         }
         
         var childVCs: [UIViewController] = []

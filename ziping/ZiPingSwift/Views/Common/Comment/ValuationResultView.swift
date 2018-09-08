@@ -14,12 +14,19 @@ class ValuationResultView: UIView {
     var tabelHeaderView :UIView!
     var headerTitleView : HeaderTitleView!
     var dataArray = [NSDictionary]()
+    //空白情况界面数据
+    var nodataView : NoPartakeViewController!
     var  teacherResultList = [TeacherResult]() {
         didSet{
-            for teacherResult in teacherResultList {
-                let dict = getData(teacherResult: teacherResult)
-                dataArray.append(dict)
-                self.tableView.reloadData()
+            if teacherResultList.isEmpty {
+                addSubview(nodataView.view)
+            }else{
+                addSubview(tableView)
+                for teacherResult in teacherResultList {
+                    let dict = getData(teacherResult: teacherResult)
+                    dataArray.append(dict)
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -32,9 +39,9 @@ class ValuationResultView: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ValuationResultCell", bundle: nil), forCellReuseIdentifier: "ValuationResultCell")
-//        tableView.register(ValuationResultCell.self, forCellReuseIdentifier:  "ValuationResultCell")
+        //        tableView.register(ValuationResultCell.self, forCellReuseIdentifier:  "ValuationResultCell")
         tableView.separatorStyle = .none
-        addSubview(tableView)
+        
         //表头
         tabelHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 61))
         tableView.tableHeaderView = tabelHeaderView
@@ -42,7 +49,10 @@ class ValuationResultView: UIView {
         headerTitleView = HeaderTitleView(frame: CGRect(x: 0, y: 16, width: frame.width, height: 46));
         tabelHeaderView.addSubview(headerTitleView)
         headerTitleView.typeData = ["  \n总分","认知\n领域","语言\n领域","社会\n领域","学习\n品质",]
-        tableView.reloadData()
+        //空白数据界面
+        nodataView = NoPartakeViewController()
+//        nodataView.titleLab.text = "本年级暂不参与专项测评哦~"
+        
     }
     
     
@@ -68,7 +78,7 @@ extension ValuationResultView: UITableViewDelegate, UITableViewDataSource {
         cell?.selectionStyle = .none
         cell?.textLabel?.theme_textColor = Theme.Color.textColor
         cell?.dict = dataArray[indexPath.row]
-       
+        
         
         return cell!
     }
