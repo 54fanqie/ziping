@@ -324,6 +324,8 @@ class OtherClassSearchController: KYBaseCollectionViewController {
                 
                 filterParams[timeOne] = CYJFilterModel(filter: ("记录时间", "time"), minTime: timeScope.start, maxTime: timeScope.end)
                 //修改时间
+                self.listparam.startTime = timeScope.start.stringWithYMD()
+                self.listparam.endTime = timeScope.end.stringWithYMD()
             }
         }
         else if level == "grade"{
