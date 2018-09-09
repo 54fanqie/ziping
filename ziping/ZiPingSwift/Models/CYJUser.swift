@@ -32,6 +32,8 @@ class CYJUser: CYJBaseModel, NSCoding {
     var avatar          : String? //头像
     var uType           : Int = 0  // 教师类型（1 => '班主任',2 => '配班教师',‘’=>都不是）
     var babyStatus      : Int = 0 //  幼儿园内状态（1在园，2毕业3退学）
+    var lookAuth        : Int = 0 //  2=全部权限 ，1=同班级权限，0=无权限
+    var grade           : Int = 0 //  用户班级
     
     var role: CYJRole {
         if groupId == 1 {
@@ -76,6 +78,8 @@ class CYJUser: CYJBaseModel, NSCoding {
         aCoder.encode(avatar, forKey:"avatar")
         aCoder.encode(uType, forKey:"uType")
         aCoder.encode(babyStatus, forKey:"babyStatus")
+        aCoder.encode(lookAuth, forKey:"lookAuth")
+        aCoder.encode(grade, forKey:"grade")
         
     }
     
@@ -95,7 +99,8 @@ class CYJUser: CYJBaseModel, NSCoding {
         avatar = aDecoder.decodeObject(forKey:"avatar") as? String
         uType = aDecoder.decodeInteger(forKey: "uType")
         babyStatus = aDecoder.decodeInteger(forKey: "babyStatus")
-        
+        lookAuth = aDecoder.decodeInteger(forKey: "lookAuth")
+        grade = aDecoder.decodeInteger(forKey: "grade")
     }
     
     required init() {

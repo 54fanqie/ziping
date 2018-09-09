@@ -21,7 +21,7 @@ class QuestionnaireEndViewController: KYBaseViewController {
     }
     //像园长申请分析报告
     @IBAction func applyforMaster(_ sender: Any) {
-        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : self.valuationStatueInfo.historyid, "shijuanid" :self.valuationStatueInfo.shijuanid]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.applyReport, params: ["historyid" : self.valuationStatueInfo.historyid, "shijuanid" :self.valuationStatueInfo.shijuanid],callBackAll : true) { [weak self] (data, error) in
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
                 return

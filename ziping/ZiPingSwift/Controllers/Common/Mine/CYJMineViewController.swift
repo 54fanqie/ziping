@@ -260,22 +260,15 @@ extension CYJMineViewController {
     }
     //浏览其他班级
     func otherClasses(){
-        let listParam = RECListSearchParam()
-        listParam.page = 1
-        listParam.limit = "10"
-        listParam.isother = 1
-        RequestManager.POST(urlString: APIManager.Record.list, params: listParam.encodeToDictionary()  ,callBackAll : true) { [weak self] (data, error) in
-
-            let custom = JSONDeserializer<CustomResponds>.deserializeFrom(dict: data as? NSDictionary)
-            if custom?.status == -1 {
-                let noPermiss = NoPermissViewController()
-                self?.navigationController?.pushViewController(noPermiss, animated: true)
-
-            }else{
-                let  otherClas = OtherClassRecordController()
-                otherClas.title = "浏览其他班级记录"
-                self?.navigationController?.pushViewController(otherClas, animated: true)
-            }
+        //2=全部权限 ，1=同班级权限，0=无权限
+        if  LocaleSetting.userInfo()?.lookAuth == 0{
+            let noPermiss = NoPermissViewController()
+            self.navigationController?.pushViewController(noPermiss, animated: true)
+            
+        }else{
+            let  otherClas = OtherClassRecordController()
+            otherClas.title = "浏览其他班级记录"
+            self.navigationController?.pushViewController(otherClas, animated: true)
         }
         
         
