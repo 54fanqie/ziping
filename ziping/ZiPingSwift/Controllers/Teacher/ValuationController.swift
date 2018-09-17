@@ -12,24 +12,25 @@ class ValuationController: KYBaseViewController {
     var target : ValuationStatuModel!
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.title = "集中测评"
-        //当本年级一个集中测评都没有完成时
-        let s = self.target.testStatistics?.object(forKey: "overComplete") as! String
-        let  count = Int(s)!
-        if count == 0{
-            self.target.status = 3
+        if target.status == 0 {
+            if self.target.shijuanid == 0{
+                self.target.status = 3
+            }
+        }else if target.status == 1 {
+            //当本年级一个专项测评都没有完成时
+            let s = self.target.testStatistics?.object(forKey: "overComplete") as! String
+            if s.isEmpty {
+                
+            }else{
+                self.view.theme_backgroundColor = "Nav.barTintColor"
+            }
+            
         }
         
-        
-        if target.status == 1 {
-           self.view.theme_backgroundColor = "Nav.barTintColor"
-        }
-        
-      //根据请求的数据，显示是否状态
+        //根据请求的数据，显示是否状态
         goToVC(index: (target?.status)!, target: target!)
-        
-        
-       
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

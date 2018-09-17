@@ -468,7 +468,10 @@ class CYJAnalyseViewController: KYBaseTableViewController {
                 for i in 0..<(dimensions.count) {
                     
                     let dimension = dimensions[i]
-                    let entry = BarChartDataEntry(x: Double(i) , y: Double(dimension.dNum!) )
+             
+                    print(Double(dimension.dNum!).roundTo(places: 1))
+                    
+                    let entry = BarChartDataEntry(x: Double(i) , y: Double(dimension.dNum!))
                     let entries = [entry]
                     
                     let barChartDataSet = BarChartDataSet(values: entries , label: dimension.diName)
@@ -491,7 +494,15 @@ class CYJAnalyseViewController: KYBaseTableViewController {
                 for i in 0..<(quotas.count) {
                     
                     let quota = quotas[i]
-                    let entry = BarChartDataEntry(x: Double(i) , y: Double(quota.qNum!) )
+                    
+                    let doubleStr = String(format: "%.1f", quota.qNum!)
+                    
+                    print(doubleStr)
+                    
+                    
+                    print(pow(10.0, Double(1.42121212)))
+                    
+                    let entry = BarChartDataEntry(x: Double(i) , y: Double(doubleStr)! )
                     let entries = [entry]
                     
                     let barChartDataSet = BarChartDataSet(values: entries , label: quota.qTitle)
@@ -564,3 +575,16 @@ extension CYJAnalyseViewController {
     
 }
 
+extension Double {
+    
+    /// Rounds the double to decimal places value
+    
+    func roundTo(places:Int) -> Double {
+        
+        let divisor = pow(10.0, Double(places))
+        
+        return (self * divisor).rounded() / divisor
+        
+    }
+    
+}

@@ -154,7 +154,7 @@ class CheckValuationController: KYBaseTableViewController {
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         
-    
+        
         
         //=======================================记录时间===================================================
         //MARK: 设置初始年与学期
@@ -180,6 +180,9 @@ class CheckValuationController: KYBaseTableViewController {
                 
                 self.valuationTimeCondition.title = "请选择测评时间"
                 //更新班级
+                if !self.gradeArray.isEmpty {
+                    self.gradeArray.removeAll()
+                }
                 self.getClassDetailList()
                 
                 self.checkValuationParamModel.grade = 0
@@ -198,45 +201,51 @@ class CheckValuationController: KYBaseTableViewController {
             }
             self.navigationController?.pushViewController(optionController, animated: true)
         }
-        //        //季节
-        //        let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
-        //        let seasonCondition = CYJConditionButton(title: self.semesterArray[season!].title , key: "time_season") { (sender) in
-        //
-        //            let index = self.semesterArray.index { $0.opId == self.analyseParam.semester} ?? 0
-        //
-        //            let optionController = CYJOptionsSelectedController(currentIndex: index, options: self.semesterArray) { [unowned sender](op) in
-        //                print("\(op.title)")
-        //                sender.setTitle(op.title, for: .normal)
-        //
-        //                self.analyseParam.semester = op.opId
-        //
-        //                self.checkValuationParamModel.semester = op.opId
-        //                //TODO: 更换季节--刷新--班级--测评时间
-        //                self.classCondition.title = "请选择班级"
-        //
-        //                self.valuationTimeCondition.title = "请选择测评时间"
-        //
-        //                self.checkValuationParamModel.grade = 0
-        //                self.checkValuationParamModel.classId = 0
-        //                self.checkValuationParamModel.shijuanid = 0
-        //                self.checkValuationParamModel.isComparison = 0
-        //                self.classIndex = 0
-        //                self.gradeIndex = 0
-        //                self.timeIndex = 0
-        //
-        //
-        //
-        //
-        //
-        //                self.analyseParam.cId = 0
-        //                self.analyseParam.dId = nil
-        //                self.analyseParam.diId = nil
-        //            }
-        //            self.navigationController?.pushViewController(optionController, animated: true)
-        //        }
+        //季节
+        let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
+        let seasonCondition = CYJConditionButton(title: self.semesterArray[season!].title , key: "time_season") { (sender) in
+            
+            let index = self.semesterArray.index { $0.opId == self.analyseParam.semester} ?? 0
+            
+            let optionController = CYJOptionsSelectedController(currentIndex: index, options: self.semesterArray) { [unowned sender](op) in
+                print("\(op.title)")
+                sender.setTitle(op.title, for: .normal)
+                
+                self.analyseParam.semester = op.opId
+                
+                self.checkValuationParamModel.semester = op.opId
+                //TODO: 更换季节--刷新--班级--测评时间
+                self.classCondition.title = "请选择班级"
+                
+                self.valuationTimeCondition.title = "请选择测评时间"
+                
+                //更新班级
+                if !self.gradeArray.isEmpty {
+                    self.gradeArray.removeAll()
+                }
+                self.getClassDetailList()
+                
+                self.checkValuationParamModel.grade = 0
+                self.checkValuationParamModel.classId = 0
+                self.checkValuationParamModel.shijuanid = 0
+                self.checkValuationParamModel.isComparison = 0
+                self.classIndex = 0
+                self.gradeIndex = 0
+                self.timeIndex = 0
+                
+                
+                
+                
+                
+                self.analyseParam.cId = 0
+                self.analyseParam.dId = nil
+                self.analyseParam.diId = nil
+            }
+            self.navigationController?.pushViewController(optionController, animated: true)
+        }
         
         termConditionView.addCondition(yearCondition)
-        //        termConditionView.addCondition(seasonCondition)
+        termConditionView.addCondition(seasonCondition)
         termConditionView.frame.origin = CGPoint(x: 0, y: 0)
         tabelHeaderView.addSubview(termConditionView)
         
@@ -321,7 +330,11 @@ class CheckValuationController: KYBaseTableViewController {
             self.classCondition.title = "请选择班级"
             self.valuationTimeCondition.title = "请选择测评时间"
             
-            
+            //更新班级
+            if !self.gradeArray.isEmpty {
+                self.gradeArray.removeAll()
+            }
+            self.getClassDetailList()
             
             
             self.checkValuationParamModel.grade = 0
@@ -345,9 +358,9 @@ class CheckValuationController: KYBaseTableViewController {
             self.compareListDatas.removeAll()
             self.tableView.reloadData()
             
-            //            let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
+            let season = self.semesterArray.index { $0.opId == self.analyseParam.semester}
             yearCondition.setTitle("\(self.analyseParam.year)", for: .normal)
-            //            seasonCondition.setTitle("\(self.semesterArray[season!].title)", for: .normal)
+            seasonCondition.setTitle("\(self.semesterArray[season!].title)", for: .normal)
             
             
             //            self.clearAllCharts()
@@ -442,7 +455,7 @@ class CheckValuationController: KYBaseTableViewController {
     }
     //获取班级信息
     func getClassDetailList(){
-        RequestManager.POST(urlString: APIManager.Valuation.getClass, params: ["year":self.analyseParam.year]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.getClass, params: ["year":self.analyseParam.year,"semester":self.analyseParam.semester]) { [weak self] (data, error) in
             
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
@@ -462,7 +475,7 @@ class CheckValuationController: KYBaseTableViewController {
     //获取测评时间
     func getValuationTimeList(){
         
-        RequestManager.POST(urlString: APIManager.Valuation.getTestTime, params: ["year":self.analyseParam.year,"classId":self.checkValuationParamModel.classId,"grade":self.checkValuationParamModel.grade]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.getTestTime, params: ["year":self.analyseParam.year,"semester":self.analyseParam.semester,"classId":self.checkValuationParamModel.classId,"grade":self.checkValuationParamModel.grade]) { [weak self] (data, error) in
             
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
@@ -488,7 +501,7 @@ class CheckValuationController: KYBaseTableViewController {
     
     //查询测评-分析
     func getValuationAnalysis(){
-        RequestManager.POST(urlString: APIManager.Valuation.analysis, params: ["year":self.checkValuationParamModel.year ,"grade":self.checkValuationParamModel.grade,"classId":self.checkValuationParamModel.classId,"shijuanid":self.checkValuationParamModel.shijuanid,"isComparison": 1]) { [weak self] (data, error) in
+        RequestManager.POST(urlString: APIManager.Valuation.analysis, params: ["year":self.checkValuationParamModel.year ,"semester":self.checkValuationParamModel.semester,"grade":self.checkValuationParamModel.grade,"classId":self.checkValuationParamModel.classId,"shijuanid":self.checkValuationParamModel.shijuanid,"isComparison":self.checkValuationParamModel.isComparison]) { [weak self] (data, error) in
             
             guard error == nil else {
                 Third.toast.message((error?.localizedDescription)!)
@@ -504,13 +517,13 @@ class CheckValuationController: KYBaseTableViewController {
             if (self?.completeNumberView == nil) || (self?.compareButton == nil){
                 self?.initUI()
             }
-                //本次数据
+            //本次数据
             self?.thisListDatas = AnalysisModel()
             self?.thisListDatas = thisList
-                //上次数据
+            //上次数据
             self?.lastListDatas = AnalysisModel()
             self?.lastListDatas = lastList
-        
+            
             
             //每次请求默认显示单次数据
             self?.completeNumberView.testTitleDetail = (self?.completeNumberTitle(isSelect: false, thisTest: (self?.thisListDatas.testStatistics!)!, lastTest: (self?.lastListDatas.testStatistics!)!))!
@@ -525,7 +538,7 @@ class CheckValuationController: KYBaseTableViewController {
         }
     }
     
-   
+    
     //封装表头显示数据
     func completeNumberTitle(isSelect : Bool,thisTest : NSDictionary ,lastTest : NSDictionary) ->TestTitleDetail {
         let testTitleDetail = TestTitleDetail()

@@ -51,7 +51,8 @@ class CYJRECDetailBarView: UIView {
             {
                 textView.isHidden = false
                 commentLabel.isHidden = false
-                commentLabel.text = "写点感想或者想说的话，仅能反馈一次哦"
+                commentLabel.numberOfLines = 0
+                commentLabel.text = "写点感想或者想说的话，\n仅能反馈一次哦"
                 sendButton.isHidden = false
             }
         }
@@ -114,7 +115,7 @@ class CYJRECDetailBarView: UIView {
         addSubview(sendButton)
         
         commentLabel = UILabel(frame: textView.frame)
-        commentLabel.font = UIFont.systemFont(ofSize: 15)
+        commentLabel.font = UIFont.systemFont(ofSize: 14)
         commentLabel.theme_textColor = Theme.Color.textColor
         commentLabel.text = "已反馈给老师"
         commentLabel.textAlignment = .center
@@ -191,7 +192,8 @@ extension CYJRECDetailBarView: UITextViewDelegate {
         if textView.text.characters.count > 0 {
             commentLabel.isHidden = true
         }else {
-            commentLabel.text = "写点感想或者想说的话，仅能反馈一次哦"
+            commentLabel.numberOfLines = 0
+            commentLabel.text = "写点感想或者想说的话，\n仅能反馈一次哦"
             commentLabel.isHidden = false
         }
         

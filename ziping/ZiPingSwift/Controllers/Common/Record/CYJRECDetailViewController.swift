@@ -73,7 +73,12 @@ class CYJRECDetailViewController: KYBaseViewController {
             print("点赞阅")
             self.actionView?.theme_backgroundColor = Theme.Color.viewLightColor
             sender.isUserInteractionEnabled = false
-            let parameter: [String: Any] = ["grId" : self.record?.grId ?? 0, "token": LocaleSetting.token]
+            let parameter: [String: Any]
+            if self.isOtherClass == true{
+                parameter = ["grId" : self.record?.grId ?? 0, "token": LocaleSetting.token,"isother":1]
+            }else{
+              parameter = ["grId" : self.record?.grId ?? 0, "token": LocaleSetting.token]
+            }
             
             RequestManager.POST(urlString: APIManager.Record.praise, params: parameter) { [unowned sender] (data, error) in
                 //如果存在error

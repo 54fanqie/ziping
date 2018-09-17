@@ -57,11 +57,7 @@ class OtherClassSearchController: KYBaseCollectionViewController {
                 CYJOption(title: "小班", opId: 3),
                 CYJOption(title: "托班", opId: 4)]
     }()
-//    var checkStatusOptions: [CYJOption] = [CYJOption(title: "未批阅", opId: 1),CYJOption(title: "已批阅", opId: 2)]
-//
-//    var goodOptions: [CYJOption] = [CYJOption(title: "是", opId: 1),CYJOption(title: "否", opId: 2)]
-    
-    
+
     var gradeIndex: Int? {
         guard let grade = self.listparam.grade?.first  else {
             return nil
@@ -98,7 +94,7 @@ class OtherClassSearchController: KYBaseCollectionViewController {
         fakeBar = UIView(frame: CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: 35))
         fakeBar.backgroundColor = UIColor.clear
         
-//        view.addSubview(fakeBar)
+        //        view.addSubview(fakeBar)
         navigationItem.titleView = fakeBar
         
         let titleLab = UILabel(frame: CGRect(x: Theme.Measure.screenWidth/2 - 30, y: 0, width: 60, height: 35))
@@ -106,7 +102,7 @@ class OtherClassSearchController: KYBaseCollectionViewController {
         titleLab.textColor = UIColor.white
         titleLab.font = UIFont.systemFont(ofSize: 18)
         fakeBar.addSubview(titleLab)
-       
+        
         
         searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth - 70, height: 35))
         searchBar.delegate = self
@@ -115,26 +111,22 @@ class OtherClassSearchController: KYBaseCollectionViewController {
         searchBar.placeholder = "输入学生，筛选"
         //        fakeBar.addSubview(searchBar)
         
-//        let cancelButton = UIButton(type: .custom)
+        //        let cancelButton = UIButton(type: .custom)
         let cancelButton =    UIButton(frame: CGRect(x: Theme.Measure.screenWidth - 70, y: 0, width: 60, height: 35))
         cancelButton.setTitle("取消", for: .normal)
         cancelButton.theme_setTitleColor(Theme.Color.ground, forState: .normal)
         cancelButton.addTarget(self, action: #selector(searchBarCanceled), for: .touchUpInside)
         fakeBar.addSubview(cancelButton)
-
         
         
-      
-        
-        
-        
-
         
         makeFilterView()
         
         makeActionView()
-        
+        //请求班级数据
         getClassbyYear()
+        
+       
     }
     
     var filterParams: [CYJFilterModel] = []
@@ -158,26 +150,36 @@ class OtherClassSearchController: KYBaseCollectionViewController {
         let semesterOption = self.semesterArray.first { $0.opId == self.listparam.semester}
         
         
-        
+      
         //MARK: 创建ViewModel
         filterParams.removeAll()
-        
-        filterParams.append(CYJFilterModel(filter: ("记录学期", "year-term"), mode: .dropDown, currentIndex: nil, options: [yearOption!, semesterOption!]))
-        
-        //年级已经选择
-        let gradeIndex = self.gradeArray.index(where: {$0.opId == self.listparam.grade?.first})
-        filterParams.append(CYJFilterModel(filter: ("按年级", "grade"), mode: .normal, currentIndex: gradeIndex, options: self.gradeArray))
-        
-        if gradeIndex != nil {
-            //班级已经选择
-            if classInGrade != nil {
-                let options = self.classInGrade!.map({ (clas) -> CYJOption in
-                    return CYJOption(title: clas.cName ?? "班级名称", opId: clas.cId)
-                })
-                let classIndex = options.index(where: {$0.opId == self.listparam.cId?.first})
-                filterParams.append(CYJFilterModel(filter: ("按班级", "class"), mode: .normal, currentIndex: classIndex ,options: options))
+        if LocaleSetting.userInfo()?.lookAuth == 2 { //        2=全部权限
+            filterParams.append(CYJFilterModel(filter: ("记录学期", "year-term"), mode: .dropDown, currentIndex: nil, options: [yearOption!, semesterOption!]))
+            //年级已经选择
+            let gradeIndex = self.gradeArray.index(where: {$0.opId == self.listparam.grade?.first})
+            filterParams.append(CYJFilterModel(filter: ("按年级", "grade"), mode: .normal, currentIndex: gradeIndex, options: self.gradeArray))
+            
+            if gradeIndex != nil {
+                //班级已经选择
+                if classInGrade != nil {
+                    let options = self.classInGrade!.map({ (clas) -> CYJOption in
+                        return CYJOption(title: clas.cName ?? "班级名称", opId: clas.cId)
+                    })
+                    let classIndex = options.index(where: {$0.opId == self.listparam.cId?.first})
+                    filterParams.append(CYJFilterModel(filter: ("按班级", "class"), mode: .normal, currentIndex: classIndex ,options: options))
+                }
             }
+            
+        }else{ //1=同班级权限，0=无权限
+            
+            self.listparam.grade = [LocaleSetting.userInfo()?.grade] as? [Int]
+            self.classInGrade = []
+            filterParams.append(CYJFilterModel(filter: ("按班级", "class"), mode: .normal, currentIndex: nil ,options: self.classArray))
         }
+        
+        
+        
+        
         
         if let startTime = self.listparam.startTime, let endTime = self.listparam.endTime {
             if let startDate = Date.date(from: startTime), let endDate = Date.date(from: endTime) {
@@ -187,19 +189,6 @@ class OtherClassSearchController: KYBaseCollectionViewController {
             
             filterParams.append(CYJFilterModel(filter: ("记录时间", "time"), minTime: timeScope.start, maxTime: timeScope.end))
         }
-        
-        //添加记录时间
-        
-//        //批阅状态
-//        let checkIndex = self.checkStatusOptions.index { $0.opId == self.listparam.isMark }
-//
-//        filterParams.append(CYJFilterModel(filter: ("批阅状态", "checkStatus"), mode: .normal, currentIndex: checkIndex, options: checkStatusOptions))
-//
-//        //标记了已批阅
-//        if self.listparam.isMark == 2 {
-//            let goodIndex = self.goodOptions.index(where: { $0.opId == self.listparam.isGood })
-//            filterParams.append(CYJFilterModel(filter: ("是否优秀", "excellent"), mode: .normal, currentIndex: goodIndex, options: self.goodOptions))
-//        }
         
         
         collectionView.frame = CGRect(x: 0, y: 64, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 64 - 60)
@@ -211,6 +200,7 @@ class OtherClassSearchController: KYBaseCollectionViewController {
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "UICollectionReusableView.self")
         
         collectionView.reloadData()
+        
     }
     
     
@@ -224,7 +214,10 @@ class OtherClassSearchController: KYBaseCollectionViewController {
             //TODO: 重置筛选的状态
             self.listparam.year = self.today.year
             self.listparam.semester = self.today.semester
-            self.listparam.grade = nil
+            //1=同班级权限下 不用重置grade
+            if LocaleSetting.userInfo()?.lookAuth != 1{
+               self.listparam.grade = nil
+            }
             self.listparam.cId = nil
             self.listparam.isMark = nil
             self.listparam.isGood = nil
@@ -238,15 +231,24 @@ class OtherClassSearchController: KYBaseCollectionViewController {
             let yearOption = self.yearArray.first { $0.opId == self.listparam.year}
             let semesterOption = self.semesterArray.first { $0.opId == self.listparam.semester}
             
-            self.filterParams = [
-                CYJFilterModel(filter: ("记录学期", "year-term"), mode: .dropDown,currentIndex: nil, options: [yearOption!, semesterOption!]),
-                CYJFilterModel(filter: ("按年级", "grade"), mode: .normal, currentIndex: nil, options: self.gradeArray),
-                CYJFilterModel(filter: ("记录时间", "time"), minTime: timeScope.start, maxTime: timeScope.end),
-//                CYJFilterModel(filter: ("批阅状态", "checkStatus"), mode: .normal, currentIndex: nil, options: self.checkStatusOptions)
-            ]
+            //全部权限
+            if LocaleSetting.userInfo()?.lookAuth == 2{
+                self.filterParams = [
+                    CYJFilterModel(filter: ("记录学期", "year-term"), mode: .dropDown,currentIndex: nil, options: [yearOption!, semesterOption!]),
+                    CYJFilterModel(filter: ("按年级", "grade"), mode: .normal, currentIndex: nil, options: self.gradeArray),
+                    CYJFilterModel(filter: ("记录时间", "time"), minTime: timeScope.start, maxTime: timeScope.end),
+                ]
+                
+            }else{//1=同班级权限
+                self.filterParams = [
+                    CYJFilterModel(filter: ("按班级", "class"), mode: .normal, currentIndex: nil, options: self.classArray),
+                    CYJFilterModel(filter: ("记录时间", "time"), minTime: timeScope.start, maxTime: timeScope.end),
+                ]
+            }
             self.collectionView.reloadData()
+            
         }
-         resetButton.filterButtonStyle = .circle_light_Style
+        resetButton.filterButtonStyle = .circle_light_Style
         
         let showButton = CYJFilterButton(title: "确定") {[unowned self] (sender) in
             print("完成选择")
@@ -262,7 +264,7 @@ class OtherClassSearchController: KYBaseCollectionViewController {
     
     //请求班级信息
     func getClassbyYear() {
-        
+
         let parameter: [String: Any] =  ["token": LocaleSetting.token, "year": self.listparam.year ?? 2017, "semester": "\(self.listparam.semester ?? 2)"]
         
         RequestManager.POST(urlString: APIManager.Baby.getClass, params: parameter) { [unowned self] (data, error) in
@@ -281,6 +283,12 @@ class OtherClassSearchController: KYBaseCollectionViewController {
                     self.classesForYear.append(target!)
                 })
             }
+            //在同班级权限下,要直接显示班级所以就要在获取班级数据后，直接刷新显示
+            if LocaleSetting.userInfo()?.lookAuth == 1 {
+                self.resetParamFrom(level: "class")
+                self.collectionView.reloadData()
+            }
+                
         }
     }
     
@@ -316,6 +324,8 @@ class OtherClassSearchController: KYBaseCollectionViewController {
                 
                 filterParams[timeOne] = CYJFilterModel(filter: ("记录时间", "time"), minTime: timeScope.start, maxTime: timeScope.end)
                 //修改时间
+                self.listparam.startTime = timeScope.start.stringWithYMD()
+                self.listparam.endTime = timeScope.end.stringWithYMD()
             }
         }
         else if level == "grade"{
@@ -346,25 +356,26 @@ class OtherClassSearchController: KYBaseCollectionViewController {
                 }
                 self.listparam.cId = nil
             }
+        }else if level == "class"{
+            if self.classArray.count > 0 {
+                
+                if let classOne = filterParams.index(where: { $0.filterId == "class"}) {
+                    //FIXME: 根据年级设置班级数据
+                    filterParams[classOne] = CYJFilterModel(filter: ("按班级", "class"), mode: .normal, currentIndex: nil ,options: self.classArray)
+                    
+                }else
+                {
+                    filterParams.insert(CYJFilterModel(filter: ("按班级", "class"), mode: .normal, currentIndex: nil, options: self.classArray), at: (LocaleSetting.userInfo()?.grade)!)
+                }
+                
+            }else
+            {
+                if let classOne = filterParams.index(where: { $0.filterId == "class"}) {
+                    filterParams.remove(at: classOne)
+                }
+            }
+            self.listparam.cId = nil
         }
-//        else if level == "checkStatus"{
-//            if let checkOne = filterParams.index(where: { $0.filterId == "checkStatus"}){
-//                let check = filterParams[checkOne]
-//                //0的时候是已批阅
-//                if check.currentIndex == 1 {
-//                    if filterParams.last?.filterId != "excellent" {
-//                        filterParams.append(CYJFilterModel(filter: ("是否优秀", "excellent"), mode: .normal, currentIndex: nil, options: self.goodOptions))
-//                    }
-//
-//                }else
-//                {
-//                    if let excellentOne = filterParams.index(where: { $0.filterId == "excellent"}) {
-//                        filterParams.remove(at: excellentOne)
-//                    }
-//                    self.listparam.isGood = nil
-//                }
-//            }
-//        }
     }
     
     
@@ -606,24 +617,7 @@ extension OtherClassSearchController {
             
             self.collectionView.reloadData()
             
-            
         }
-//        else if param.filterId == "checkStatus" {
-//            //MARK: 选择 批阅状态
-//            if param.currentIndex == indexPath.row{
-//                param.currentIndex = nil
-//                self.listparam.isMark = nil
-//                
-//            }else {
-//                param.currentIndex = indexPath.row
-//                self.listparam.isMark = param.options[indexPath.row].opId
-//            }
-//            
-//            self.resetParamFrom(level: "checkStatus")
-//            
-//            collectionView.reloadData()
-//            
-//        }
         else if param.filterId == "excellent" {
             if param.currentIndex == indexPath.row{
                 param.currentIndex = nil

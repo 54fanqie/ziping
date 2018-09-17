@@ -181,7 +181,7 @@ class CYJRECBuildInfoViewController: KYBaseCollectionViewController {
         let nextButton = UIButton(type: .custom)
         nextButton.theme_setTitleColor(Theme.Color.ground, forState: .normal)
         nextButton.theme_backgroundColor = Theme.Color.main
-        nextButton.setTitle("下一步", for: .normal)
+        nextButton.setTitle("去评析", for: .normal)
         nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         nextButton.addTarget(self, action: #selector(nextREC), for: .touchUpInside)
         actionView.actions = [saveButton, nextButton]

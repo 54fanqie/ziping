@@ -158,7 +158,7 @@ extension CYJRECBuildScoreViewController {
        let lastButton = UIButton(frame: CGRect(x: 0, y: 0, width: buttonActionView.frame.width  * 0.6 * 0.5 - 0.5, height: 44))
         lastButton.theme_setTitleColor(Theme.Color.textColorlight, forState: .normal)
         lastButton.theme_backgroundColor = Theme.Color.ground
-        lastButton.setTitle("上一步", for: .normal)
+        lastButton.setTitle("去描述", for: .normal)
         lastButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         lastButton.addTarget(self, action: #selector(lastREC), for: .touchUpInside)
          buttonActionView.addSubview(lastButton)
