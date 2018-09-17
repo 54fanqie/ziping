@@ -40,7 +40,7 @@ class CYJBabiesPageController: KYBaseViewController {
         style.normalTitleColor = normalColor
         style.selectedTitleColor = color
         
-        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight), segmentStyle: style, titles: ["成长记录", "专项测评结果" ,"档案袋"], childVcs: setChildVcs(), parentViewController: self)
+        scrollPageView = ScrollPageView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight), segmentStyle: style, titles: ["成长记录", "集中测评结果" ,"档案袋"], childVcs: setChildVcs(), parentViewController: self)
         
         view.addSubview(scrollPageView)
     }

@@ -51,7 +51,7 @@ class CYJProfessionalAnalyseController: KYBaseViewController {
             
         }
         
-        //专项测评分析申请
+        //集中测评分析申请
         if isValuation == true{
             RequestManager.POST(urlString: APIManager.Valuation.teacherApplyReport, params: nil ,callBackAll : true) { [] (data, error) in
                 guard error == nil else {

@@ -47,7 +47,7 @@ class CYJMineViewController: KYBaseTableViewController {
         
         // Do any additional setup after loading the view.
         automaticallyAdjustsScrollViewInsets = false
-        examples.append(KYTableExample(key: "specialvaluation", title: "专项测评", selector: #selector(specialvaluation), image: #imageLiteral(resourceName: "leftbaar-ic-ceping") ))
+        examples.append(KYTableExample(key: "specialvaluation", title: "集中测评", selector: #selector(specialvaluation), image: #imageLiteral(resourceName: "leftbaar-ic-ceping") ))
         
         if role == .teacher  || role == .teacherL{
             examples.append(KYTableExample(key: "checkOtherClasses", title: "浏览其他班级记录", selector: #selector(otherClasses), image: #imageLiteral(resourceName: "leftbaar-ic-qitabanji")))

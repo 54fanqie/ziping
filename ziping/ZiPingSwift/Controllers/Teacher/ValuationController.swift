@@ -12,8 +12,8 @@ class ValuationController: KYBaseViewController {
     var target : ValuationStatuModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "专项测评"
-        //当本年级一个专项测评都没有完成时
+        self.title = "集中测评"
+        //当本年级一个集中测评都没有完成时
         let s = self.target.testStatistics?.object(forKey: "overComplete") as! String
         let  count = Int(s)!
         if count == 0{
@@ -69,7 +69,7 @@ class ValuationController: KYBaseViewController {
             endVC.view.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(endVC.view)
             addChildViewController(endVC)
-        case 3://本年级暂未参与专项测评哦~
+        case 3://本年级暂未参与集中测评哦~
             let  nopart = NoPartakeViewController();
             nopart.view.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(nopart.view)

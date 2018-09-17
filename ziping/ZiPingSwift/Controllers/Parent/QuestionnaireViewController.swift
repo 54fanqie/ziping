@@ -152,11 +152,11 @@ class QuestionnaireViewController: KYBaseViewController {
             vc3.valuationStatueInfo = self.valuatuinStatue!
             childVCs.append(vc3)
         case 5:
-            //  本年级暂不参与专项测评哦~
+            //  本年级暂不参与集中测评哦~
             let vc5 = NoPartakeViewController()
             vc5.view.backgroundColor = UIColor.white
             vc5.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
-            vc5.titleLab.text = "本年级暂不参与专项测评哦~"
+            vc5.titleLab.text = "本年级暂不参与集中测评哦~"
             childVCs.append(vc5)
             
         default:
