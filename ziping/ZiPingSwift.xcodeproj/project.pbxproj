@@ -458,6 +458,7 @@
 		B1214ADC211AD54500BFA28A /* ScoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */; };
 		B129E4072126A7D10086D6FD /* NoPermissViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B129E4052126A7D10086D6FD /* NoPermissViewController.swift */; };
 		B129E4082126A7D10086D6FD /* NoPermissViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B129E4062126A7D10086D6FD /* NoPermissViewController.xib */; };
+		B12BDAB1215130CF00C9F70C /* EvaluateScoreSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDAB0215130CF00C9F70C /* EvaluateScoreSegmentView.swift */; };
 		B12DB11E2100DB3200D95FAA /* ValuationNoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */; };
 		B12DB11F2100DB3200D95FAA /* ValuationNoStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */; };
 		B12DB1222100DC2A00D95FAA /* ValuationEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */; };
@@ -1039,6 +1040,7 @@
 		B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListTableViewCell.swift; sourceTree = "<group>"; };
 		B129E4052126A7D10086D6FD /* NoPermissViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPermissViewController.swift; sourceTree = "<group>"; };
 		B129E4062126A7D10086D6FD /* NoPermissViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoPermissViewController.xib; sourceTree = "<group>"; };
+		B12BDAB0215130CF00C9F70C /* EvaluateScoreSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluateScoreSegmentView.swift; sourceTree = "<group>"; };
 		B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationNoStartViewController.swift; sourceTree = "<group>"; };
 		B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationNoStartViewController.xib; sourceTree = "<group>"; };
 		B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationEndViewController.swift; sourceTree = "<group>"; };
@@ -1991,6 +1993,7 @@
 				8D25F1021FAAE36000ABE7D1 /* CYJThemeTabBarItem.swift */,
 				B17721461FEA9A1C00A3F25C /* AuthorizationManager.swift */,
 				8D424EEF1F7A78ED000FEA7B /* CustomSegmentView.swift */,
+				B12BDAB0215130CF00C9F70C /* EvaluateScoreSegmentView.swift */,
 				8D6374921F569BD500F666C9 /* ScrollPageView */,
 				8D6374981F569BD500F666C9 /* SwipeViewController */,
 				8D8149B11F74E5B90090858D /* CYJFilterButton.swift */,
@@ -2900,6 +2903,7 @@
 				B13ACFD22103309D00700C06 /* GraduationViewController.swift in Sources */,
 				8D4C8D871F7F717A00EDAE28 /* VideoPreview.m in Sources */,
 				8DE6C2C21F60E84A006A42B5 /* CYJThemes.swift in Sources */,
+				B12BDAB1215130CF00C9F70C /* EvaluateScoreSegmentView.swift in Sources */,
 				8DA819C81F7CECA7002E03D5 /* CYJEvaluateTree.swift in Sources */,
 				8D6374C01F569BD500F666C9 /* UIView+CornerRadius.swift in Sources */,
 				8D4C8D861F7F717A00EDAE28 /* VideoCutView.m in Sources */,

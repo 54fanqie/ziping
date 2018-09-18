@@ -75,7 +75,7 @@ class CYJRECBuildScoreContainerController: KYBaseViewController {
                 self?.childViewControllersChanged()
             }
         }
-        vc1.view.frame = CGRect(x: 0, y: 0.5, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 58 - 8 - 64 - 44)
+        vc1.view.frame = CGRect(x: 0, y: 100, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - 58 - 8 - 64 - 44)
         self.firstViewController = vc1
         childVCs.append(vc1)
         

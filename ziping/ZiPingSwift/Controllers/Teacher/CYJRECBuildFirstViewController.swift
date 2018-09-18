@@ -13,7 +13,7 @@ class CYJRECBuildFirstViewController: UIViewController {
     var dynamicTree: KYDynamicTree!
     var allDomains: [CYJDomain]!
     var allnodes: [KYDynamicTreeNode] = []
-
+    var evaluateScoreSegmentView : EvaluateScoreSegmentView!
     /// 整个界面通过recordParam 创建
     var recordParam : CYJNewRECParam {
         return CYJRECBuildHelper.default.recordParam
@@ -52,7 +52,12 @@ class CYJRECBuildFirstViewController: UIViewController {
             
             view.addSubview(emptyLabel)
         }else {
-            dynamicTree = KYDynamicTree(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: Theme.Measure.screenHeight - 64 - 58 - 8 - 44 - 44 ), nodes: self.allnodes)
+            
+            // 滚动条
+//            evaluateScoreSegmentView = EvaluateScoreSegmentView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 80), titles: children, images: images)
+            view.addSubview(evaluateScoreSegmentView)
+            
+            dynamicTree = KYDynamicTree(frame: CGRect(x: 0, y: 80, width: view.frame.width, height: Theme.Measure.screenHeight - 64 - 58 - 8 - 44 - 44 ), nodes: self.allnodes)
             dynamicTree.delegate = self
             view.addSubview(dynamicTree)
         }
