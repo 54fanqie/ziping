@@ -36,13 +36,18 @@ class CYJQuota: CYJBaseModel{
     var lId: String?  //水平id 从这往下用户暂存记录的编辑展示
     var diId: String? //维度id
     var dId: String? //领域id
-    
+
     var qTitleAttr: NSAttributedString{
         return NSAttributedString(string: qTitle ?? "qTitleAttr异常", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black])
     } //指标标题
     var lNameAttr: NSAttributedString{
         return NSAttributedString(string: lName ?? "qTitleAttr异常", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black])
     }// 答案，
+    
+    var zbColo: String? //颜色
+    var zbDes: String? //摘要描述
+    var zbGive: String? //
+    
 }
 
 /// 水平
