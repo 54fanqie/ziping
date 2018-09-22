@@ -12,9 +12,9 @@ import Foundation
 struct APIManager {
     
     //MARK: Server地址
-    //    static let serverPath = "http://api.epaofu.com"
+        static let serverPath = "http://api.epaofu.com"
     //    static let serverPath = "http://testapi.emice.net"
-    static let serverPath = "http://testapi.epaofu.com"
+//    static let serverPath = "http://testapi.epaofu.com"
     
     struct User {
         /// 登录
