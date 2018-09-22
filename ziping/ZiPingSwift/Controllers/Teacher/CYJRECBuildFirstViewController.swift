@@ -8,12 +8,16 @@
 
 import UIKit
 
+
 class CYJRECBuildFirstViewController: UIViewController {
 
-    var dynamicTree: KYDynamicTree!
+    var dynamicTree: FQDynamicTree!
     var allDomains: [CYJDomain]!
-    var allnodes: [KYDynamicTreeNode] = []
+    //父节点滚动视图
+    var fatherNodes: [KYDynamicTreeNode] = []
 
+    //指标标题
+    var evaluateScoreSegmentView : EvaluateScoreSegmentView!
     /// 整个界面通过recordParam 创建
     var recordParam : CYJNewRECParam {
         return CYJRECBuildHelper.default.recordParam
@@ -42,19 +46,40 @@ class CYJRECBuildFirstViewController: UIViewController {
         
         self.makeData()
         
-        if allnodes.count == 0 {
+        if self.fatherNodes.count == 0 {
             let emptyLabel = UILabel(frame: CGRect(x: 35, y: 100, width: Theme.Measure.screenWidth - 70, height: 100))
             emptyLabel.text = "该年级园长未设置成评价指标，暂不能设置评分"
             emptyLabel.textAlignment = .center
             emptyLabel.numberOfLines = 0
             emptyLabel.lineBreakMode = .byWordWrapping
             emptyLabel.theme_textColor = Theme.Color.textColorlight
-            
             view.addSubview(emptyLabel)
         }else {
-            dynamicTree = KYDynamicTree(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: Theme.Measure.screenHeight - 64 - 58 - 8 - 44 - 44 ), nodes: self.allnodes)
+            // 健康维度滚动条
+            var titles = [String]()
+            self.fatherNodes.forEach { (domain) in
+                titles.append(domain.name!)
+            }
+            //评比状态
+            var markCounts = [Int]()
+            self.fatherNodes.forEach { (domain) in
+                markCounts.append(domain.markedCount)
+            }
+            evaluateScoreSegmentView = EvaluateScoreSegmentView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 80), titles: titles, status: markCounts)
+         
+            
+            dynamicTree = FQDynamicTree(frame: CGRect(x: 0, y: 80, width: view.frame.width, height: Theme.Measure.screenHeight - 64 - 58 - 8 - 44 - 44 ), nodes: self.fatherNodes[0].subNodes)
             dynamicTree.delegate = self
             view.addSubview(dynamicTree)
+            
+            // 避免循环引用
+            evaluateScoreSegmentView.titleBtnOnClick = {[unowned self] (label: UILabel, index: Int) in
+                // 切换内容数据源
+                self.dynamicTree.reloadData(nodes: self.fatherNodes[index].subNodes)
+            }
+            view.addSubview(evaluateScoreSegmentView)
+            
+           
         }
     }
     
@@ -65,44 +90,67 @@ class CYJRECBuildFirstViewController: UIViewController {
         let allSelectedDID = evaluate.dId
         let allSelectedDiID = evaluate.diId
         let allSelectedQid = evaluate.qId
-
+        
+        
         self.allDomains.forEach { (domain) in
             let dnode = KYDynamicTreeNode()
-//            dnode.floor = 0
             dnode.shouldSelected = false
             dnode.fatherNodeId = nil
             dnode.nodeId = "domain-" + "\(domain.dId ?? 0)"
             dnode.name = domain.dName
-//            dnode.ext = ["name":"北京大洋国际科技有限公司", "count": "3"]
+            dnode.shouldOpen = true
+            dnode.ext = ["name":"百旺科技有限公司", "count": "3"]
             dnode.markedCount = allSelectedDID.filter({ $0 == "\(domain.dId ?? 0)"}).count
-            allnodes.append(dnode)
+            fatherNodes.append(dnode)
             
+            //标题子节点列表
             domain.dimension?.forEach({ (dimension) in
                 let dinode = KYDynamicTreeNode()
-//                dinode.floor = 1
+                dinode.floor = 0
+                dinode.shouldOpen = true
                 dinode.shouldSelected = false
-                dinode.fatherNodeId = dnode.nodeId
+                //此处fatherNodeId必须设置为nil，这样是为了判断,此处就为根节点，否者就报错
+                dinode.fatherNodeId = nil
                 dinode.nodeId = "dimension" + dimension.diId!
                 dinode.name = dimension.diName
-//                dinode.ext = ["name":"北京大洋国际科技有限公司", "count": "3"]
+                dinode.ext = ["name":"任我行国际科技有限公司", "count": "3"]
                 dinode.markedCount = allSelectedDiID.filter({ $0 == "\(dimension.diId ?? "0")"}).count
+                
 
-                allnodes.append(dinode)
+                //详情子节点列表
+                dnode.subNodes.append(dinode)
                 dimension.quota?.forEach({ (quota) in
                     let qunode = KYDynamicTreeNode()
-//                    qunode.floor = 2
+                    qunode.floor = 1
                     qunode.shouldSelected = false
+                    qunode.shouldOpen = true
                     qunode.fatherNodeId = dinode.nodeId
                     qunode.nodeId = "quota" + quota.qId!
                     qunode.name = quota.qTitle
-//                    qunode.ext = ["name":"北京大洋国际科技有限公司", "count": "3"]
                     qunode.markedCount = allSelectedQid.filter({ $0 == "\(quota.qId ?? "0")"}).count
-
-
-                    allnodes.append(qunode)
+                    //颜色FFFF00
+                    qunode.nodeColor = UIColor(hex: quota.zbColo!, alpha: 1)
+                    dnode.subNodes.append(qunode)
+                    
+                    
+                    if !(quota.zbDes?.isEmpty)!  && !(quota.zbGive?.isEmpty)!{
+                        let lenode = KYDynamicTreeNode()
+                        lenode.floor = 2
+                        lenode.shouldOpen = false
+                        lenode.shouldSelected = true
+                        lenode.fatherNodeId = qunode.nodeId
+                        lenode.haveDetail = true
+                        //指标介绍、举例
+                        lenode.nodeDetail = quota.zbDes
+                        lenode.nodeDetailDemo = quota.zbGive
+                        dnode.subNodes.append(lenode)
+                    }
+                    
+                    
                     quota.level?.forEach({ (level) in
                         let lenode = KYDynamicTreeNode()
-//                        lenode.floor = 3
+                        lenode.floor = 2
+                        lenode.shouldOpen = false
                         lenode.shouldSelected = true
                         lenode.fatherNodeId = qunode.nodeId
                         lenode.nodeId = "level-" + level.lId!
@@ -113,12 +161,16 @@ class CYJRECBuildFirstViewController: UIViewController {
                                 lenode.isSelected = true
                                 selectedNodes.append(lenode)
                             }
-                        
-                        allnodes.append(lenode)
+                        dnode.subNodes.append(lenode)
                     })
                 })
             })
         }
+        
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,11 +188,11 @@ class CYJRECBuildFirstViewController: UIViewController {
     */
 
 }
-extension CYJRECBuildFirstViewController: KYDynamicTreeDelegate {
-    func dynamicTree(_ dynamicTree: KYDynamicTree, didSelectedRowWith node: KYDynamicTreeNode) {
+extension CYJRECBuildFirstViewController: FQDynamicTreeDelegate {
+    func dynamicTree(_ dynamicTree: FQDynamicTree, didSelectedRowWith node: KYDynamicTreeNode) {
         //
     }
-    func dynamicTree(_ dynamicTree: KYDynamicTree, didSelectedStatusButtonWith node: KYDynamicTreeNode) {
+    func dynamicTree(_ dynamicTree: FQDynamicTree, didSelectedStatusButtonWith node: KYDynamicTreeNode) {
         // 查找相同父id的内容，如果存在，那么更新，否则直接加！
         
         if node.isSelected { //选中当前

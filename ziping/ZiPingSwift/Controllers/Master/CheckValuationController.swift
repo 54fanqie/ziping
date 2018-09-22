@@ -147,7 +147,7 @@ class CheckValuationController: KYBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "专项测评"
+        self.title = "集中测评"
         tabelHeaderView = UIView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: 544))
         tabelHeaderView.backgroundColor = UIColor.white
         tableView.tableHeaderView = tabelHeaderView
@@ -442,7 +442,7 @@ class CheckValuationController: KYBaseTableViewController {
     //对比数据
     func compareAciton(button : UIButton){
         button.isSelected = !button.isSelected
-        isComparison = button.isSelected
+        isComparison = button.isSelected 
         //如果有上一次的记录数据，就封装上一次的数据
         if button.isSelected == true {
             self.completeNumberView.testTitleDetail = self.completeNumberTitle(isSelect: true, thisTest: self.thisListDatas.testStatistics!, lastTest: self.lastListDatas.testStatistics!)

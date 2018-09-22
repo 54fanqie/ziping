@@ -40,15 +40,15 @@ class CYJRECBuildScoreViewController: KYBaseViewController {
     var allDomains: [CYJDomain] = []
     //    var actionView: CYJActionsView!
     var buttonActionView: UIView!
-//    var lastButton : UIButton!
-//    var saveButton : UIButton!
-//    var nextButton : UIButton!
-//    var lineLab : UILabel!
+    //    var lastButton : UIButton!
+    //    var saveButton : UIButton!
+    //    var nextButton : UIButton!
+    //    var lineLab : UILabel!
     //MARK: View Properties
     var segView: CustomScrollSegmentView!
     var segmentStyle: SegmentStyle!
     var contentView: ContentView!
-
+    
     
     var contentViewControllers: [CYJRECBuildScoreContainerController] = []
     
@@ -87,6 +87,7 @@ class CYJRECBuildScoreViewController: KYBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden  = true
         //MARK: 设置recordView的父识图
         CYJASRRecordor.share.containerView = self.view
         
@@ -96,6 +97,7 @@ class CYJRECBuildScoreViewController: KYBaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden  = false
         //MARK: 设置recordView的父识图
         CYJASRRecordor.share.containerView = nil
         Third.toast.hide {}
@@ -124,76 +126,96 @@ class CYJRECBuildScoreViewController: KYBaseViewController {
 extension CYJRECBuildScoreViewController {
     
     func makeSegmentView() {
+        let color = UIColor.init(red: 246/255.0, green: 76/255.0, blue: 128/255.0, alpha: 1)
+        
+        //自定导航栏
+        let navigationBarView = UIView()
+        navigationBarView.backgroundColor = color
+        view.addSubview(navigationBarView)
+        
+        navigationBarView.snp.makeConstraints { (make) in
+            make.top.equalTo(view).offset(0)
+            make.height.equalTo(Theme.Measure.navigationBarHeight)
+            make.width.equalTo(Theme.Measure.screenWidth)
+            make.left.equalTo(view).offset(0)
+        }
+        let backButton = UIButton(type: .custom)
+//        backButton.setTitle("关闭", for: .normal)
+//        backButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        backButton.setBackgroundImage(#imageLiteral(resourceName: "icon_white_arrow"), for: .normal)
+        backButton.addTarget(self, action: #selector(backAction), for: UIControlEvents.touchUpInside)
+        navigationBarView.addSubview(backButton)
+        
+        backButton.snp.makeConstraints { (make) in
+            make.left.equalTo(navigationBarView).offset(15)
+            make.height.equalTo(17)
+            make.width.equalTo(10)
+            make.bottom.equalTo(navigationBarView).offset(-12)
+        }
+        
+        let titleLab = UILabel()
+        titleLab.text = "评分评价"
+        titleLab.font = UIFont.boldSystemFont(ofSize: 18)
+        titleLab.textColor = UIColor.white
+        navigationBarView.addSubview(titleLab)
+        titleLab.snp.makeConstraints { (make) in
+            make.centerX.equalTo(navigationBarView).offset(0)
+            make.bottom.equalTo(navigationBarView).offset(-12)
+        }
+
         // 滚动条
-        var style = SegmentStyle()
-        style.showLine = true        // 颜色渐变
-        style.gradualChangeTitleColor = true         // 滚动条颜色
-        style.titleMargin = 30        //标题间距
-        style.scrollTitle = true// s滚动标题
-        style.titleAlignment = false  //整体剧中
-        style.titleFont = UIFont.systemFont(ofSize: 17)
-        let color = ThemeManager.color(for: "Nav.barTintColor")!
-        let normalColor = ThemeManager.color(for: "Global.textColorLight")!
-        //        style.selectedTitleColor = UIColor(red: 86/255.0, green: 173/255.0, blue: 235/255.0, alpha: 1)
-        //        style.normalTitleColor = UIColor(red: 86/255.0, green: 173/255.0, blue: 235/255.0, alpha: 1)
-        //        style.scrollLineColor =  UIColor(red: 86/255.0, green: 173/255.0, blue: 235/255.0, alpha: 1)
-        
-        style.scrollLineColor =  color
-        style.normalTitleColor = normalColor
-        style.selectedTitleColor = normalColor
-        style.highlightTitleColor = color
-        
-        self.segmentStyle = style
-        
-        segView = CustomScrollSegmentView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: 50), segmentStyle: style, titles: children, images: images)
+        segView = CustomScrollSegmentView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight, width: view.frame.width, height: 60), titles: children, images: images)
         
         segmentView.theme_backgroundColor = Theme.Color.ground
         view.addSubview(segmentView)
         
     }
+    func backAction() {
+        self.navigationController?.popViewController(animated: true)
+    }
     func makeActionsView() {
         buttonActionView = UIView(frame: CGRect(x: 0, y: view.frame.height - 44, width: view.frame.width, height: 44))
         view.addSubview(buttonActionView)
         
-       let lastButton = UIButton(frame: CGRect(x: 0, y: 0, width: buttonActionView.frame.width  * 0.6 * 0.5 - 0.5, height: 44))
+        let lastButton = UIButton(frame: CGRect(x: 0, y: 0, width: buttonActionView.frame.width  * 0.6 * 0.5 - 0.5, height: 44))
         lastButton.theme_setTitleColor(Theme.Color.textColorlight, forState: .normal)
         lastButton.theme_backgroundColor = Theme.Color.ground
         lastButton.setTitle("去描述", for: .normal)
         lastButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         lastButton.addTarget(self, action: #selector(lastREC), for: .touchUpInside)
-         buttonActionView.addSubview(lastButton)
+        buttonActionView.addSubview(lastButton)
         
         let lineLab = UILabel(frame: CGRect(x: buttonActionView.frame.width  * 0.6 * 0.5, y:0, width: 0.5, height: 44))
         lineLab.theme_backgroundColor = Theme.Color.viewLightColor
         buttonActionView.addSubview(lineLab)
         
-       let saveButton = UIButton(frame: CGRect(x: 0.5 + buttonActionView.frame.width  * 0.6 * 0.5, y: 0, width: buttonActionView.frame.width  * 0.6 * 0.5, height: 44))
+        let saveButton = UIButton(frame: CGRect(x: 0.5 + buttonActionView.frame.width  * 0.6 * 0.5, y: 0, width: buttonActionView.frame.width  * 0.6 * 0.5, height: 44))
         saveButton.theme_setTitleColor(Theme.Color.textColorlight, forState: .normal)
         saveButton.theme_backgroundColor = Theme.Color.ground
         saveButton.setTitle("暂存", for: .normal)
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         saveButton.addTarget(self, action: #selector(saveREC), for: .touchUpInside)
         buttonActionView.addSubview(saveButton)
-       let nextButton = UIButton(frame: CGRect(x: buttonActionView.frame.width  * 0.6, y: 0, width: buttonActionView.frame.width  * 0.4, height: 44))
+        let nextButton = UIButton(frame: CGRect(x: buttonActionView.frame.width  * 0.6, y: 0, width: buttonActionView.frame.width  * 0.4, height: 44))
         nextButton.theme_setTitleColor(Theme.Color.ground, forState: .normal)
         nextButton.theme_backgroundColor = Theme.Color.main
         nextButton.setTitle("提交并完成该记录", for: .normal)
         nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         nextButton.addTarget(self, action: #selector(nextREC), for: .touchUpInside)
         buttonActionView.addSubview(nextButton)
- 
+        
     }
     
     /// 创建 主要内容的视图
     func makeContentView() {
         
-        contentView = ContentView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight + 1 + 50 + 5, width: view.frame.width, height: view.frame.height - (Theme.Measure.navigationBarHeight + 1 + 50 + 44)), childVcs: setChildVcs(), parentViewController: self)
+        contentView = ContentView(frame: CGRect(x: 0, y: Theme.Measure.navigationBarHeight + 60, width: view.frame.width, height: view.frame.height - (Theme.Measure.navigationBarHeight + 1 + 50 + 44)), childVcs: setChildVcs(), parentViewController: self)
         contentView.delegate = self
         // 避免循环引用
         segView.titleBtnOnClick = {[unowned self] (label: UILabel, index: Int) in
             // 切换内容显示(update content)
             UIApplication.shared.keyWindow?.endEditing(true)
-            self.contentView.setContentOffSet(CGPoint(x: self.contentView.bounds.size.width * CGFloat(index), y: 0), animated: self.segmentStyle.changeContentAnimated)
+            self.contentView.setContentOffSet(CGPoint(x: self.contentView.bounds.size.width * CGFloat(index), y: 0), animated: true)
         }
         view.addSubview(contentView)
         
@@ -286,7 +308,7 @@ extension CYJRECBuildScoreViewController {
     
     /// 上传对象到Object      需要与 self.recordParam.type 配对使用
     
-   func uploadObjectToServer(_ finish: Int) {
+    func uploadObjectToServer(_ finish: Int) {
         let paramter = self.recordParam.encodeToDictionary()
         
         //        self.alertShare()
@@ -479,7 +501,7 @@ extension CYJRECBuildScoreViewController: ContentViewDelegate
 extension CYJRECBuildScoreViewController: CYJRECBuildSubViewChangeDelegate {
     
     func subViewChanged(index: Int, highlight: Bool) {
-        segView.hightlightLabel(index: index, highlight: highlight)
+//        segView.hightlightLabel(index: index, highlight: highlight)
     }
 }
 

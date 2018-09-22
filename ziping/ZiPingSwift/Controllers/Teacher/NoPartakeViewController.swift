@@ -13,7 +13,7 @@ class NoPartakeViewController: KYBaseViewController {
     @IBOutlet weak var titleLab: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "本年级暂未参与专项测评哦~"
+        self.title = "本年级暂未参与集中测评哦~"
         // Do any additional setup after loading the view.
     }
 

@@ -12,7 +12,8 @@ class ValuationController: KYBaseViewController {
     var target : ValuationStatuModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "专项测评"
+
+        self.title = "集中测评"
         if target.status == 0 {
             if self.target.shijuanid == 0{
                 self.target.status = 3
@@ -23,16 +24,13 @@ class ValuationController: KYBaseViewController {
             if s.isEmpty {
                 
             }else{
-               self.view.theme_backgroundColor = "Nav.barTintColor"
+                self.view.theme_backgroundColor = "Nav.barTintColor"
             }
-           
+            
         }
         
-      //根据请求的数据，显示是否状态
+        //根据请求的数据，显示是否状态
         goToVC(index: (target?.status)!, target: target!)
-        
-        
-       
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -72,7 +70,7 @@ class ValuationController: KYBaseViewController {
             endVC.view.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(endVC.view)
             addChildViewController(endVC)
-        case 3://本年级暂未参与专项测评哦~
+        case 3://本年级暂未参与集中测评哦~
             let  nopart = NoPartakeViewController();
             nopart.view.frame = CGRect(x: 0, y: 0, width: Theme.Measure.screenWidth, height: Theme.Measure.screenHeight - Theme.Measure.navigationBarHeight)
             view.addSubview(nopart.view)

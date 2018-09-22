@@ -458,6 +458,10 @@
 		B1214ADC211AD54500BFA28A /* ScoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */; };
 		B129E4072126A7D10086D6FD /* NoPermissViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B129E4052126A7D10086D6FD /* NoPermissViewController.swift */; };
 		B129E4082126A7D10086D6FD /* NoPermissViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B129E4062126A7D10086D6FD /* NoPermissViewController.xib */; };
+		B12BDAB1215130CF00C9F70C /* EvaluateScoreSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12BDAB0215130CF00C9F70C /* EvaluateScoreSegmentView.swift */; };
+		B12D8CE321534D1700E12E02 /* FQDynamicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12D8CE021534D1600E12E02 /* FQDynamicCell.xib */; };
+		B12D8CE421534D1700E12E02 /* FQDynamicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12D8CE121534D1600E12E02 /* FQDynamicCell.swift */; };
+		B12D8CE521534D1700E12E02 /* FQDynamicTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12D8CE221534D1600E12E02 /* FQDynamicTree.swift */; };
 		B12DB11E2100DB3200D95FAA /* ValuationNoStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */; };
 		B12DB11F2100DB3200D95FAA /* ValuationNoStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */; };
 		B12DB1222100DC2A00D95FAA /* ValuationEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */; };
@@ -1039,6 +1043,10 @@
 		B1214ADA211AD54500BFA28A /* ScoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreListTableViewCell.swift; sourceTree = "<group>"; };
 		B129E4052126A7D10086D6FD /* NoPermissViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPermissViewController.swift; sourceTree = "<group>"; };
 		B129E4062126A7D10086D6FD /* NoPermissViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoPermissViewController.xib; sourceTree = "<group>"; };
+		B12BDAB0215130CF00C9F70C /* EvaluateScoreSegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluateScoreSegmentView.swift; sourceTree = "<group>"; };
+		B12D8CE021534D1600E12E02 /* FQDynamicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FQDynamicCell.xib; sourceTree = "<group>"; };
+		B12D8CE121534D1600E12E02 /* FQDynamicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FQDynamicCell.swift; sourceTree = "<group>"; };
+		B12D8CE221534D1600E12E02 /* FQDynamicTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FQDynamicTree.swift; sourceTree = "<group>"; };
 		B12DB11C2100DB3200D95FAA /* ValuationNoStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationNoStartViewController.swift; sourceTree = "<group>"; };
 		B12DB11D2100DB3200D95FAA /* ValuationNoStartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValuationNoStartViewController.xib; sourceTree = "<group>"; };
 		B12DB1202100DC2A00D95FAA /* ValuationEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuationEndViewController.swift; sourceTree = "<group>"; };
@@ -1977,6 +1985,7 @@
 		8D6374911F569BD500F666C9 /* Wheels */ = {
 			isa = PBXGroup;
 			children = (
+				B12D8CDF21534D1600E12E02 /* FQDynamicTree */,
 				8D3607D21F7B40E800EB24A0 /* KYDynamicTree */,
 				8D2839B51F7A21A600B1133C /* MutiPhotoPicker */,
 				8D65C6971F760C0E00D81314 /* StarEvaluateView.swift */,
@@ -1991,6 +2000,7 @@
 				8D25F1021FAAE36000ABE7D1 /* CYJThemeTabBarItem.swift */,
 				B17721461FEA9A1C00A3F25C /* AuthorizationManager.swift */,
 				8D424EEF1F7A78ED000FEA7B /* CustomSegmentView.swift */,
+				B12BDAB0215130CF00C9F70C /* EvaluateScoreSegmentView.swift */,
 				8D6374921F569BD500F666C9 /* ScrollPageView */,
 				8D6374981F569BD500F666C9 /* SwipeViewController */,
 				8D8149B11F74E5B90090858D /* CYJFilterButton.swift */,
@@ -2343,6 +2353,16 @@
 			path = Plists;
 			sourceTree = "<group>";
 		};
+		B12D8CDF21534D1600E12E02 /* FQDynamicTree */ = {
+			isa = PBXGroup;
+			children = (
+				B12D8CE021534D1600E12E02 /* FQDynamicCell.xib */,
+				B12D8CE121534D1600E12E02 /* FQDynamicCell.swift */,
+				B12D8CE221534D1600E12E02 /* FQDynamicTree.swift */,
+			);
+			path = FQDynamicTree;
+			sourceTree = "<group>";
+		};
 		B18CBEBF20FF6F6200827E39 /* Valuation */ = {
 			isa = PBXGroup;
 			children = (
@@ -2684,6 +2704,7 @@
 				8D16549D1FA732AA00AC4954 /* button_gray.png in Resources */,
 				8D2839CA1F7A21B800B1133C /* KYAddImageCell.xib in Resources */,
 				8D4C8D961F7F719A00EDAE28 /* noeyegray.wmc in Resources */,
+				B12D8CE321534D1700E12E02 /* FQDynamicCell.xib in Resources */,
 				8DDA2F7D1F667EA60024CCC8 /* CYJRECStatisticCVC.xib in Resources */,
 				8D4C8E021F7F71B500EDAE28 /* startpreview@2x.png in Resources */,
 				8D4C8DE21F7F71B500EDAE28 /* backDelete_disable@2x.png in Resources */,
@@ -2900,6 +2921,7 @@
 				B13ACFD22103309D00700C06 /* GraduationViewController.swift in Sources */,
 				8D4C8D871F7F717A00EDAE28 /* VideoPreview.m in Sources */,
 				8DE6C2C21F60E84A006A42B5 /* CYJThemes.swift in Sources */,
+				B12BDAB1215130CF00C9F70C /* EvaluateScoreSegmentView.swift in Sources */,
 				8DA819C81F7CECA7002E03D5 /* CYJEvaluateTree.swift in Sources */,
 				8D6374C01F569BD500F666C9 /* UIView+CornerRadius.swift in Sources */,
 				8D4C8D861F7F717A00EDAE28 /* VideoCutView.m in Sources */,
@@ -2957,6 +2979,7 @@
 				8D2839AE1F79FCF900B1133C /* CYJDropDownTableView.swift in Sources */,
 				8D63750D1F56A15500F666C9 /* CYJCommentListCell.swift in Sources */,
 				8DC9DB9E1F57BBFE00E63461 /* RequestManager.swift in Sources */,
+				B12D8CE521534D1700E12E02 /* FQDynamicTree.swift in Sources */,
 				8D7365751F691A5A00A294EF /* CYJRECStatisticTVC.swift in Sources */,
 				8DDA2F731F6630F00024CCC8 /* CYJRecordListCell.swift in Sources */,
 				8D4C8D771F7F714E00EDAE28 /* UIImage+Additions.m in Sources */,
@@ -2967,6 +2990,7 @@
 				8DC9DBA01F57BBFE00E63461 /* AttachManager.swift in Sources */,
 				8DA3D4D11F97598D00B54F4C /* CYJProgressView.swift in Sources */,
 				8D4C8D7A1F7F715400EDAE28 /* ScanQRController.mm in Sources */,
+				B12D8CE421534D1700E12E02 /* FQDynamicCell.swift in Sources */,
 				8D2839CF1F7A21B800B1133C /* KYSquaredPickerView.swift in Sources */,
 				8D6374BF1F569BD500F666C9 /* UITabbar+Frame.swift in Sources */,
 				8DA8E5221F7E36B20068EA25 /* CYJRECDetailInfoCell.swift in Sources */,

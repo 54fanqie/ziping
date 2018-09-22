@@ -24,7 +24,7 @@ class ValuationCompleteController: KYBaseViewController {
         // Do any additional setup after loading the view.
         let color = UIColor.init(red: 246/255.0, green: 76/255.0, blue: 128/255.0, alpha: 1)
         topView.backgroundColor = color
-        self.title = "专项测评"
+        self.title = "集中测评"
        
     }
     override func viewWillAppear(_ animated: Bool) {
