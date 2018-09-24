@@ -17,7 +17,7 @@ class CYJRECStatisticX: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        //测试git服务
         
     }
 
